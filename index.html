@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agora — The Modern Public Square</title>
+  <meta name="description" content="Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── CSS VARIABLES (light default) ── */
+    :root {
+      --bg:      #F5F2EB;
+      --bg2:     #EDE9DF;
+      --bg3:     #E4DFD3;
+      --text:    #1A1713;
+      --text2:   #5A5347;
+      --text3:   #8C8074;
+      --border:  rgba(26,23,19,0.12);
+      --border2: rgba(26,23,19,0.22);
+      --gold:    #8B6914;
+      --gold-lt: #C9A84C;
+      --serif:   'Playfair Display', Georgia, serif;
+      --bserif:  'EB Garamond', Georgia, serif;
+      --sans:    'Jost', system-ui, sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg:      #0F0E09;
+      --bg2:     #1A1812;
+      --bg3:     #232118;
+      --text:    #F0EBDF;
+      --text2:   #A89880;
+      --text3:   #6B5E4A;
+      --border:  rgba(240,235,223,0.10);
+      --border2: rgba(240,235,223,0.20);
+      --gold:    #C9A84C;
+      --gold-lt: #E8C96A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      transition: background .35s, color .35s;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--sans); cursor: pointer; }
+
+    /* ── GREEK KEY BAND ── */
+    .greek-band {
+      width: 100%; height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0,7 L4,7 L4,2 L12,2 L12,12 L8,12 L8,7' fill='none' stroke='%23C9A84C' stroke-width='1.2' opacity='0.45'/%3E%3Cpath d='M14,7 L18,7 L18,2 L26,2 L26,12 L22,12 L22,7' fill='none' stroke='%23C9A84C' stroke-width='1.2' opacity='0.45'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 28px 14px;
+    }
+
+    /* ── COLUMNS ORNAMENT ── */
+    .columns { display: flex; gap: 14px; margin-bottom: 22px; opacity: .28; }
+    .col-unit { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+    .col-cap    { width: 12px; height: 3px;  background: var(--gold); border-radius: 1px; }
+    .col-neck   { width:  8px; height: 2px;  background: var(--gold); }
+    .col-shaft  { width:  5px; height: 26px; background: var(--gold); border-radius: 1px; }
+    .col-base   { width:  8px; height: 2px;  background: var(--gold); }
+    .col-plinth { width: 12px; height: 3px;  background: var(--gold); border-radius: 1px; }
+
+    /* ── NAV ── */
+    .site-nav {
+      background: var(--bg);
+      border-bottom: .5px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      transition: background .35s;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 28px; max-width: 1080px; margin: 0 auto;
+    }
+    .nav-left { display: flex; align-items: center; gap: 20px; }
+    .nav-logo {
+      background: none; border: none; padding: 0;
+      display: flex; align-items: center; cursor: pointer;
+    }
+    .nav-logo svg { height: 52px; width: auto; transition: opacity .2s; }
+    .nav-logo:hover svg { opacity: .82; }
+    .nav-logo .logo-text   { fill: var(--text); }
+    .nav-logo .logo-gold   { fill: var(--gold); }
+    .nav-logo .logo-branch { fill: var(--text2); }
+    .nav-logo .logo-flute  { fill: var(--bg); }
+    .nav-motto {
+      border-left: .5px solid var(--border2); padding-left: 20px; line-height: 1.3;
+    }
+    .nav-motto-greek { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text2); }
+    .nav-motto-sub   { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-link {
+      background: none; border: none; padding: 0;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text2); transition: color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--text); }
+    .theme-btn {
+      background: none; border: .5px solid var(--border2); border-radius: 99px;
+      padding: 5px 14px; font-size: 11px; letter-spacing: .08em; color: var(--text2);
+      transition: color .2s, border-color .2s;
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--gold); }
+    #themeIconWrap {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @keyframes starTwinkle {
+      0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
+      25%  { opacity: 1; transform: scale(1.2) rotate(10deg); }
+      55%  { opacity: 0.3; transform: scale(0.7) rotate(-5deg); }
+      80%  { opacity: 1; transform: scale(1.1) rotate(8deg); }
+      100% { opacity: 0; transform: scale(0) rotate(15deg); }
+    }
+    @keyframes rayDance {
+      0%   { opacity: 0; transform: rotate(var(--r)) scaleY(0.3); }
+      30%  { opacity: 1; transform: rotate(var(--r)) scaleY(1.5); }
+      65%  { opacity: 0.6; transform: rotate(var(--r)) scaleY(1.2); }
+      100% { opacity: 0; transform: rotate(var(--r)) scaleY(0.4); }
+    }
+    .theme-star {
+      position: absolute;
+      font-size: 7px;
+      color: var(--gold-lt);
+      pointer-events: none;
+      animation: starTwinkle 0.95s ease forwards;
+      line-height: 1;
+    }
+    .theme-ray {
+      position: absolute;
+      width: 1.5px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 1px;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.75px;
+      margin-top: -7px;
+      pointer-events: none;
+      transform-origin: 50% 100%;
+      animation: rayDance 0.85s ease forwards;
+    }
+    @keyframes starHover {
+      0%, 100% { opacity: 0; transform: scale(0.4); }
+      50%       { opacity: 0.85; transform: scale(1); }
+    }
+    @keyframes rayHover {
+      0%, 100% { opacity: 0; transform: rotate(var(--r)) scaleY(0.4); }
+      50%       { opacity: 0.6; transform: rotate(var(--r)) scaleY(1.2); }
+    }
+    .theme-star-hover {
+      position: absolute;
+      font-size: 6px;
+      color: var(--gold-lt);
+      pointer-events: none;
+      animation: starHover 1.2s ease infinite;
+      line-height: 1;
+    }
+    .theme-ray-hover {
+      position: absolute;
+      width: 1.5px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 1px;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.75px;
+      margin-top: -6px;
+      pointer-events: none;
+      transform-origin: 50% 100%;
+      animation: rayHover 1s ease infinite;
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── MASTHEAD ── */
+    .masthead { padding: 44px 28px 32px; border-bottom: .5px solid var(--border); }
+    .masthead-inner { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: flex-end; max-width: 1080px; margin: 0 auto; }
+    .mast-eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .mast-headline { font-family: var(--serif); font-size: 52px; font-weight: 500; line-height: 1.05; color: var(--text); margin-bottom: 16px; }
+    .mast-sub { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.8; max-width: 400px; }
+    .mast-contrib-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; text-align: right; }
+    .mast-author { text-align: right; }
+    .mast-author-name { font-family: var(--serif); font-size: 14px; color: var(--text); }
+    .mast-author-beat { font-size: 11px; color: var(--text3); }
+    .mast-divider { width: 24px; height: .5px; background: var(--border2); margin: 7px 0 7px auto; }
+
+    /* ── TOPIC BAR ── */
+    .topic-bar {
+      background: var(--bg2); border-bottom: .5px solid var(--border);
+      padding: 11px 28px; display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none;
+    }
+    .topic-bar::-webkit-scrollbar { display: none; }
+    .topic-pill {
+      background: transparent; border: .5px solid var(--border2); border-radius: 99px;
+      padding: 5px 14px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text2); white-space: nowrap; transition: background .2s, color .2s, border-color .2s;
+    }
+    .topic-pill:hover { border-color: var(--gold); color: var(--text); }
+    .topic-pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* ── FEATURED ── */
+    .featured-section { padding: 32px 28px; border-bottom: .5px solid var(--border); }
+    .featured-section > div { max-width: 1080px; margin: 0 auto; }
+    .feat-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .feat-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+    .feat-title { font-family: var(--serif); font-size: 28px; font-weight: 500; line-height: 1.2; color: var(--text); margin-bottom: 12px; max-width: 600px; }
+    .feat-deck { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.75; margin-bottom: 16px; max-width: 560px; }
+    .feat-meta { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 8px; }
+    .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
+    .read-link {
+      display: inline-block; margin-top: 14px; background: none;
+      border: none; border-bottom: .5px solid var(--gold); padding: 0 0 2px;
+      font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ── ARTICLE GRID ── */
+    .articles-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .article-card { padding: 26px 0; border-bottom: .5px solid var(--border); cursor: pointer; }
+    .article-card:nth-child(odd)  { padding-right: 36px; border-right: .5px solid var(--border); }
+    .article-card:nth-child(even) { padding-left: 36px; }
+    .article-card:hover .card-title { color: var(--gold); }
+    .card-topic { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text3); margin-bottom: 7px; }
+    .card-title { font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.3; color: var(--text); margin-bottom: 7px; transition: color .2s; }
+    .card-deck  { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 10px; }
+    .card-meta  { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .card-read  { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 8px; }
+
+    /* ── PAGE HERO ── */
+    .page-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .page-hero > div { max-width: 1080px; margin: 0 auto; }
+    .page-eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .page-title { font-family: var(--serif); font-size: 40px; font-weight: 500; line-height: 1.1; color: var(--text); margin-bottom: 12px; }
+    .page-sub { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.75; max-width: 560px; }
+
+    /* ── AUTHORS GRID ── */
+    .authors-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .author-card { padding: 36px 0; border-bottom: .5px solid var(--border); }
+    .author-card:nth-child(odd)  { padding-right: 44px; border-right: .5px solid var(--border); }
+    .author-card:nth-child(even) { padding-left: 44px; }
+    .author-card.empty { opacity: .4; }
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--bg3); border: .5px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 20px; color: var(--gold); margin-bottom: 14px;
+    }
+    .author-avatar.empty-av { color: var(--text3); }
+    .author-name     { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .author-location { font-size: 11px; color: var(--text3); letter-spacing: .06em; margin-bottom: 6px; }
+    .author-beat     { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .edu-label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+    .edu-value { font-family: var(--bserif); font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+    .author-bio { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 16px; }
+    .author-essays-lbl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; padding-top: 16px; border-top: .5px solid var(--border); }
+    .essay-link { display: block; padding: 10px 0; border-bottom: .5px solid var(--border); cursor: pointer; background: none; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; }
+    .essay-link:last-child { border-bottom: none; }
+    .essay-link-title { font-family: var(--serif); font-size: 14px; color: var(--text); transition: color .2s; }
+    .essay-link:hover .essay-link-title { color: var(--gold); }
+    .essay-link-meta  { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+    /* ── ABOUT ── */
+    .about-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .about-hero-inner { max-width: 720px; margin: 0 auto; }
+    .about-hero-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .about-motto-greek { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--text); letter-spacing: .02em; }
+    .about-motto-sub   { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-top: 4px; text-align: right; }
+    .about-layout { display: grid; grid-template-columns: 1fr 240px; gap: 56px; padding: 40px 28px 64px; max-width: 720px; margin: 0 auto; }
+    .about-body h2 { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin: 32px 0 12px; }
+    .about-body h2:first-child { margin-top: 0; }
+    .about-body p  { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.85; margin-bottom: 16px; }
+    .about-body blockquote { border-left: 2px solid var(--gold); padding: 4px 0 4px 20px; margin: 24px 0; }
+    .about-body blockquote p { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--text); line-height: 1.5; margin: 0; }
+    .about-body blockquote p + p { margin-top: 6px; }
+    .sidebar-block { padding: 18px 0; border-bottom: .5px solid var(--border); }
+    .sidebar-block:first-child { border-top: .5px solid var(--border); }
+    .sidebar-lbl  { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .sidebar-list { list-style: none; }
+    .sidebar-list li { font-size: 12px; color: var(--text2); padding: 3px 0; }
+    .sidebar-list li::before { content: '— '; color: var(--text3); }
+
+    /* ── ARTICLE PAGE ── */
+    .article-hero { padding: 44px 28px 32px; border-bottom: .5px solid var(--border); }
+    .article-hero-inner { max-width: 900px; margin: 0 auto; }
+    .art-topic-lbl { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .art-title { font-family: var(--serif); font-size: 40px; font-weight: 500; line-height: 1.1; color: var(--text); margin-bottom: 16px; max-width: 640px; }
+    .art-deck  { font-family: var(--bserif); font-size: 19px; color: var(--text2); line-height: 1.7; max-width: 580px; margin-bottom: 20px; }
+    .art-meta  { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 10px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 220px; gap: 56px; padding: 40px 28px 64px; max-width: 900px; margin: 0 auto; align-items: start; }
+    .article-body p  { font-family: var(--bserif); font-size: 18px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--text); margin: 40px 0 14px; }
+    .article-body blockquote { border-left: 2px solid var(--gold); padding: 4px 0 4px 24px; margin: 32px 0; }
+    .article-body blockquote p { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--text); line-height: 1.45; margin: 0; }
+    .art-sidebar { position: sticky; top: 80px; }
+    .art-sidebar-block { padding: 16px 0; border-bottom: .5px solid var(--border); }
+    .art-sidebar-block:first-child { border-top: .5px solid var(--border); }
+    .art-sidebar-lbl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .tag { display: inline-block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border: .5px solid var(--border2); border-radius: 99px; color: var(--text3); margin: 2px; }
+    .related-link { display: block; padding: 9px 0; border-bottom: .5px solid var(--border); background: none; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; cursor: pointer; }
+    .related-link:last-child { border-bottom: none; }
+    .rl-topic { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
+    .rl-title { font-family: var(--serif); font-size: 13px; color: var(--text); line-height: 1.35; transition: color .2s; }
+    .related-link:hover .rl-title { color: var(--gold); }
+    .back-link { background: none; border: none; border-top: .5px solid var(--border); width: 100%; text-align: left; padding: 16px 0 0; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); cursor: pointer; }
+
+    /* ── FOOTER ── */
+    .site-footer { }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; max-width: 1080px; margin: 0 auto; }
+    .footer-logo { font-family: var(--serif); font-size: 16px; letter-spacing: .12em; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .footer-logo .omega { color: var(--gold); }
+    .footer-copy { font-size: 11px; letter-spacing: .08em; color: var(--text3); }
+    .footer-motto { text-align: right; }
+    .footer-motto-greek { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text3); }
+    .footer-motto-sub   { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .masthead-inner, .articles-grid, .authors-grid, .about-layout, .article-layout { grid-template-columns: 1fr; }
+      .mast-headline { font-size: 36px; }
+      .article-card:nth-child(odd)  { padding-right: 0; border-right: none; }
+      .article-card:nth-child(even) { padding-left: 0; }
+      .author-card:nth-child(odd)   { padding-right: 0; border-right: none; }
+      .author-card:nth-child(even)  { padding-left: 0; }
+      .nav-motto, .mast-contrib { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <button class="nav-logo" onclick="showPage('home')" aria-label="Agora home">
+          <svg viewBox="0 0 220 86" xmlns="http://www.w3.org/2000/svg">
+            <rect x="84" y="14" width="52" height="5" rx="1" class="logo-text"/>
+            <rect x="87" y="19" width="46" height="3" class="logo-text"/>
+            <rect x="90" y="22" width="40" height="2" class="logo-text"/>
+            <rect x="90" y="24" width="40" height="34" class="logo-text"/>
+            <rect x="93" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="98" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="103" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="108" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="113" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="118" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="123" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="87" y="58" width="46" height="4" class="logo-text"/>
+            <rect x="83" y="62" width="54" height="3" class="logo-text"/>
+            <rect x="79" y="65" width="62" height="3" class="logo-text"/>
+            <path d="M83 63 Q72 58 64 50 Q58 42 58 34" fill="none" stroke-width="1" style="stroke:var(--text2)"/>
+            <path d="M81 61 Q74 54 74 46 Q80 47 81 61Z" class="logo-branch"/>
+            <path d="M81 61 Q75 67 70 60 Q75 56 81 61Z" class="logo-branch"/>
+            <path d="M72 53 Q64 46 65 38 Q71 40 72 53Z" class="logo-branch"/>
+            <path d="M72 53 Q66 59 61 52 Q67 48 72 53Z" class="logo-branch"/>
+            <path d="M63 43 Q57 35 59 28 Q65 31 63 43Z" class="logo-branch"/>
+            <path d="M63 43 Q58 49 53 42 Q59 39 63 43Z" class="logo-branch"/>
+            <path d="M137 63 Q148 58 156 50 Q162 42 162 34" fill="none" stroke-width="1" style="stroke:var(--text2)"/>
+            <path d="M139 61 Q146 54 146 46 Q140 47 139 61Z" class="logo-branch"/>
+            <path d="M139 61 Q145 67 150 60 Q145 56 139 61Z" class="logo-branch"/>
+            <path d="M148 53 Q156 46 155 38 Q149 40 148 53Z" class="logo-branch"/>
+            <path d="M148 53 Q154 59 159 52 Q153 48 148 53Z" class="logo-branch"/>
+            <path d="M157 43 Q163 35 161 28 Q155 31 157 43Z" class="logo-branch"/>
+            <path d="M157 43 Q162 49 167 42 Q161 39 157 43Z" class="logo-branch"/>
+            <text x="110" y="64" text-anchor="middle" font-size="56" font-weight="700" font-family="'Times New Roman', Times, serif" class="logo-gold">A</text>
+            <text x="110" y="78" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="3" font-family="'Times New Roman', Times, serif" class="logo-text">AGORA</text>
+            <text x="110" y="86" text-anchor="middle" font-size="5.5" font-style="italic" letter-spacing="1.5" font-family="'Times New Roman', Times, serif" class="logo-gold">μελέτη τὸ πᾶν</text>
+          </svg>
+        </button>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-link active" id="nav-home"    onclick="showPage('home')">Feed</button>
+        <button class="nav-link"        id="nav-authors" onclick="showPage('authors')">Authors</button>
+        <button class="nav-link"        id="nav-about"   onclick="showPage('about')">About</button>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()"><span id="themeIconWrap"><span id="themeIcon">☽</span></span> <span id="themeLabel">Dark</span></button>
+      </nav>
+    </div>
+    <div class="greek-band"></div>
+  </header>
+
+  <!-- ══════════════ HOME ══════════════ -->
+  <div class="page active" id="page-home">
+
+    <!-- Masthead -->
+    <section class="masthead">
+      <div class="masthead-inner">
+        <div>
+          <div class="columns" id="mast-cols"></div>
+          <div class="mast-eyebrow">— A modern public forum —</div>
+          <h1 class="mast-headline">Ideas tested<br>in the open.</h1>
+          <p class="mast-sub">Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum.</p>
+        </div>
+        <div class="mast-contrib">
+          <div class="mast-contrib-label">Contributors</div>
+          <div class="mast-author"><div class="mast-author-name">Joven Heer</div><div class="mast-author-beat">Politics · Business</div></div>
+          <div class="mast-divider"></div>
+          <div class="mast-author"><div class="mast-author-name">Udhay Kapila</div><div class="mast-author-beat">Finance · Economics</div></div>
+          <div class="mast-divider"></div>
+          <div class="mast-author"><div class="mast-author-name">Kasra Kazemialiakbar</div><div class="mast-author-beat">Economics · Intl. Relations</div></div>
+          <div class="mast-divider"></div>
+          <div class="mast-author"><div class="mast-author-name">Sidhant Matthews</div><div class="mast-author-beat">Finance · Accounting</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic bar -->
+    <div class="topic-bar">
+      <button class="topic-pill active" data-topic="all">All</button>
+      <button class="topic-pill" data-topic="finance">Finance</button>
+      <button class="topic-pill" data-topic="politics">Politics</button>
+      <button class="topic-pill" data-topic="philosophy">Philosophy</button>
+      <button class="topic-pill" data-topic="business">Business</button>
+      <button class="topic-pill" data-topic="analysis">Analysis</button>
+    </div>
+
+    <!-- Featured -->
+    <section class="featured-section" id="featured-section">
+      <div>
+        <div class="feat-label">✦ Featured essay</div>
+        <div class="feat-topic-lbl" id="feat-topic-lbl"></div>
+        <h2 class="feat-title" id="feat-title"></h2>
+        <p class="feat-deck" id="feat-deck"></p>
+        <div class="feat-meta">
+          <span id="feat-author"></span>
+          <span class="meta-dot"></span>
+          <span id="feat-date"></span>
+        </div>
+        <button class="read-link" id="feat-read-btn">Read essay →</button>
+      </div>
+    </section>
+
+    <!-- Articles grid -->
+    <div class="articles-grid" id="articles-grid"></div>
+
+  </div>
+
+  <!-- ══════════════ AUTHORS ══════════════ -->
+  <div class="page" id="page-authors">
+    <div class="page-hero">
+      <div>
+        <div class="columns" id="authors-cols"></div>
+        <div class="page-eyebrow">The contributors</div>
+        <h1 class="page-title">Countless ideas.<br>One forum.</h1>
+        <p class="page-sub">Agora is written by a team of lifelong learners across North America, in the pursuit of articulating knowledge and ideas and sharing it with the world.</p>
+      </div>
+    </div>
+    <div class="authors-grid" id="authors-grid"></div>
+  </div>
+
+  <!-- ══════════════ ABOUT ══════════════ -->
+  <div class="page" id="page-about">
+    <div class="about-hero">
+      <div class="about-hero-inner">
+        <div class="columns" id="about-cols"></div>
+        <div class="page-eyebrow">About this publication</div>
+        <div class="about-hero-top">
+          <h1 class="page-title" style="margin-bottom:0;">The Agora<br>Manifesto.</h1>
+          <div>
+            <div class="about-motto-greek">μελέτη τὸ πᾶν</div>
+            <div class="about-motto-sub">Ponder the whole</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-layout">
+      <div class="about-body">
+        <h2>Why we built this</h2>
+        <p>The ancient Agora was Athens' public square — a single open space where philosophers, merchants, politicians, and citizens collided without agenda. Socrates did not publish newsletters. Aristotle did not run a podcast. They stood in an open space and argued, and the best arguments survived.</p>
+        <p>We are not under the illusion that a team writing from North America in 2026 are the heirs to that tradition. But we do think something essential has been lost in the way ideas circulate today — the slow, careful, adversarial working-through of a question to its logical conclusion.</p>
+        <p>In an era full of noise, monetisation, and clickbait, now more than ever, thoughtfulness, analysis, and truth must prevail.</p>
+        <blockquote>
+          <p>"It is better to change an opinion than to persist in a wrong one."</p>
+          <p>— Socrates</p>
+        </blockquote>
+        <h2>What we cover</h2>
+        <p>Finance, economics, business, politics, philosophy, and the occasional piece that refuses to fit any of those categories. What ties them together is a commitment to analysis over opinion, and to first principles over received wisdom. We are not interested in hot takes. We are interested in whether the reasoning holds.</p>
+        <h2>How we write</h2>
+        <p>Our team does not have a house view — disagreement is a feature, not a problem. We are not selling anything. We are letting knowledge and the best ideas prevail.</p>
+        <p>We cite our sources, admit openly when we do not know something, grow when we are proven wrong, and stand firmly with our own names in the byline. Anonymous analysis is cowardly analysis.</p>
+      </div>
+      <aside>
+        <div class="sidebar-block">
+          <div class="sidebar-lbl">Topics</div>
+          <ul class="sidebar-list">
+            <li>Finance &amp; Economics</li>
+            <li>Business &amp; Strategy</li>
+            <li>Political Theory &amp; Analysis</li>
+            <li>Philosophy</li>
+            <li>History of Ideas</li>
+            <li>Culture</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-lbl">Based in</div>
+          <ul class="sidebar-list">
+            <li>Vancouver</li>
+            <li>Toronto</li>
+            <li>London, Ontario</li>
+            <li>Waterloo</li>
+            <li>New York</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ══════════════ ARTICLE ══════════════ -->
+  <div class="page" id="page-article">
+    <div class="article-hero">
+      <div class="article-hero-inner">
+        <div class="art-topic-lbl" id="art-topic-lbl"></div>
+        <h1 class="art-title" id="art-title"></h1>
+        <p class="art-deck" id="art-deck"></p>
+        <div class="art-meta">
+          <span id="art-author"></span>
+          <span class="meta-dot"></span>
+          <span id="art-date"></span>
+        </div>
+      </div>
+    </div>
+    <div class="article-layout">
+      <article class="article-body" id="article-body"></article>
+      <aside class="art-sidebar">
+        <div class="art-sidebar-block">
+          <div class="art-sidebar-lbl">Author</div>
+          <div id="art-sidebar-author" style="font-family:var(--serif);font-size:15px;color:var(--text);"></div>
+          <div id="art-sidebar-beat"   style="font-size:11px;color:var(--text3);"></div>
+        </div>
+        <div class="art-sidebar-block">
+          <div class="art-sidebar-lbl">Filed under</div>
+          <div id="art-tags"></div>
+        </div>
+        <div class="art-sidebar-block" id="related-block">
+          <div class="art-sidebar-lbl">Related reading</div>
+          <div id="related-links"></div>
+        </div>
+        <button class="back-link" onclick="showPage('home')">← Back to feed</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="greek-band"></div>
+    <div class="footer-inner">
+      <div class="footer-logo"><span class="omega">Ω</span> AGORA</div>
+      <span class="footer-copy">© 2026 Agora</span>
+      <div class="footer-motto">
+        <div class="footer-motto-greek">μελέτη τὸ πᾶν</div>
+        <div class="footer-motto-sub">Ponder the whole</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // ── DATA ──────────────────────────────────────────────────────────────────
+
+  var AUTHORS = {
+    joven: {
+      id: 'joven', initials: 'JH', name: 'Joven Heer',
+      location: 'Vancouver, BC', beat: 'Politics · Business',
+      education: 'Political Science & Ivey AEO — Western University',
+      bio: 'Joven is drawn to the structures beneath the surface: how power is accumulated, exercised, and lost, and what the great thinkers of history can tell us about the world as it actually operates today. He writes about politics and business through the lens of people, incentives, and consequences. His work spans North American politics, international relations, and the power dynamics that quietly govern both boardrooms and governments. He is equally interested in culture and statistics as tools for understanding behaviour, and returns often to a single question: what actually makes people, institutions, and nations succeed.',
+    },
+    udhay: {
+      id: 'udhay', initials: 'UK', name: 'Udhay Kapila',
+      location: 'Toronto, ON', beat: 'Finance · Economics',
+      education: 'Business Management & Ivey AEO — Western University',
+      bio: 'Udhay thinks in numbers and systems. He is interested in how and why financial decisions get made, what the data actually says beneath the headlines, and how models can illuminate or mislead our understanding of economic reality. His work explores how markets live and breathe in real time, the financial indicators that signal success and failure before most people notice, and the quantitative frameworks that make sense of complexity. He believes good data visualisation is not just a technical skill but an act of clarity, and that the most important financial questions are rarely the ones making the most noise.',
+    },
+    kasra: {
+      id: 'kasra', initials: 'KK', name: 'Kasra Kazemialiakbar',
+      location: 'Vancouver, BC', beat: 'Economics · Intl. Relations',
+      education: 'Economics — University of British Columbia',
+      bio: 'Kasra approaches economics not as a set of models but as a living system — interconnected, adaptive, and best understood when examined through multiple lenses at once. He is drawn to international relations and the way conflict and geopolitical tension reshape the economic order, creating new incentives and dissolving old ones. His work sits at the intersection of political economy and strategic decision-making: why states and institutions act the way they do, and what the economic logic beneath the surface reveals about those choices. He believes the most valuable insight comes from applying rigorous economic thinking to questions that most treat as purely political.',
+    },
+    sidhant: {
+      id: 'sidhant', initials: 'SM', name: 'Sidhant Matthews',
+      location: 'Toronto, ON', beat: 'Finance · Accounting',
+      education: 'Accounting & Finance — University of Waterloo',
+      bio: 'Sidhant is fascinated by the architecture of financial systems — how regulations, institutions, and markets are built, tested, and remade as the world shifts beneath them. He believes that to understand finance is to understand history in motion: the rules that govern capital are never static, and the most revealing moments are the ones when they change. Beyond the mechanics of money, he is drawn to the human side of organisations: what separates real leaders from those who merely hold titles, and how people can come together around something larger than themselves. He is driven by a commitment to community and the conviction that shared success, carefully cultivated, is the most durable kind.',
+    },
+  };
+
+  var EMPTY_SLOTS = 2;
+
+  var ARTICLES = [
+    { id: 'a1', topic: 'finance',    topicLabel: 'Finance · Long-form',   title: 'Coming Soon', deck: 'An essay on finance and economics. Check back shortly.',    author: 'joven', date: 'Coming Soon', featured: true  },
+    { id: 'a2', topic: 'politics',   topicLabel: 'Politics · Analysis',   title: 'Coming Soon', deck: 'An essay on politics and deliberation. Check back shortly.', author: 'udhay', date: 'Coming Soon', featured: false },
+    { id: 'a3', topic: 'business',   topicLabel: 'Business · Short take', title: 'Coming Soon', deck: 'An essay on business strategy. Check back shortly.',         author: 'joven', date: 'Coming Soon', featured: false },
+    { id: 'a4', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+    { id: 'a5', topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
+    { id: 'a6', topic: 'philosophy', topicLabel: 'Philosophy · Long-form',title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+  ];
+
+  // ── THEME ─────────────────────────────────────────────────────────────────
+
+  var dark = localStorage.getItem('agora-theme') === 'dark';
+  var hoverEls = [];
+
+  function applyTheme() {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    document.getElementById('themeIcon').textContent = dark ? '☀' : '☽';
+    document.getElementById('themeLabel').textContent = dark ? 'Light' : 'Dark';
+    localStorage.setItem('agora-theme', dark ? 'dark' : 'light');
+  }
+
+  function showStarBurst() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap) return;
+    var positions = [
+      {top: '-9px',  left: '7px',  delay: '0s'},
+      {top: '-7px',  left: '12px', delay: '0.10s'},
+      {top: '3px',   left: '12px', delay: '0.05s'},
+      {top: '-12px', left: '-2px', delay: '0.16s'},
+    ];
+    positions.forEach(function(p) {
+      var s = document.createElement('span');
+      s.className = 'theme-star';
+      s.textContent = '✦';
+      s.style.top = p.top;
+      s.style.left = p.left;
+      s.style.animationDelay = p.delay;
+      wrap.appendChild(s);
+      setTimeout(function() { if (s.parentNode) s.parentNode.removeChild(s); }, 1100);
+    });
+  }
+
+  function showRayBurst() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap) return;
+    for (var i = 0; i < 8; i++) {
+      var ray = document.createElement('span');
+      ray.className = 'theme-ray';
+      ray.style.setProperty('--r', (i * 45) + 'deg');
+      ray.style.animationDelay = (i * 0.04) + 's';
+      wrap.appendChild(ray);
+      (function(el) {
+        setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 1100);
+      })(ray);
+    }
+  }
+
+  function showStarHover() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap || hoverEls.length) return;
+    var positions = [
+      {top: '-9px',  left: '7px',  delay: '0s'},
+      {top: '-7px',  left: '12px', delay: '0.3s'},
+      {top: '3px',   left: '12px', delay: '0.6s'},
+      {top: '-12px', left: '-2px', delay: '0.9s'},
+    ];
+    positions.forEach(function(p) {
+      var s = document.createElement('span');
+      s.className = 'theme-star-hover';
+      s.textContent = '✦';
+      s.style.top = p.top;
+      s.style.left = p.left;
+      s.style.animationDelay = p.delay;
+      wrap.appendChild(s);
+      hoverEls.push(s);
+    });
+  }
+
+  function showRayHover() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap || hoverEls.length) return;
+    for (var i = 0; i < 8; i++) {
+      var ray = document.createElement('span');
+      ray.className = 'theme-ray-hover';
+      ray.style.setProperty('--r', (i * 45) + 'deg');
+      ray.style.animationDelay = (i * 0.12) + 's';
+      wrap.appendChild(ray);
+      hoverEls.push(ray);
+    }
+  }
+
+  function clearHoverEls() {
+    hoverEls.forEach(function(el) { if (el.parentNode) el.parentNode.removeChild(el); });
+    hoverEls = [];
+  }
+
+  function toggleTheme() {
+    clearHoverEls();
+    if (!dark) { showStarBurst(); } else { showRayBurst(); }
+    setTimeout(function() { dark = !dark; applyTheme(); }, 150);
+  }
+
+  applyTheme();
+
+  var themeBtn = document.getElementById('themeBtn');
+  themeBtn.addEventListener('mouseenter', function() {
+    if (!dark) { showStarHover(); } else { showRayHover(); }
+  });
+  themeBtn.addEventListener('mouseleave', clearHoverEls);
+
+  // ── COLUMNS HELPER ────────────────────────────────────────────────────────
+
+  function buildColumns(containerId, count) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    el.className = 'columns';
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      html += '<div class="col-unit"><div class="col-cap"></div><div class="col-neck"></div><div class="col-shaft"></div><div class="col-base"></div><div class="col-plinth"></div></div>';
+    }
+    el.innerHTML = html;
+  }
+
+  // ── NAVIGATION ────────────────────────────────────────────────────────────
+
+  var currentArticle = null;
+
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('page-' + name).classList.add('active');
+    ['home','authors','about'].forEach(function(n) {
+      var btn = document.getElementById('nav-' + n);
+      if (btn) btn.classList.toggle('active', n === name);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function openArticle(article) {
+    currentArticle = article;
+    var author = AUTHORS[article.author];
+    document.getElementById('art-topic-lbl').textContent = article.topicLabel + ' · ' + article.date;
+    document.getElementById('art-title').textContent = article.title;
+    document.getElementById('art-deck').textContent = article.deck;
+    document.getElementById('art-author').textContent = author ? author.name : '';
+    document.getElementById('art-date').textContent = article.date;
+    document.getElementById('article-body').innerHTML = '<p style="font-family:var(--bserif);font-size:18px;color:var(--text2);line-height:1.9;">This essay is coming soon.</p>';
+    document.getElementById('art-sidebar-author').textContent = author ? author.name : '';
+    document.getElementById('art-sidebar-beat').textContent = author ? author.beat : '';
+    document.getElementById('art-tags').innerHTML = '<span class="tag">' + article.topic + '</span>';
+    var related = ARTICLES.filter(function(a) { return a.id !== article.id && a.topic === article.topic; }).slice(0, 3);
+    var relBlock = document.getElementById('related-block');
+    var relLinks = document.getElementById('related-links');
+    if (related.length) {
+      relBlock.style.display = '';
+      relLinks.innerHTML = related.map(function(r) {
+        return '<button class="related-link" onclick="openArticle(ARTICLES.find(function(a){return a.id===\'' + r.id + '\'}))">' +
+          '<div class="rl-topic">' + r.topicLabel + '</div>' +
+          '<div class="rl-title">' + r.title + '</div>' +
+          '</button>';
+      }).join('');
+    } else {
+      relBlock.style.display = 'none';
+    }
+    showPage('article');
+  }
+
+  // ── TOPIC FILTER ──────────────────────────────────────────────────────────
+
+  var activeTopic = 'all';
+
+  document.querySelectorAll('.topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      activeTopic = pill.dataset.topic;
+      document.querySelectorAll('.topic-pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      renderGrid();
+    });
+  });
+
+  // ── RENDER HOME ───────────────────────────────────────────────────────────
+
+  function renderHome() {
+    buildColumns('mast-cols', 20);
+    var featured = ARTICLES.find(function(a) { return a.featured; });
+    if (featured) {
+      var fa = AUTHORS[featured.author];
+      document.getElementById('feat-topic-lbl').textContent = featured.topicLabel;
+      document.getElementById('feat-title').textContent = featured.title;
+      document.getElementById('feat-deck').textContent = featured.deck;
+      document.getElementById('feat-author').textContent = fa ? fa.name : '';
+      document.getElementById('feat-date').textContent = featured.date;
+      document.getElementById('feat-read-btn').onclick = function() { openArticle(featured); };
+    }
+    renderGrid();
+  }
+
+  function renderGrid() {
+    var grid = document.getElementById('articles-grid');
+    var featured = ARTICLES.find(function(a) { return a.featured; });
+    var list = ARTICLES.filter(function(a) { return !a.featured; });
+    if (activeTopic !== 'all') list = list.filter(function(a) { return a.topic === activeTopic; });
+    grid.innerHTML = list.map(function(a) {
+      var auth = AUTHORS[a.author];
+      return '<div class="article-card" data-topic="' + a.topic + '" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+        '<div class="card-topic">' + a.topicLabel + '</div>'+
+        '<div class="card-title">' + a.title + '</div>'+
+        '<p class="card-deck">' + a.deck + '</p>'+
+        '<div class="card-meta"><span>' + (auth ? auth.name : '') + '</span>' +
+        (a.date ? '<span class="meta-dot"></span><span>' + a.date + '</span>' : '') +
+        '</div>'+
+        '<span class="card-read">Read →</span>'+
+        '</div>';
+    }).join('');
+
+    // Show/hide featured based on topic filter
+    var fs = document.getElementById('featured-section');
+    var featVisible = featured && (activeTopic === 'all' || activeTopic === featured.topic);
+    fs.style.display = featVisible ? '' : 'none';
+  }
+
+  // ── RENDER AUTHORS ────────────────────────────────────────────────────────
+
+  function renderAuthors() {
+    buildColumns('authors-cols', 8);
+    var grid = document.getElementById('authors-grid');
+    var cards = '';
+    var allAuthors = Object.values(AUTHORS);
+    allAuthors.forEach(function(au, idx) {
+      var essays = ARTICLES.filter(function(a) { return a.author === au.id; });
+      var essayLinks = essays.map(function(a) {
+        return '<button class="essay-link" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+          '<div class="essay-link-title">' + a.title + '</div>'+
+          '<div class="essay-link-meta">' + a.topicLabel + ' · ' + a.date + '</div>'+
+          '</button>';
+      }).join('');
+      cards += '<div class="author-card">'+
+        '<div class="author-avatar">' + au.initials + '</div>'+
+        '<div class="author-name">' + au.name + '</div>'+
+        '<div class="author-location">' + au.location + '</div>'+
+        '<div class="author-beat">' + au.beat + '</div>'+
+        '<div class="edu-label">Education</div>'+
+        '<div class="edu-value">' + au.education + '</div>'+
+        '<p class="author-bio">' + au.bio + '</p>'+
+        (essays.length ? '<div class="author-essays-lbl">Recent essays</div>' + essayLinks : '') +
+        '</div>';
+    });
+    // Empty slots
+    for (var i = 0; i < EMPTY_SLOTS; i++) {
+      cards += '<div class="author-card empty">'+
+        '<div class="author-avatar empty-av">?</div>'+
+        '<div class="author-name">Coming Soon</div>'+
+        '<p class="author-bio" style="margin-top:10px;">This contributor will be announced shortly.</p>'+
+        '</div>';
+    }
+    grid.innerHTML = cards;
+  }
+
+  // ── RENDER ABOUT ──────────────────────────────────────────────────────────
+
+  function renderAbout() { buildColumns('about-cols', 6); }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+
+  renderHome();
+  renderAuthors();
+  renderAbout();
+  </script>
+</body>
+</html>

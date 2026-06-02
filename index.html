@@ -322,9 +322,33 @@
     .footer-logo { font-family: var(--serif); font-size: 16px; letter-spacing: .12em; color: var(--text3); display: flex; align-items: center; gap: 6px; }
     .footer-logo .omega { color: var(--gold); }
     .footer-copy { font-size: 11px; letter-spacing: .08em; color: var(--text3); }
+    .footer-social { display: flex; align-items: center; gap: 16px; }
+    .footer-social-link { display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--text3); font-size: 11px; letter-spacing: .08em; transition: color .2s; }
+    .footer-social-link:hover { color: var(--gold); }
+    .footer-social-link svg { width: 18px; height: 18px; fill: currentColor; transition: fill .2s; }
+    .footer-linkedin { display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--text3); font-size: 11px; letter-spacing: .08em; transition: color .2s; }
+    .footer-linkedin:hover { color: var(--gold); }
+    .footer-linkedin svg { width: 18px; height: 18px; fill: currentColor; transition: fill .2s; }
     .footer-motto { text-align: right; }
     .footer-motto-greek { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text3); }
     .footer-motto-sub   { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+
+    /* ── CONNECT ── */
+    .connect-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .connect-hero-inner { max-width: 720px; margin: 0 auto; }
+    .connect-body { max-width: 720px; margin: 0 auto; padding: 48px 28px 80px; }
+    .connect-cards { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+    .connect-card { display: flex; align-items: center; gap: 24px; padding: 28px 0; border-bottom: .5px solid var(--border); text-decoration: none; color: inherit; transition: background .15s; }
+    .connect-card:first-child { border-top: .5px solid var(--border); }
+    .connect-card:hover .connect-card-label { color: var(--gold); }
+    .connect-card:hover .connect-card-icon { color: var(--gold); }
+    .connect-card-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--text3); transition: color .2s; }
+    .connect-card-icon svg { width: 100%; height: 100%; fill: currentColor; }
+    .connect-card-info { flex: 1; }
+    .connect-card-label { font-family: var(--serif); font-size: 20px; color: var(--text); transition: color .2s; }
+    .connect-card-handle { font-size: 12px; letter-spacing: .08em; color: var(--text3); margin-top: 4px; }
+    .connect-card-arrow { font-size: 18px; color: var(--text3); }
+    .connect-intro { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.85; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -384,6 +408,7 @@
         <button class="nav-link active" id="nav-home"    onclick="showPage('home')">Feed</button>
         <button class="nav-link"        id="nav-authors" onclick="showPage('authors')">Authors</button>
         <button class="nav-link"        id="nav-about"   onclick="showPage('about')">About</button>
+        <button class="nav-link"        id="nav-connect" onclick="showPage('connect')">Connect</button>
         <button class="theme-btn" id="themeBtn" onclick="toggleTheme()"><span id="themeIconWrap"><span id="themeIcon">☽</span></span> <span id="themeLabel">Dark</span></button>
       </nav>
     </div>
@@ -557,12 +582,71 @@
     </div>
   </div>
 
+  <!-- ══════════════ CONNECT ══════════════ -->
+  <div class="page" id="page-connect">
+    <div class="connect-hero">
+      <div class="connect-hero-inner">
+        <div class="columns" id="connect-cols"></div>
+        <div class="page-eyebrow">Get in touch</div>
+        <h1 class="page-title">Connect.</h1>
+      </div>
+    </div>
+    <div class="connect-body">
+      <p class="connect-intro">We want to hear from you — whether you have a pitch, a disagreement, or just want to say hello.</p>
+      <div class="connect-cards">
+
+        <a class="connect-card" href="https://www.linkedin.com/company/agora-publication/about/" target="_blank" rel="noopener noreferrer">
+          <div class="connect-card-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div class="connect-card-info">
+            <div class="connect-card-label">LinkedIn</div>
+            <div class="connect-card-handle">Agora Publication</div>
+          </div>
+          <div class="connect-card-arrow">→</div>
+        </a>
+
+        <a class="connect-card" href="mailto:theagorapublishing@gmail.com">
+          <div class="connect-card-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div class="connect-card-info">
+            <div class="connect-card-label">Email</div>
+            <div class="connect-card-handle">theagorapublishing@gmail.com</div>
+          </div>
+          <div class="connect-card-arrow">→</div>
+        </a>
+
+        <a class="connect-card" href="https://www.instagram.com/agora_public" target="_blank" rel="noopener noreferrer">
+          <div class="connect-card-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </div>
+          <div class="connect-card-info">
+            <div class="connect-card-label">Instagram</div>
+            <div class="connect-card-handle">@agora_public</div>
+          </div>
+          <div class="connect-card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="greek-band"></div>
     <div class="footer-inner">
       <div class="footer-logo"><span class="omega">Ω</span> AGORA</div>
-      <span class="footer-copy">© 2026 Agora</span>
+      <div class="footer-social">
+        <a class="footer-social-link" href="https://www.linkedin.com/company/agora-publication/about/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="footer-social-link" href="https://www.instagram.com/agora_public" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+      </div>
       <div class="footer-motto">
         <div class="footer-motto-greek">μελέτη τὸ πᾶν</div>
         <div class="footer-motto-sub">Ponder the whole</div>
@@ -729,15 +813,30 @@
 
   var currentArticle = null;
 
-  function showPage(name) {
+  var VALID_PAGES = ['home','authors','about','connect','article'];
+
+  function pageToPath(name) { return name === 'home' ? '/' : '/' + name; }
+  function pathToPage(path) {
+    var p = path.replace(/^\//, '') || 'home';
+    return VALID_PAGES.indexOf(p) !== -1 ? p : 'home';
+  }
+
+  function showPage(name, skipHistory) {
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('page-' + name).classList.add('active');
-    ['home','authors','about'].forEach(function(n) {
+    ['home','authors','about','connect'].forEach(function(n) {
       var btn = document.getElementById('nav-' + n);
       if (btn) btn.classList.toggle('active', n === name);
     });
     window.scrollTo(0, 0);
+    if (!skipHistory && location.pathname !== pageToPath(name)) {
+      history.pushState({ page: name }, '', pageToPath(name));
+    }
   }
+
+  window.addEventListener('popstate', function() {
+    showPage(pathToPage(location.pathname), true);
+  });
 
   function openArticle(article) {
     currentArticle = article;
@@ -863,11 +962,20 @@
 
   function renderAbout() { buildColumns('about-cols', 6); }
 
+  // ── RENDER CONNECT ────────────────────────────────────────────────────────
+
+  function renderConnect() { buildColumns('connect-cols', 6); }
+
   // ── INIT ──────────────────────────────────────────────────────────────────
 
   renderHome();
   renderAuthors();
   renderAbout();
+  renderConnect();
+
+  (function() {
+    showPage(pathToPage(location.pathname), true);
+  })();
   </script>
 </body>
 </html>

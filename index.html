@@ -234,6 +234,7 @@
     /* ── ARTICLE GRID ── */
     .articles-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
     .article-card { padding: 26px 0; border-bottom: .5px solid var(--border); cursor: pointer; }
+    .card-img { width: 100%; height: 180px; object-fit: cover; object-position: center 20%; display: block; margin-bottom: 14px; border-radius: 2px; }
     .article-card:nth-child(odd)  { padding-right: 36px; border-right: .5px solid var(--border); }
     .article-card:nth-child(even) { padding-left: 36px; }
     .article-card:hover .card-title { color: var(--gold); }
@@ -1084,7 +1085,10 @@
     if (featured) {
       var fa = AUTHORS[featured.author];
       document.getElementById('feat-topic-lbl').textContent = featured.topicLabel;
-      document.getElementById('feat-title').textContent = featured.title;
+      var featTitle = document.getElementById('feat-title');
+      featTitle.textContent = featured.title;
+      featTitle.style.cursor = 'pointer';
+      featTitle.onclick = function() { openArticle(featured); };
       document.getElementById('feat-deck').textContent = featured.deck;
       document.getElementById('feat-author').innerHTML = fa
         ? '<button class="author-link" onclick="showAuthor(\'' + featured.author + '\')">' + fa.name + '</button>' : '';
@@ -1112,6 +1116,7 @@
     grid.innerHTML = list.map(function(a) {
       var auth = AUTHORS[a.author];
       return '<div class="article-card" data-topic="' + a.topic + '" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+        (a.heroImg ? '<img class="card-img" src="' + a.heroImg + '" alt="' + a.title + '">' : '')+
         '<div class="card-topic">' + a.topicLabel + '</div>'+
         '<div class="card-title">' + a.title + '</div>'+
         '<p class="card-deck">' + a.deck + '</p>'+

@@ -42,7 +42,11 @@ export default {
       img   = url.origin + OG[match[1]].img;
     }
 
+    // Replace the existing description meta tag and inject OG tags
+    html = html.replace(/<meta name="description"[^>]*>/i, '');
+
     const tags = `
+  <meta name="description" content="${desc}">
   <meta property="og:site_name" content="Agora">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${url.href}">

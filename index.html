@@ -818,7 +818,7 @@
       id: 'sidhant', initials: 'SM', name: 'Sidhant Matthews',
       location: 'Toronto, ON', beat: 'Finance · Accounting',
       education: 'Accounting & Finance — University of Waterloo',
-      email: 'placeholder@email.com', linkedin: 'https://www.linkedin.com/in/sidhant-mathews-a70a03344/',
+      email: 'sidhant.mathews@gmail.com', linkedin: 'https://www.linkedin.com/in/sidhant-mathews-a70a03344/',
       bio: 'Sidhant is fascinated by the architecture of financial systems — how regulations, institutions, and markets are built, tested, and remade as the world shifts beneath them. He believes that to understand finance is to understand history in motion: the rules that govern capital are never static, and the most revealing moments are the ones when they change. Beyond the mechanics of money, he is drawn to the human side of organisations: what separates real leaders from those who merely hold titles, and how people can come together around something larger than themselves. He is driven by a commitment to community and the conviction that shared success, carefully cultivated, is the most durable kind.',
     },
   };
@@ -971,6 +971,8 @@
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('page-' + name).classList.add('active');
     setNavActive(name);
+    var pageTitles = { home: 'Agora — The Modern Public Square', authors: 'Authors — Agora', about: 'About — Agora', connect: 'Connect — Agora', article: 'Agora' };
+    document.title = pageTitles[name] || 'Agora — The Modern Public Square';
     window.scrollTo(0, 0);
     if (!skipHistory && location.pathname !== pageToPath(name)) {
       history.pushState({ page: name }, '', pageToPath(name));
@@ -981,6 +983,7 @@
     var au = AUTHORS[id];
     if (!au) return;
     buildColumns('ap-cols', 6);
+    document.title = au.name + ' — Agora';
     document.getElementById('ap-avatar').textContent = au.initials;
     document.getElementById('ap-name').textContent = au.name;
     document.getElementById('ap-beat').textContent = au.beat;
@@ -1029,6 +1032,7 @@
   function openArticle(article, skipHistory) {
     currentArticle = article;
     var author = AUTHORS[article.author];
+    document.title = article.title + ' — Agora';
     document.getElementById('art-topic-lbl').textContent = article.topicLabel + ' · ' + article.date;
     document.getElementById('art-title').textContent = article.title;
     document.getElementById('art-deck').textContent = article.deck;

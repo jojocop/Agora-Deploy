@@ -414,6 +414,23 @@
     .ap-contact-link:hover { color: var(--gold); }
     .ap-contact-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
+    /* ── DEBATE EASTER EGG ── */
+    .debate-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .5s; }
+    .debate-overlay.active { opacity: 1; pointer-events: all; }
+    .debate-modal { background: var(--bg2); border: .5px solid var(--border2); max-width: 580px; width: 92%; max-height: 82vh; overflow-y: auto; padding: 44px 40px 36px; position: relative; }
+    .debate-close { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 20px; color: var(--text3); cursor: pointer; line-height: 1; transition: color .2s; }
+    .debate-close:hover { color: var(--gold); }
+    .debate-eyebrow { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 6px; }
+    .debate-title { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--text); text-align: center; margin-bottom: 4px; letter-spacing: .04em; }
+    .debate-sub { font-family: var(--serif); font-style: italic; font-size: 12px; color: var(--text3); text-align: center; margin-bottom: 28px; padding-bottom: 24px; border-bottom: .5px solid var(--border); }
+    .debate-line { opacity: 0; transform: translateY(6px); transition: opacity .5s, transform .5s; margin-bottom: 22px; }
+    .debate-line.visible { opacity: 1; transform: translateY(0); }
+    .debate-speaker { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 5px; }
+    .debate-speaker.soc { color: var(--gold); }
+    .debate-speaker.pla { color: var(--text3); }
+    .debate-text { font-family: var(--bserif); font-size: 16px; color: var(--text); line-height: 1.75; font-style: italic; }
+    .debate-footer { font-size: 10px; letter-spacing: .1em; color: var(--text3); text-align: center; margin-top: 24px; padding-top: 20px; border-top: .5px solid var(--border); }
+
     /* ── CONNECT ── */
     .connect-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
     .connect-hero-inner { max-width: 720px; margin: 0 auto; }
@@ -1240,6 +1257,54 @@
 
   // ── INIT ──────────────────────────────────────────────────────────────────
 
+  // ── DEBATE EASTER EGG ─────────────────────────────────────────────────────
+
+  var DEBATE = [
+    { cls: 'soc', speaker: 'Socrates', text: 'Democratia quid est, Plato, nisi navigium ab imperitis nautis gubernatum? Plebs sapientiam non habet — et quod ignorat, regere non potest.' },
+    { cls: 'pla', speaker: 'Plato',    text: 'Ita est, magister. Civitas a philosophis regenda est — ab illis qui Formam Boni vident et veritatem ab umbris distinguunt.' },
+    { cls: 'soc', speaker: 'Socrates', text: 'Sed Plato — quis me philosophum vocat? Ego nihil scio. Hoc unum certum est mihi.' },
+    { cls: 'pla', speaker: 'Plato',    text: 'Demos umbras in caverna spectat, non veritatem ipsam. Liberari non potest nisi per eos qui lucem viderunt.' },
+    { cls: 'soc', speaker: 'Socrates', text: 'Fortasse. Sed eum qui imperat sapientem esse posse valde dubito — potestas animum corrumpit. Athenis saepe hoc vidimus.' },
+    { cls: 'pla', speaker: 'Plato',    text: 'Ergo democratia semper in tyrannidem cadet. Id inevitabile est — historia testis est.' },
+    { cls: 'soc', speaker: 'Socrates', text: 'Hoc scio: qui nihil interrogat, nihil scit. Quaeramus semper — etiam de nobis ipsis.' },
+    { cls: 'pla', speaker: 'Plato',    text: '...' },
+    { cls: 'soc', speaker: 'Socrates', text: 'Vides? Etiam tu non respondes. Ergo sumus ambo, mi Plato, aliquid democratici.' },
+  ];
+
+  var eggClicks = 0, eggTimer = null;
+
+  document.getElementById('themeBtn').addEventListener('click', function() {
+    eggClicks++;
+    clearTimeout(eggTimer);
+    eggTimer = setTimeout(function() { eggClicks = 0; }, 1800);
+    if (eggClicks >= 5) {
+      eggClicks = 0;
+      showDebate();
+    }
+  });
+
+  function showDebate() {
+    var container = document.getElementById('debate-lines');
+    container.innerHTML = DEBATE.map(function(line) {
+      return '<div class="debate-line">' +
+        '<div class="debate-speaker ' + line.cls + '">' + line.speaker + '</div>' +
+        '<div class="debate-text">' + line.text + '</div>' +
+        '</div>';
+    }).join('');
+    document.getElementById('debateOverlay').classList.add('active');
+    var lines = container.querySelectorAll('.debate-line');
+    lines.forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('visible'); }, i * 1400);
+    });
+    document.getElementById('debateOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeDebate();
+    });
+  }
+
+  function closeDebate() {
+    document.getElementById('debateOverlay').classList.remove('active');
+  }
+
   renderHome();
   renderAuthors();
   renderAbout();
@@ -1259,6 +1324,18 @@
     showPage(pathToPage(path), true);
   }, 0);
   </script>
+
+  <!-- DEBATE EASTER EGG -->
+  <div class="debate-overlay" id="debateOverlay">
+    <div class="debate-modal" id="debateModal">
+      <button class="debate-close" onclick="closeDebate()">✕</button>
+      <div class="debate-eyebrow">Arcanum Agorae · Anno CCCCIX a.C.n.</div>
+      <div class="debate-title">Dialogus de Democratia</div>
+      <div class="debate-sub">Socrates et Plato disceptant</div>
+      <div id="debate-lines"></div>
+      <div class="debate-footer">κρυπτός · Noli hoc aliis dicere.</div>
+    </div>
+  </div>
 
   <!-- Twitter/X widget (renders embedded tweets) -->
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

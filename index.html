@@ -1274,9 +1274,10 @@
   var eggClicks = 0, eggTimer = null;
 
   document.getElementById('themeBtn').addEventListener('click', function() {
+    if (document.getElementById('debateOverlay').classList.contains('active')) return;
     eggClicks++;
     clearTimeout(eggTimer);
-    eggTimer = setTimeout(function() { eggClicks = 0; }, 1800);
+    eggTimer = setTimeout(function() { eggClicks = 0; }, 5000);
     if (eggClicks >= 5) {
       eggClicks = 0;
       showDebate();

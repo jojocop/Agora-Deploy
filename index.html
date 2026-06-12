@@ -432,6 +432,18 @@
     .connect-card-handle { font-size: 12px; letter-spacing: .08em; color: var(--text3); margin-top: 4px; }
     .connect-card-arrow { font-size: 18px; color: var(--text3); }
     .connect-intro { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.85; }
+    .newsletter-section { margin-top: 48px; padding-top: 40px; border-top: .5px solid var(--border); }
+    .newsletter-eyebrow { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .newsletter-heading { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+    .newsletter-sub { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 24px; }
+    .newsletter-form { display: flex; flex-direction: column; gap: 12px; }
+    .newsletter-row { display: flex; gap: 12px; }
+    .newsletter-input { flex: 1; background: var(--bg2); border: .5px solid var(--border2); color: var(--text); font-family: var(--sans); font-size: 13px; padding: 11px 14px; outline: none; transition: border-color .2s; border-radius: 2px; }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .newsletter-input::placeholder { color: var(--text3); }
+    .newsletter-btn { background: var(--gold); border: none; color: var(--bg); font-family: var(--sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding: 11px 24px; cursor: pointer; border-radius: 2px; transition: opacity .2s; white-space: nowrap; }
+    .newsletter-btn:hover { opacity: .85; }
+    .newsletter-note { font-size: 11px; color: var(--text3); margin-top: 4px; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -725,6 +737,24 @@
         </a>
 
       </div>
+
+      <div class="newsletter-section">
+        <div class="newsletter-eyebrow">Newsletter</div>
+        <div class="newsletter-heading">Stay in the loop.</div>
+        <p class="newsletter-sub">New essays, straight to your inbox. No noise, no algorithm — just the work.</p>
+        <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form">
+          <div class="newsletter-row">
+            <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
+            <input type="email" name="EMAIL" placeholder="Email address" required class="newsletter-input">
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </div>
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_fc853e3b6d230f6191a66a544_1cbf9becd3" tabindex="-1" value="">
+          </div>
+          <div class="newsletter-note">No spam. Unsubscribe any time.</div>
+        </form>
+      </div>
+
     </div>
   </div>
 

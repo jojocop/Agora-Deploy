@@ -2,12 +2,12 @@ const OG = {
   'a1': {
     title: 'Inside The Most Expensive Primary in US History — Agora',
     desc:  'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.',
-    img:   '/massie.jpg'
+    img:   null
   },
   'a2': {
     title: "The BC Conservatives' New Leader and What It Means for the Province — Agora",
     desc:  "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.",
-    img:   '/findlay.jpg'
+    img:   null
   }
 };
 
@@ -33,17 +33,21 @@ export default {
     // Pick OG tags
     let title = 'Agora — The Modern Public Square';
     let desc  = 'Finance, politics, philosophy and business — examined without deference.';
-    let img   = url.origin + '/massie.jpg';
+    let img   = null;
 
     const match = path.match(/^\/article\/(\w+)/);
     if (match && OG[match[1]]) {
       title = OG[match[1]].title;
       desc  = OG[match[1]].desc;
-      img   = url.origin + OG[match[1]].img;
+      img   = OG[match[1]].img ? url.origin + OG[match[1]].img : null;
     }
 
     // Replace the existing description meta tag and inject OG tags
     html = html.replace(/<meta name="description"[^>]*>/i, '');
+
+    const imgTags = img
+      ? `\n  <meta property="og:image" content="${img}">\n  <meta name="twitter:card" content="summary_large_image">\n  <meta name="twitter:image" content="${img}">`
+      : `\n  <meta name="twitter:card" content="summary">`;
 
     const tags = `
   <meta name="description" content="${desc}">
@@ -51,12 +55,9 @@ export default {
   <meta property="og:type" content="article">
   <meta property="og:url" content="${url.href}">
   <meta property="og:title" content="${title}">
-  <meta property="og:description" content="${desc}">
-  <meta property="og:image" content="${img}">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:description" content="${desc}">${imgTags}
   <meta name="twitter:title" content="${title}">
-  <meta name="twitter:description" content="${desc}">
-  <meta name="twitter:image" content="${img}">`;
+  <meta name="twitter:description" content="${desc}">`;
 
     html = html.replace('</head>', tags + '\n</head>');
 

@@ -1260,15 +1260,15 @@
   // ── DEBATE EASTER EGG ─────────────────────────────────────────────────────
 
   var DEBATE = [
-    { cls: 'soc', speaker: 'Socrates', text: 'Democratia quid est, Plato, nisi navigium ab imperitis nautis gubernatum? Plebs sapientiam non habet — et quod ignorat, regere non potest.' },
-    { cls: 'pla', speaker: 'Plato',    text: 'Ita est, magister. Civitas a philosophis regenda est — ab illis qui Formam Boni vident et veritatem ab umbris distinguunt.' },
-    { cls: 'soc', speaker: 'Socrates', text: 'Sed Plato — quis me philosophum vocat? Ego nihil scio. Hoc unum certum est mihi.' },
-    { cls: 'pla', speaker: 'Plato',    text: 'Demos umbras in caverna spectat, non veritatem ipsam. Liberari non potest nisi per eos qui lucem viderunt.' },
-    { cls: 'soc', speaker: 'Socrates', text: 'Fortasse. Sed eum qui imperat sapientem esse posse valde dubito — potestas animum corrumpit. Athenis saepe hoc vidimus.' },
-    { cls: 'pla', speaker: 'Plato',    text: 'Ergo democratia semper in tyrannidem cadet. Id inevitabile est — historia testis est.' },
-    { cls: 'soc', speaker: 'Socrates', text: 'Hoc scio: qui nihil interrogat, nihil scit. Quaeramus semper — etiam de nobis ipsis.' },
-    { cls: 'pla', speaker: 'Plato',    text: '...' },
-    { cls: 'soc', speaker: 'Socrates', text: 'Vides? Etiam tu non respondes. Ergo sumus ambo, mi Plato, aliquid democratici.' },
+    { cls: 'soc', speaker: 'Σωκράτης', text: 'Τί ἐστιν ἡ δημοκρατία, ὦ Πλάτων, εἰ μὴ πλοῖον ὑπὸ ἀπείρων ναυτῶν κυβερνώμενον; ὁ δῆμος σοφίαν οὐκ ἔχει — καὶ ὃ ἀγνοεῖ, ἄρχειν οὐ δύναται.' },
+    { cls: 'pla', speaker: 'Πλάτων',   text: 'Οὕτως ἔχει, ὦ διδάσκαλε. ἡ πόλις ὑπὸ φιλοσόφων ἀρκτέα ἐστίν — ὑπ᾽ ἐκείνων οἳ τὴν τοῦ Ἀγαθοῦ Ἰδέαν ὁρῶσι καὶ ἀλήθειαν ἀπὸ σκιῶν διακρίνουσιν.' },
+    { cls: 'soc', speaker: 'Σωκράτης', text: 'Ἀλλά, ὦ Πλάτων — τίς ἐμὲ φιλόσοφον καλεῖ; ἐγὼ οὐδὲν οἶδα. τοῦτο μόνον βέβαιόν μοί ἐστιν.' },
+    { cls: 'pla', speaker: 'Πλάτων',   text: 'ὁ δῆμος σκιὰς ἐν σπηλαίῳ βλέπει, οὐκ αὐτὴν τὴν ἀλήθειαν. ἐλευθεροῦσθαι οὐ δύναται εἰ μὴ διὰ τῶν τὸ φῶς ἑωρακότων.' },
+    { cls: 'soc', speaker: 'Σωκράτης', text: 'ἴσως. ἀλλὰ τὸν ἄρχοντα σοφὸν εἶναι δύνασθαι μάλα ἀμφιβάλλω — ἡ ἀρχὴ τὴν ψυχὴν διαφθείρει. τοῦτο ἐν Ἀθήναις πολλάκις εἴδομεν.' },
+    { cls: 'pla', speaker: 'Πλάτων',   text: 'ἄρα ἡ δημοκρατία ἀεὶ εἰς τυραννίδα πεσεῖται. τοῦτο ἀναπόφευκτόν ἐστιν — ἡ ἱστορία μάρτυς ἐστίν.' },
+    { cls: 'soc', speaker: 'Σωκράτης', text: 'τοῦτο οἶδα· ὁ μηδὲν ἐρωτῶν μηδὲν οἶδεν. ζητῶμεν ἀεί — καὶ περὶ ἡμῶν αὐτῶν.' },
+    { cls: 'pla', speaker: 'Πλάτων',   text: '...' },
+    { cls: 'soc', speaker: 'Σωκράτης', text: 'ὁρᾷς; καὶ σὺ οὐκ ἀποκρίνῃ. ἄρα ἐσμὲν ἀμφότεροι, ὦ Πλάτων, δημοκρατικοί τινες.' },
   ];
 
   var eggClicks = 0, eggTimer = null;
@@ -1330,11 +1330,11 @@
   <div class="debate-overlay" id="debateOverlay">
     <div class="debate-modal" id="debateModal">
       <button class="debate-close" onclick="closeDebate()">✕</button>
-      <div class="debate-eyebrow">Arcanum Agorae · Anno CCCCIX a.C.n.</div>
-      <div class="debate-title">Dialogus de Democratia</div>
-      <div class="debate-sub">Socrates et Plato disceptant</div>
+      <div class="debate-eyebrow">Μυστήριον τῆς Ἀγορᾶς · 409 π.Χ.</div>
+      <div class="debate-title">Διάλογος περὶ Δημοκρατίας</div>
+      <div class="debate-sub">Σωκράτης καὶ Πλάτων διαλέγονται</div>
       <div id="debate-lines"></div>
-      <div class="debate-footer">κρυπτός · Noli hoc aliis dicere.</div>
+      <div class="debate-footer">κρυπτός · Μὴ τοῦτο ἄλλοις λέγε.</div>
     </div>
   </div>
 

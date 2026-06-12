@@ -31,7 +31,7 @@ export default {
     }
 
     // Pick OG tags
-    let title = 'Agora — The Modern Public Square';
+    let title = 'Agora — A Modern Public Forum';
     let desc  = 'Finance, politics, philosophy and business — examined without deference.';
     let img   = null;
 

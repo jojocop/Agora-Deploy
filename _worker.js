@@ -1,12 +1,17 @@
 const OG = {
-  'a1': {
+  'massie-primary': {
     title: 'Inside The Most Expensive Primary in US History — Agora',
     desc:  'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.',
     img:   null
   },
-  'a2': {
+  'findlay-bc-conservatives': {
     title: "The BC Conservatives' New Leader and What It Means for the Province — Agora",
     desc:  "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.",
+    img:   null
+  },
+  'paramount-wbd-merger': {
+    title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done — Agora",
+    desc:  "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.",
     img:   null
   }
 };
@@ -30,9 +35,12 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
-    // Pick OG tags
+    // Strip ALL existing og/twitter/description meta tags to avoid duplicates
+    html = html.replace(/<meta\s[^>]*(?:property="og:[^"]*"|name="twitter:[^"]*"|name="description")[^>]*>/gi, '');
+
+    // Pick values
     let title = 'Agora — A Modern Public Forum';
-    let desc  = 'Finance, politics, philosophy and business — examined without deference.';
+    let desc  = 'Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum.';
     let img   = null;
 
     const match = path.match(/^\/article\/(\w+)/);
@@ -42,11 +50,8 @@ export default {
       img   = OG[match[1]].img ? url.origin + OG[match[1]].img : null;
     }
 
-    // Replace the existing description meta tag and inject OG tags
-    html = html.replace(/<meta name="description"[^>]*>/i, '');
-
     const imgTags = img
-      ? `\n  <meta property="og:image" content="${img}">\n  <meta name="twitter:card" content="summary_large_image">\n  <meta name="twitter:image" content="${img}">`
+      ? `\n  <meta property="og:image" content="${img}">\n  <meta name="twitter:image" content="${img}">\n  <meta name="twitter:card" content="summary_large_image">`
       : `\n  <meta name="twitter:card" content="summary">`;
 
     const tags = `

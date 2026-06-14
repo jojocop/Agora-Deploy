@@ -925,12 +925,12 @@
   var EMPTY_SLOTS = 2;
 
   var ARTICLES = [
-    { id: 'a1', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
-    { id: 'a2', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
-    { id: 'a3', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
-    { id: 'a4', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
-    { id: 'a5', topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
-    { id: 'a6', topic: 'philosophy', topicLabel: 'Philosophy · Long-form',title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+    { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
+    { id: 'a2', slug: 'findlay-bc-conservatives', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
+    { id: 'a3', slug: 'paramount-wbd-merger', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
+    { id: 'a4', slug: 'coming-soon-philosophy', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+    { id: 'a5', slug: 'coming-soon-finance',    topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
+    { id: 'a6', slug: 'coming-soon-political-philosophy', topic: 'philosophy', topicLabel: 'Philosophy · Long-form', title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
   ];
 
   // ── THEME ─────────────────────────────────────────────────────────────────
@@ -1117,7 +1117,7 @@
     var path = location.pathname;
     if (path.startsWith('/article/')) {
       var aid = path.replace('/article/', '');
-      var art = ARTICLES.find(function(a) { return a.id === aid; });
+      var art = ARTICLES.find(function(a) { return (a.slug || a.id) === aid; });
       if (art) { openArticle(art, true); return; }
     }
     if (path.startsWith('/author/')) {
@@ -1182,7 +1182,7 @@
     document.getElementById('page-article').classList.add('active');
     setNavActive('');
     window.scrollTo(0, 0);
-    if (!skipHistory) history.pushState({ page: 'article', id: article.id }, '', '/article/' + article.id);
+    if (!skipHistory) history.pushState({ page: 'article', id: article.id }, '', '/article/' + (article.slug || article.id));
   }
 
   // ── TOPIC FILTER ──────────────────────────────────────────────────────────
@@ -1502,7 +1502,7 @@
     var path = location.pathname;
     if (path.startsWith('/article/')) {
       var aid = path.replace('/article/', '');
-      var art = ARTICLES.find(function(a) { return a.id === aid; });
+      var art = ARTICLES.find(function(a) { return (a.slug || a.id) === aid; });
       if (art) { openArticle(art, true); return; }
     }
     if (path.startsWith('/author/')) {

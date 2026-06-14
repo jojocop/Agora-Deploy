@@ -927,7 +927,7 @@
   var ARTICLES = [
     { id: 'a1', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
     { id: 'a2', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
-    { id: 'a3', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0' },
+    { id: 'a3', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
     { id: 'a4', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
     { id: 'a5', topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
     { id: 'a6', topic: 'philosophy', topicLabel: 'Philosophy · Long-form',title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
@@ -1140,8 +1140,10 @@
     document.getElementById('art-date').textContent = article.date;
     var heroWrap = document.getElementById('art-hero-img-wrap');
     if (article.heroImg) {
-      document.getElementById('art-hero-img').src = article.heroImg;
-      document.getElementById('art-hero-img').alt = article.title;
+      var heroImg = document.getElementById('art-hero-img');
+      heroImg.src = article.heroImg;
+      heroImg.alt = article.title;
+      heroImg.style.objectPosition = article.imgPos || 'center 18%';
       document.getElementById('art-hero-credit').textContent = article.heroCredit || '';
       heroWrap.style.display = '';
     } else {
@@ -1235,7 +1237,7 @@
     grid.innerHTML = list.map(function(a) {
       var auth = AUTHORS[a.author];
       return '<div class="article-card" data-topic="' + a.topic + '" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
-        (a.heroImg ? '<img class="card-img" src="' + a.heroImg + '" alt="' + a.title + '">' : '')+
+        (a.heroImg ? '<img class="card-img" src="' + a.heroImg + '" alt="' + a.title + '"' + (a.imgPos ? ' style="object-position:' + a.imgPos + '"' : '') + '>' : '')+
         '<div class="card-topic">' + a.topicLabel + '</div>'+
         '<div class="card-title">' + a.title + '</div>'+
         '<p class="card-deck">' + a.deck + '</p>'+

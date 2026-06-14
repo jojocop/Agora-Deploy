@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
     /* ── RESET & BASE ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -351,11 +352,32 @@
     .article-body li { font-family: var(--bserif); font-size: 18px; color: var(--text2); line-height: 1.9; margin-bottom: 6px; }
     .article-body em { font-style: italic; }
     .article-body strong { color: var(--text); font-weight: 600; }
+    .article-body a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+    .article-body a:hover { opacity: .75; }
     .art-hero-img-wrap { border-bottom: .5px solid var(--border); position: relative; overflow: hidden; }
     .art-hero-img { width: 100%; height: 560px; object-fit: cover; object-position: center 18%; display: block; }
     .art-hero-img-gradient { position: absolute; bottom: 0; left: 0; right: 0; height: 220px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; }
     .art-hero-credit { font-size: 10px; letter-spacing: .06em; color: var(--text3); padding: 7px 28px; }
     .art-dw-wrap { margin: 36px 0; border-top: .5px solid var(--border); border-bottom: .5px solid var(--border); padding: 24px 0 8px; }
+    .art-chart-wrap { margin: 36px 0; border-top: .5px solid var(--border); border-bottom: .5px solid var(--border); padding: 24px 0 16px; background: var(--bg2); border-radius: 4px; padding: 24px; }
+    .art-chart-wrap .chart-label { font-family: var(--sans); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text2); margin-bottom: 8px; }
+    .art-chart-wrap .chart-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; font-family: var(--sans); font-size: 12px; color: var(--text2); }
+    .art-chart-wrap .chart-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
+    .art-chart-wrap .chart-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .art-chart-wrap .chart-card { background: var(--bg3); border-radius: 6px; padding: 14px 16px; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; user-select: none; }
+    .art-chart-wrap .chart-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.13); }
+    .art-chart-wrap .chart-card.expanded { background: var(--bg); box-shadow: 0 4px 18px rgba(0,0,0,.1); }
+    .art-chart-wrap .chart-card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .art-chart-wrap .chart-card-toggle { font-size: 16px; color: var(--text3); transition: transform .3s; line-height: 1; margin-top: 2px; }
+    .art-chart-wrap .chart-card.expanded .chart-card-toggle { transform: rotate(45deg); color: var(--gold); }
+    .art-chart-wrap .chart-card-label { font-family: var(--sans); font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+    .art-chart-wrap .chart-card-value { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 0; }
+    .art-chart-wrap .chart-card-sub { font-family: var(--sans); font-size: 12px; color: var(--text2); line-height: 1.6; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease; margin-top: 0; }
+    .art-chart-wrap .chart-card.expanded .chart-card-sub { max-height: 120px; opacity: 1; margin-top: 10px; }
+    .art-chart-wrap .chart-card-hint { font-family: var(--sans); font-size: 10px; color: var(--text3); margin-top: 6px; transition: opacity .2s; letter-spacing: .04em; }
+    .art-chart-wrap .chart-card.expanded .chart-card-hint { opacity: 0; }
+    .art-chart-wrap .chart-source { font-family: var(--sans); font-size: 11px; color: var(--text3); margin-top: 16px; }
+    @media (max-width: 500px) { .art-chart-wrap .chart-cards { grid-template-columns: 1fr; } }
     .art-dw-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
     [data-theme="dark"] .art-dw-wrap iframe { filter: invert(1) hue-rotate(180deg); }
     .art-tweet { margin: 32px 0; border: .5px solid var(--border); border-radius: 6px; padding: 20px 24px; background: var(--bg2); }
@@ -905,7 +927,7 @@
   var ARTICLES = [
     { id: 'a1', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
     { id: 'a2', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
-    { id: 'a3', topic: 'business',   topicLabel: 'Business · Short take', title: 'Coming Soon', deck: 'An essay on business strategy. Check back shortly.',         author: 'joven', date: 'Coming Soon', featured: false },
+    { id: 'a3', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0' },
     { id: 'a4', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
     { id: 'a5', topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
     { id: 'a6', topic: 'philosophy', topicLabel: 'Philosophy · Long-form',title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
@@ -1130,6 +1152,12 @@
       ? bodyTpl.innerHTML
       : '<p style="font-family:var(--bserif);font-size:18px;color:var(--text2);line-height:1.9;">This essay is coming soon.</p>';
     if (window.twttr && window.twttr.widgets) { window.twttr.widgets.load(); }
+    document.getElementById('article-body').querySelectorAll('script').forEach(function(old) {
+      var s = document.createElement('script');
+      Array.from(old.attributes).forEach(function(a) { s.setAttribute(a.name, a.value); });
+      s.textContent = old.textContent;
+      old.parentNode.replaceChild(s, old);
+    });
     document.getElementById('art-sidebar-author').innerHTML = author
       ? '<button class="author-link" onclick="showAuthor(\'' + author.id + '\')" style="font-family:var(--serif);font-size:15px;color:var(--text);">' + author.name + '</button>' : '';
     document.getElementById('art-sidebar-beat').textContent = author ? author.beat : '';
@@ -1635,6 +1663,21 @@
     <p>Allowing elites to hijack elections they have no meaningful connection to, over personal grievances, is hardly democratic. The Supreme Court may have ruled that political spending is protected as a form of free speech, but should it be protected as <em>anonymous</em> speech?</p>
     <p>In a country where free and fair elections are a founding pillar, one would expect, at the very least, a higher degree of transparency around financial disclosures and donor information, even when the money flows through a 501(c)(4).</p>
     <p>Campaigning is an art form, and every art form requires artists. It is only sensible to give the paintbrushes to the people with meaningful stakes in the election or, at minimum, to let them know who's painting the picture.</p>
+
+    <h2>Sources</h2>
+    <ul style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.9;padding-left:20px;">
+      <li>Politico, <a href="https://www.politico.com/news/2026/05/17/massie-aipac-record-spending-israel-maga-trump-primary-00925375" target="_blank">"AIPAC, Trump allies shatter spending records in Massie primary"</a>, May 2026</li>
+      <li>Politico, <a href="https://www.politico.com/live-updates/2025/07/31/congress/maga-ky-super-pac-donors-00487931" target="_blank">"MAGA KY Super PAC donors"</a>, July 2025</li>
+      <li>Ballotpedia, <a href="https://ballotpedia.org/Thomas_Massie" target="_blank">"Thomas Massie"</a></li>
+      <li>Ballotpedia, <a href="https://ballotpedia.org/Bundling" target="_blank">"Bundling"</a></li>
+      <li>Britannica, <a href="https://www.britannica.com/topic/political-action-committee" target="_blank">"Political action committee"</a></li>
+      <li>Lawshun, <a href="https://lawshun.com/article/what-law-created-political-action-committee" target="_blank">"What law created Political Action Committees"</a></li>
+      <li>Brennan Center for Justice, <a href="https://www.brennancenter.org/our-work/research-reports/citizens-united-explained" target="_blank">"Citizens United Explained"</a></li>
+      <li>Campaign Legal Center, <a href="https://campaignlegal.org/cases-actions/speechnoworg-v-fec" target="_blank"><em>SpeechNow.org v. FEC</em></a></li>
+      <li>FEC / Covington &amp; Burling, <a href="https://www.cov.com/en/news-and-insights/insights/2025/01/fec-raises-contribution-limits-for-2025-2026" target="_blank">"FEC Raises Contribution Limits for 2025–2026"</a></li>
+      <li>Wiley Law, <a href="https://www.wiley.law/alert-FEC-Raises-Individual-Federal-Contribution-Limits-for-2025-2026-Election-Cycle" target="_blank">"FEC Raises Individual Federal Contribution Limits for 2025–2026 Election Cycle"</a></li>
+      <li>GRF CPA, <a href="https://www.grfcpa.com/2024/05/21/campaign-contributions-rules/" target="_blank">"Campaign Contributions Rules"</a>, 2024</li>
+    </ul>
   </template>
 
   <template id="body-a2">
@@ -1652,6 +1695,154 @@
     <h2>The Road Ahead</h2>
     <p>For now, Findlay will need to become an MLA by winning a local election, a position she has yet to hold. Only by entering Victoria's legislative chamber will she be able to present herself as the next potential Premier, able to challenge the NDP in debates and hold the government to account.</p>
     <p>Until then, she leads a party that needs time to rebuild after a messy leadership contest — but one which could very well be the next government of British Columbia.</p>
+
+    <h2>Sources</h2>
+    <ul style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.9;padding-left:20px;">
+      <li>Statistics Canada, <a href="https://www150.statcan.gc.ca/n1/daily-quotidien/240625/cg-b001-eng.htm" target="_blank">"Religious diversity in Canada"</a>, June 2024</li>
+      <li>Research Co., <a href="https://researchco.ca/2026/06/08/bcpoli-june2026/" target="_blank">"BC Political Polling — June 2026"</a></li>
+      <li>Léger, <a href="https://leger360.com/in-the-news-bc-conservatives-take-narrow-lead/" target="_blank">"BC Conservatives Take Narrow Lead"</a></li>
+      <li>Kerry-Lynne Findlay campaign, <a href="https://www.findlay4bc.ca/" target="_blank">findlay4bc.ca</a></li>
+      <li>BC Government, <a href="https://www2.gov.bc.ca/gov/content/erase/diversity-and-inclusion" target="_blank">"ERASE — Diversity and Inclusion"</a></li>
+    </ul>
+  </template>
+
+  <template id="body-a3">
+    <p>Three months ago, the boards of Paramount Skydance and Warner Bros. Discovery shook the world by shaking hands on what David Ellison called the future of "next-generation" entertainment: a merger between the two giants.</p>
+    <p>Since then, shareholders voted yes, lawyers have filed their papers with the SEC, yet when you walk into Warner Bros. headquarters in Burbank today, you'll find that the company still stands on its own, still waiting. Waiting for what?</p>
+    <p>As time goes on, the $110 billion unification is no longer a question of <em>if</em> or <em>why</em>, but <em>when</em> and <em>how</em>.</p>
+
+    <h2>How did we get here?</h2>
+    <p>To understand why this deal has stalled, we go back to last December, when, before Paramount got a seat at negotiations, Netflix was looking to take over the iconic studio. The initial deal, announced December 4th of last year, involved the streaming giant (not Paramount) looking to acquire WBD for as much as $72 billion. This transaction would have handed Netflix control of Warner Bros.' film studios, HBO, and CNN.</p>
+    <p>However, Paramount Skydance, coming off its own $8 billion merger with Skydance Media, had its own plan to buy some time. Over the following two months, Paramount waged aggressive public campaigns against the Netflix deal, while it quietly built its own offer.</p>
+    <p>When Paramount made its pitch to WBD shareholders, they were a lot more blunt and straightforward than Netflix's complacent, sliding-scale structure that could pay as little as $21.23 a share. Paramount instead offered a clean $30 a share in cash, later raised to $31.</p>
+    <p>The studio also went to Washington, signalling a warning. In testimony before the House Judiciary Committee, the company argued the Netflix deal would hand the streamer roughly 43% of the global subscription video-on-demand market, deeming it "clearly anticompetitive and not a close call."</p>
+    <p>Their efforts paid off. Hours after Paramount raised its offer to $31 a share, on February 27th, Netflix walked away from the deal. WBD's board, which had unanimously backed Netflix weeks earlier, completely flipped and signed with Paramount instead. This new deal valued WBD at a much higher $110 billion, or 7.5x its projected 2026 EBITDA value.</p>
+
+    <h2>Controversy around the vote</h2>
+    <p>On April 23, WBD shareholders formally approved the Paramount merger. But the vote was messier than the headline suggests.</p>
+    <p>In a separate, non-binding vote held the same day, the shareholders rejected the proposed executive compensation package tied to the deal, a package that would give outgoing WBD CEO David Zaslav a "golden parachute" worth almost $887 million, according to proxy advisory firm Institutional Shareholder Services.</p>
+    <p>It's a small but telling detail: investors were willing to take Paramount's money, but were not happy about how WBD's leadership would be rewarded for the sale. This tension has only grown stronger since.</p>
+
+    <h2>Does Hollywood want this?</h2>
+    <p>If you followed this deal outside of just the SEC filings, you'd see the other side of the story. By late spring, more than 5,000 actors, directors, and writers, including Kristen Stewart, Pedro Pascal, and Javier Bardem, had signed an open letter opposing the merger. Jane Fonda and Mark Ruffalo recorded videos urging the deal to be stopped. The objections aren't really about price, but rather what the deal means.</p>
+    <p>Critics argue that combining Paramount's CBS, Nickelodeon, and Paramount Pictures with WBD's HBO, Warner Bros. Pictures, CNN, and cable portfolio creates a single company with outsized leverage over what gets made, who gets hired, and what audiences are allowed to see, essentially creating a monopoly.</p>
+    <p>There's also a political factor that many find hard to ignore. Paramount Skydance is led by David Ellison, son of Oracle co-founder Larry Ellison, a prominent ally of President Trump. Critics, including a number of Democrats, have asked California Attorney General Rob Bonta to scrutinize the deal closely. There are growing concerns about the Ellison family's political ties and reports of a "side deal."</p>
+    <p>Paramount's chief legal officer, Makan Delrahim, pushed back hard on the criticism in a recent interview, telling the Los Angeles Times that some opponents were motivated by "antisemitic views." This remark drew its own backlash and added yet another layer of controversy to an already contentious process.</p>
+    <p>Meanwhile, Ellison has tried his best to play peacemaker. At CinemaCon in April, he told theatre owners directly: "I wanted to look every single one of you in the eye and give you my word: once we combine with Warner Bros., we are going to make a minimum of 30 films annually, across both studios." According to Bloomberg, Paramount's broader plan is to keep both studios largely intact, folding HBO Max into Paramount+ while preserving separate creative teams, and sharing back-office resources between CNN and CBS News without necessarily merging them together.</p>
+
+    <h2>The numbers</h2>
+    <div class="art-chart-wrap">
+      <p class="chart-label">Per-share offer to WBD shareholders</p>
+      <div class="chart-legend">
+        <span><span class="chart-dot" style="background:#F09595;"></span>Netflix: floor ($21.23)</span>
+        <span><span class="chart-dot" style="background:#E24B4A;"></span>Netflix: upside (to $27.75)</span>
+        <span><span class="chart-dot" style="background:#1D9E75;"></span>Paramount: fixed, all cash</span>
+      </div>
+      <div style="position:relative;width:100%;height:160px;">
+        <canvas id="wbd-offer-chart" aria-label="Horizontal bar chart comparing Netflix floor $21.23 plus upside to $27.75 against Paramount fixed $31.00 all cash."></canvas>
+      </div>
+      <div class="chart-cards">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <p class="chart-card-label">Netflix offer (Dec 2025)</p>
+              <p class="chart-card-value">$21.23 – $27.75</p>
+            </div>
+            <span class="chart-card-toggle">+</span>
+          </div>
+          <p class="chart-card-hint">tap to expand</p>
+          <p class="chart-card-sub">Cash + Discovery Global stub equity. Range depended on spinoff debt load. Per Paramount's SEC filings.</p>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <p class="chart-card-label">Paramount offer (Feb 2026)</p>
+              <p class="chart-card-value">$31.00</p>
+            </div>
+            <span class="chart-card-toggle">+</span>
+          </div>
+          <p class="chart-card-hint">tap to expand</p>
+          <p class="chart-card-sub">All cash. Fixed price. No financing conditions. WBD board accepted Feb 27, 2026.</p>
+        </div>
+      </div>
+      <p class="chart-source">Sources: WBD Form 8-K (Feb 27 2026), Paramount Skydance SEC filings, Congressional testimony (Jan 2026). Netflix range per Paramount's characterization; excludes residual stub equity value.</p>
+      <script>
+        (function() {
+          var existing = typeof Chart !== 'undefined' && Chart.getChart && Chart.getChart('wbd-offer-chart');
+          if (existing) existing.destroy();
+          if (typeof Chart === 'undefined') return;
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var tickColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)';
+          var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+          new Chart(document.getElementById('wbd-offer-chart'), {
+            type: 'bar',
+            data: {
+              labels: ['Netflix offer', 'Paramount offer'],
+              datasets: [
+                { label: 'Floor / fixed value', data: [21.23, 31.00], backgroundColor: ['#F09595', '#1D9E75'], borderRadius: 4, barThickness: 36 },
+                { label: 'Upside range',         data: [6.52, 0],     backgroundColor: ['#E24B4A', 'transparent'], borderRadius: 4, barThickness: 36 }
+              ]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    label: function(ctx) {
+                      if (ctx.label === 'Netflix offer') {
+                        return ctx.datasetIndex === 0 ? 'Floor: $21.23/share' : 'High end: $27.75/share';
+                      }
+                      return ctx.datasetIndex === 0 ? 'Fixed: $31.00/share (all cash)' : '';
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: { stacked: true, min: 0, max: 35, ticks: { callback: function(v) { return '$' + v; }, color: tickColor }, grid: { color: gridColor } },
+                y: { stacked: true, grid: { display: false }, ticks: { color: tickColor } }
+              }
+            }
+          });
+          document.querySelectorAll('#article-body .chart-card').forEach(function(card) {
+            card.addEventListener('click', function() { card.classList.toggle('expanded'); });
+          });
+        })();
+      </script>
+    </div>
+
+    <h2>The financing</h2>
+    <p>Paramount's offer has roughly $54 billion in committed financial backing from a consortium that includes companies like Citigroup and Apollo. That figure includes $15 billion to refinance WBD's existing bridge facility and $39 billion in new debt.</p>
+    <p>On top of that, existing Paramount shareholders are being offered a rights offering of up to $3.25 billion in Class B stock, priced at $16.02 per share, expected closer to closing. The rights offering involves Paramount's publicly traded Class B shares, which typically have fewer voting rights than the company's Class A shares.</p>
+    <p>Notably, Paramount has stated the deal carries no financing conditions, meaning the money is locked in regardless of market conditions between now and closing. That's a meaningful commitment in a higher-rate environment, and it's one of the stronger signals that Paramount intends to see this through.</p>
+
+    <h2>The ticking fee</h2>
+    <p>The important detail everyone should understand from an M&amp;A standpoint is that if the deal is not closed by September 30, 2026, WBD shareholders start receiving an extra $0.25 per share for every quarter it remains open, accruing daily. This ticking fee exists because regulatory delay is not free; it covers the cost taken on by WBD shareholders, who are stuck holding shares in a company that cannot make major strategic moves while the deal is pending.</p>
+    <p>The fact that Paramount agreed to the fee and has referenced both a September 30 and a December 31 trigger date across different filings tells you both sides expected this could run long, and wanted to make sure shareholders don't lose faith, and more importantly, are not penalized for it.</p>
+
+    <h2>The regulatory picture</h2>
+    <p>Paramount's HSR filing cleared its initial waiting period in February, just a procedural step, not approval. Germany's regulators signed off, but U.S. antitrust review, more EU clearances, and California's state inquiry are still pending. With the magnitude of broadcast, cable, streaming, and film market share combined, "cleared the waiting period" isn't "cleared." February acted as a reduction in uncertainty, not a green light.</p>
+    <p>Under HSR, big mergers get a 30-day review window before closing. If regulators don't request more info in that window, it "expires," removing one early roadblock, though they can still challenge the deal later on.</p>
+
+    <h2>What happens if it doesn't close?</h2>
+    <p>If the Paramount deal collapses, whether from a failed regulatory process, prolonged litigation, or some unforeseen complication, WBD can't simply go back to business as usual. The company has spent over a year in deal limbo, restricted from major strategic moves, with senior executives focused on closing rather than running the business.</p>
+    <p>There would be a regulatory break fee, reportedly around $1.1 billion (1.4% of the deal's equity value), paid to WBD. But this doesn't come close to compensating for the lost time, leadership focus, and reputational effect WBD went through.</p>
+
+    <h2>The bottom line</h2>
+    <p>What's happening with Paramount and Warner Bros. Discovery right now isn't a failure of the deal. It's the normal, grinding machinery of a transaction this size working its way through antitrust review, political scrutiny, and a media industry that is not thrilled about the outcome.</p>
+    <p>But "normal" doesn't mean fast, and it doesn't mean guaranteed. With the September 30 deadline approaching, every week without a regulatory green light is a week closer to that ticking fee kicking in, and a week longer that two of the most storied names in entertainment remain in limbo, waiting to find out what they're about to become.</p>
+
+    <h2>Sources</h2>
+    <ul style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.9;padding-left:20px;">
+      <li>Warner Bros. Discovery, Form 8-K (February 27, 2026), SEC EDGAR</li>
+      <li>Warner Bros. Discovery, Form DFAN14A and SC TO-T/A filings (Jan–Feb 2026), SEC EDGAR</li>
+      <li>NPR, "Warner Bros. Discovery shareholders approve $110B merger with Paramount Skydance," April 23, 2026</li>
+      <li>NBC News, "David Ellison vows Paramount-Warner Bros. Discovery merger won't cut film output," April 17, 2026</li>
+      <li>Variety, "Paramount's Top Lawyer Claims Some Opponents of Warner Bros. Merger Are Engaging in 'Fear Mongering,'" June 2026</li>
+      <li>Reuters / Bloomberg, "Paramount plans to keep Warner Bros largely intact after merger"</li>
+    </ul>
   </template>
 
 </body>

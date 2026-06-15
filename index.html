@@ -499,6 +499,51 @@
     .newsletter-btn:hover { opacity: .85; }
     .newsletter-note { font-size: 11px; color: var(--text3); margin-top: 4px; }
 
+    /* ── SECONDARY FEATURED ── */
+    .feat2-section { border-bottom: .5px solid var(--border); }
+    .feat2-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; align-items: stretch; }
+    .feat2-img-wrap { position: relative; overflow: hidden; border-right: .5px solid var(--border); cursor: pointer; }
+    .feat2-img { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; transition: transform .4s ease; }
+    .feat2-img-wrap:hover .feat2-img { transform: scale(1.03); }
+    .feat2-text { padding: 26px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .feat2-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .feat2-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+    .feat2-title { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.25; color: var(--text); margin-bottom: 8px; cursor: pointer; transition: color .2s; background: none; border: none; text-align: left; padding: 0; width: 100%; }
+    .feat2-title:hover { color: var(--gold); }
+    .feat2-deck { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; }
+    .feat2-meta { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+
+    /* ── STAT BLOCKS ── */
+    .stat-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; }
+    .stat-block { background: var(--bg2); border: .5px solid var(--border); border-radius: 6px; padding: 32px 24px; text-align: center; transition: transform .2s, box-shadow .2s; }
+    .stat-block:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.11); }
+    .stat-num { font-family: var(--serif); font-size: 64px; font-weight: 700; line-height: 1; margin-bottom: 14px; color: var(--gold); }
+    .stat-block:last-child .stat-num { color: var(--text); }
+    .stat-desc { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.65; margin-bottom: 8px; }
+    .stat-src { font-family: var(--sans); font-size: 11px; color: var(--text3); }
+
+    /* ── PLATFORM CARDS ── */
+    .platform-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 36px 0; }
+    .platform-card { background: var(--bg2); border: .5px solid var(--border); border-radius: 6px; padding: 20px; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .platform-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+    .platform-card.p-expanded { background: var(--bg3); box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+    .platform-card-hdr { display: flex; justify-content: space-between; align-items: flex-start; }
+    .platform-name { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--text); }
+    .platform-toggle { font-size: 16px; color: var(--text3); transition: transform .3s; line-height: 1; flex-shrink: 0; margin-left: 8px; margin-top: 2px; }
+    .platform-card.p-expanded .platform-toggle { transform: rotate(45deg); color: var(--gold); }
+    .platform-tag { font-family: var(--sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 6px 0 0; }
+    .platform-desc { font-family: var(--bserif); font-size: 14px; color: var(--text2); line-height: 1.7; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .3s ease, margin-top .3s; }
+    .platform-card.p-expanded .platform-desc { max-height: 200px; opacity: 1; margin-top: 12px; }
+    .platform-hint { font-family: var(--sans); font-size: 10px; color: var(--text3); margin-top: 8px; transition: opacity .2s; }
+    .platform-card.p-expanded .platform-hint { opacity: 0; height: 0; margin: 0; }
+
+    /* ── CANNOT-DO GRID ── */
+    .cannot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0 36px; }
+    .cannot-item { background: var(--bg2); border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; padding: 16px 18px; transition: transform .2s, box-shadow .2s; }
+    .cannot-item:hover { transform: translateX(4px); box-shadow: 3px 4px 14px rgba(0,0,0,.08); }
+    .cannot-title { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
+    .cannot-desc { font-family: var(--bserif); font-size: 14px; color: var(--text2); line-height: 1.6; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .masthead-inner, .articles-grid, .authors-grid, .about-layout, .article-layout { grid-template-columns: 1fr; }
@@ -511,6 +556,10 @@
       .author-card:nth-child(odd)   { padding-right: 0; border-right: none; }
       .author-card:nth-child(even)  { padding-left: 0; }
       .nav-motto, .mast-contrib { display: none; }
+      .feat2-section > div { grid-template-columns: 1fr; }
+      .feat2-img-wrap { border-right: none; border-bottom: .5px solid var(--border); }
+      .feat2-img { min-height: 180px; height: 180px; }
+      .stat-blocks, .platform-cards, .cannot-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -619,6 +668,27 @@
         </div>
         <div class="feat-img-wrap" id="feat-img-wrap" style="display:none;">
           <img id="feat-img" class="feat-img" src="" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Secondary Featured -->
+    <section class="feat2-section" id="feat2-section" style="display:none;">
+      <div>
+        <div class="feat2-img-wrap" id="feat2-img-wrap">
+          <img id="feat2-img" class="feat2-img" src="" alt="">
+        </div>
+        <div class="feat2-text">
+          <div class="feat2-label">✦ Also featured</div>
+          <div class="feat2-topic-lbl" id="feat2-topic-lbl"></div>
+          <button class="feat2-title" id="feat2-title"></button>
+          <p class="feat2-deck" id="feat2-deck"></p>
+          <div class="feat2-meta">
+            <span id="feat2-author"></span>
+            <span class="meta-dot"></span>
+            <span id="feat2-date"></span>
+          </div>
+          <button class="read-link" id="feat2-read-btn">Read essay →</button>
         </div>
       </div>
     </section>
@@ -737,6 +807,8 @@
           <span id="art-author"></span>
           <span class="meta-dot"></span>
           <span id="art-date"></span>
+          <span class="meta-dot"></span>
+          <span id="art-read-time"></span>
         </div>
         <div id="art-hero-credit" class="art-hero-credit" style="padding:0;margin-top:8px;"></div>
       </div>
@@ -925,15 +997,13 @@
     },
   };
 
-  var EMPTY_SLOTS = 2;
+  var EMPTY_SLOTS = 0;
 
   var ARTICLES = [
     { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
     { id: 'a2', slug: 'findlay-bc-conservatives', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
     { id: 'a3', slug: 'paramount-wbd-merger', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
-    { id: 'a4', slug: 'coming-soon-philosophy', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
-    { id: 'a5', slug: 'coming-soon-finance',    topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
-    { id: 'a6', slug: 'coming-soon-political-philosophy', topic: 'philosophy', topicLabel: 'Philosophy · Long-form', title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+    { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, secondFeatured: true, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
   ];
 
   // ── THEME ─────────────────────────────────────────────────────────────────
@@ -1157,12 +1227,16 @@
       ? bodyTpl.innerHTML
       : '<p style="font-family:var(--bserif);font-size:18px;color:var(--text2);line-height:1.9;">This essay is coming soon.</p>';
     if (window.twttr && window.twttr.widgets) { window.twttr.widgets.load(); }
-    document.getElementById('article-body').querySelectorAll('script').forEach(function(old) {
+    var bodyEl = document.getElementById('article-body');
+    var wordCount = (bodyEl.innerText || bodyEl.textContent).trim().split(/\s+/).length;
+    document.getElementById('art-read-time').textContent = Math.max(1, Math.round(wordCount / 200)) + ' min read';
+    bodyEl.querySelectorAll('script').forEach(function(old) {
       var s = document.createElement('script');
       Array.from(old.attributes).forEach(function(a) { s.setAttribute(a.name, a.value); });
       s.textContent = old.textContent;
       old.parentNode.replaceChild(s, old);
     });
+    article.readTime = Math.max(1, Math.round(wordCount / 200)) + ' min';
     document.getElementById('art-sidebar-author').innerHTML = author
       ? '<button class="author-link" onclick="showAuthor(\'' + author.id + '\')" style="font-family:var(--serif);font-size:15px;color:var(--text);">' + author.name + '</button>' : '';
     document.getElementById('art-sidebar-beat').textContent = author ? author.beat : '';
@@ -1229,13 +1303,37 @@
         featImgWrap.style.display = 'none';
       }
     }
+    var feat2 = ARTICLES.find(function(a) { return a.secondFeatured; });
+    var feat2El = document.getElementById('feat2-section');
+    if (feat2) {
+      var f2a = AUTHORS[feat2.author];
+      document.getElementById('feat2-topic-lbl').textContent = feat2.topicLabel;
+      var feat2Title = document.getElementById('feat2-title');
+      feat2Title.textContent = feat2.title;
+      feat2Title.onclick = function() { openArticle(feat2); };
+      document.getElementById('feat2-deck').textContent = feat2.deck;
+      document.getElementById('feat2-author').innerHTML = f2a
+        ? '<button class="author-link" onclick="showAuthor(\'' + feat2.author + '\')">' + f2a.name + '</button>' : '';
+      document.getElementById('feat2-date').textContent = feat2.date;
+      document.getElementById('feat2-read-btn').onclick = function() { openArticle(feat2); };
+      var f2img = document.getElementById('feat2-img');
+      f2img.src = feat2.heroImg || '';
+      f2img.alt = feat2.title;
+      if (feat2.imgPos) f2img.style.objectPosition = feat2.imgPos;
+      var f2imgWrap = document.getElementById('feat2-img-wrap');
+      f2imgWrap.onclick = function() { openArticle(feat2); };
+      feat2El.style.display = feat2.heroImg ? '' : 'none';
+    } else {
+      feat2El.style.display = 'none';
+    }
     renderGrid();
   }
 
   function renderGrid() {
     var grid = document.getElementById('articles-grid');
     var featured = ARTICLES.find(function(a) { return a.featured; });
-    var list = ARTICLES.filter(function(a) { return !a.featured; });
+    var feat2 = ARTICLES.find(function(a) { return a.secondFeatured; });
+    var list = ARTICLES.filter(function(a) { return !a.featured && !a.secondFeatured; });
     if (activeTopic !== 'all') list = list.filter(function(a) { return a.topic === activeTopic; });
     grid.innerHTML = list.map(function(a) {
       var auth = AUTHORS[a.author];
@@ -1246,15 +1344,20 @@
         '<p class="card-deck">' + a.deck + '</p>'+
         '<div class="card-meta"><button class="author-link" onclick="event.stopPropagation();showAuthor(\'' + a.author + '\')">' + (auth ? auth.name : '') + '</button>' +
         (a.date ? '<span class="meta-dot"></span><span>' + a.date + '</span>' : '') +
+        (a.readTime ? '<span class="meta-dot"></span><span>' + a.readTime + ' read</span>' : '') +
         '</div>'+
         '<span class="card-read">Read →</span>'+
         '</div>';
     }).join('');
 
-    // Show/hide featured based on topic filter
+    // Show/hide featured sections based on topic filter
     var fs = document.getElementById('featured-section');
     var featVisible = featured && (activeTopic === 'all' || activeTopic === featured.topic);
     fs.style.display = featVisible ? '' : 'none';
+    var f2s = document.getElementById('feat2-section');
+    if (f2s && feat2) {
+      f2s.style.display = (feat2.heroImg && (activeTopic === 'all' || activeTopic === feat2.topic)) ? '' : 'none';
+    }
   }
 
   // ── RENDER AUTHORS ────────────────────────────────────────────────────────
@@ -1502,6 +1605,16 @@
   renderConnect();
 
   setTimeout(function() {
+    // Precompute reading times from templates for card display
+    ARTICLES.forEach(function(a) {
+      var tpl = document.getElementById('body-' + a.id);
+      if (tpl) {
+        var text = tpl.innerHTML.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+        a.readTime = Math.max(1, Math.round(text.split(' ').length / 200)) + ' min';
+      }
+    });
+    renderGrid();
+
     var path = location.pathname;
     if (path.startsWith('/article/')) {
       var aid = path.replace('/article/', '');
@@ -1876,13 +1989,133 @@
 
     <h2>Sources</h2>
     <ul style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.9;padding-left:20px;">
-      <li>Warner Bros. Discovery, Form 8-K (February 27, 2026), SEC EDGAR</li>
+      <li>Warner Bros. Discovery, Form 8-K (February 27, 2026) SEC EDGAR</li>
       <li>Warner Bros. Discovery, Form DFAN14A and SC TO-T/A filings (Jan–Feb 2026), SEC EDGAR</li>
       <li>NPR, "Warner Bros. Discovery shareholders approve $110B merger with Paramount Skydance," April 23, 2026</li>
       <li>NBC News, "David Ellison vows Paramount-Warner Bros. Discovery merger won't cut film output," April 17, 2026</li>
       <li>Variety, "Paramount's Top Lawyer Claims Some Opponents of Warner Bros. Merger Are Engaging in 'Fear Mongering,'" June 2026</li>
       <li>Reuters / Bloomberg, "Paramount plans to keep Warner Bros largely intact after merger"</li>
     </ul>
+  </template>
+
+  <template id="body-a4">
+    <p>As an accounting student, I hear the same question all the time: "Why are you going into accounting when AI is going to take all those jobs?" It is a fair question on the surface. AI tools can already read invoices, do reconciliations, and even draft tax research.</p>
+    <p>But when you actually look at what the professional bodies and the biggest accounting firms are saying and doing, the answer becomes clear. AI is taking over tasks, not careers. If anything, the CPA designation is about to become more valuable, not less.</p>
+
+    <h2>What the Profession Itself Is Saying</h2>
+    <p>The best place to start is with the organizations that govern the profession in Canada. CPA Canada's guidance on AI and automation says that these technologies will improve productivity and reduce human error, but it also says that CPAs need to build new skills in AI to better support their clients and organizations. CPA Canada is not preparing members for unemployment. It is preparing them for a bigger role, including leading the governance and controls that make AI trustworthy in the first place.</p>
+    <p>CPA Ontario goes even further. In its publication, <em>Accountabilities for CPAs in the Age of Artificial Intelligence</em>, it points out a striking gap in how the profession and the broader business world are approaching AI.</p>
+
+    <div class="stat-blocks">
+      <div class="stat-block">
+        <div class="stat-num" data-target="89">0%</div>
+        <p class="stat-desc">of Canadian accountants say AI will positively impact the profession</p>
+        <p class="stat-src">2023 survey via CPA Ontario</p>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" data-target="86">0%</div>
+        <p class="stat-desc">of Canadian companies are worried about the ethical risks of AI</p>
+        <p class="stat-src">Deloitte survey</p>
+      </div>
+    </div>
+
+    <p>Think about that gap for a second. Almost every company wants to use AI, and almost every company is nervous about it. Someone has to close that trust gap, and CPA Ontario argues that CPAs are exactly the people to do it. By building governance structures, planning for worst-case scenarios, and putting safeguards in place, AI is actually creating a whole new area of work for the profession rather than shrinking it.</p>
+
+    <h2>What the Big Firms Are Actually Building</h2>
+    <p>If AI could really replace accountants, the Big Four would have the biggest incentive to do it. They employ hundreds of thousands of people, and salaries are their largest cost. But look at how they are designing their AI tools.</p>
+
+    <div class="platform-cards">
+      <div class="platform-card">
+        <div class="platform-card-hdr">
+          <div>
+            <div class="platform-name">KPMG Clara</div>
+            <div class="platform-tag">AI-Enabled. Human-Led.</div>
+          </div>
+          <span class="platform-toggle">+</span>
+        </div>
+        <p class="platform-hint">tap to expand</p>
+        <p class="platform-desc">AI agents handle continuous analysis and data-heavy procedures, freeing auditors to focus on judgment, professional skepticism, and complex risk assessment. Agents document their reasoning at every step so a human reviewer can challenge and stay accountable for the result.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-hdr">
+          <div>
+            <div class="platform-name">Deloitte Omnia</div>
+            <div class="platform-tag">Agentic AI</div>
+          </div>
+          <span class="platform-toggle">+</span>
+        </div>
+        <p class="platform-hint">tap to expand</p>
+        <p class="platform-desc">AI agents carry out multi-step procedures across systems, while experienced auditors spend time on risk assessment and evaluating internal controls. Deloitte frames this explicitly as combining human intelligence and artificial intelligence, not swapping one for the other.</p>
+      </div>
+    </div>
+
+    <p>The pattern here matters. The firms spending the most money on AI are not building tools to remove the accountant. They are building tools to elevate the accountant's labour.</p>
+
+    <h2>What AI Actually Cannot Do</h2>
+    <p>This is the part that gets missed in the "AI will replace accountants" debate. The core of being a CPA was never data entry. It is professional judgment backed by real accountability. Only a licensed CPA can sign an audit opinion or carry professional liability for the work. You cannot summon an algorithm in front of a professional conduct committee.</p>
+    <p>CPA Ontario makes this concrete in a published case study. A CPA uses a large language model for tax research, and the model cites a line of the U.S. tax code that does not actually exist. The company gets fined. The CPA ends up in front of the Professional Conduct Committee. AI can produce convincing output that is simply wrong, which means every AI tool in finance creates new demand for the one professional trained and legally required to verify it.</p>
+
+    <div class="cannot-grid">
+      <div class="cannot-item">
+        <div class="cannot-title">Legal Accountability</div>
+        <p class="cannot-desc">No algorithm can sign an audit opinion or carry professional liability for the work it produces.</p>
+      </div>
+      <div class="cannot-item">
+        <div class="cannot-title">Regulatory Accountability</div>
+        <p class="cannot-desc">AI cannot be brought before a professional conduct committee or held to a code of ethics.</p>
+      </div>
+      <div class="cannot-item">
+        <div class="cannot-title">Ethical Judgment</div>
+        <p class="cannot-desc">Professional standards require discretion and context that cannot be reduced to a prompt.</p>
+      </div>
+      <div class="cannot-item">
+        <div class="cannot-title">Output Verification</div>
+        <p class="cannot-desc">AI can produce confident, detailed, and completely wrong answers. Someone has to check.</p>
+      </div>
+    </div>
+
+    <h2>The Bigger Picture</h2>
+    <p>There is also a practical reality that the doom headlines ignore. The profession is facing a serious talent shortage, with a large share of current CPAs heading toward retirement over the next decade. Firms are struggling to fill roles, not cut them. AI is showing up at the perfect time to absorb repetitive work like reconciliations and document processing, while people move into advisory and assurance work that clients pay a premium for.</p>
+    <p>The CPA 2025 AI in Accounting Report sums it up well: AI is not replacing practitioners; it is amplifying their potential. For students entering the profession, the entry-level job will look different. There will be less manual grunt work and more reviewing, analyzing, and directing AI tools. The students who should be worried are not the ones going into accounting. They are the ones who refuse to learn the technology.</p>
+
+    <h2>Conclusion</h2>
+    <p>Accounting has survived every technology wave before this one. Spreadsheets did not kill the profession in the 1980s; they killed paper ledgers and made each accountant far more productive. AI is the same shift on a bigger scale. The routine tasks will get automated, but the judgment, ethics, and accountability that define a CPA cannot be, and the regulators and the biggest firms in the world are building their entire AI strategies around that exact fact.</p>
+    <p>CPAs are not in danger. The CPAs who learn to work with AI are going to be the most valuable ones the profession has ever produced.</p>
+
+    <h2>Sources</h2>
+    <ul style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.9;padding-left:20px;">
+      <li>CPA Canada, <a href="https://www.cpacanada.ca/business-and-accounting-resources/other-general-business-topics/information-management-and-technology/publications/ai-automation-for-cpas" target="_blank">"How could automation and AI change the CPA's role?"</a></li>
+      <li>CPA Ontario, <a href="https://www.cpaontario.ca/members/regulations-guidance/regulatory-publications/accountabilities-for-cpas-in-the-age-of-artificial-intelligence" target="_blank">"Accountabilities for CPAs in the Age of Artificial Intelligence"</a>, August 2024</li>
+      <li>CPA Ontario, <a href="https://www.cpaontario.ca/members/regulations-guidance/regulatory-publications/cpas-and-artificial-intelligence-a-case-study" target="_blank">"CPAs and Artificial Intelligence: A Case Study"</a>, November 2024</li>
+      <li>CPA.com, <a href="https://www.cpa.com/sites/cpa/files/2025-06/2025_AI_in_Accounting_Report.pdf" target="_blank">"2025 AI in Accounting Report"</a></li>
+      <li>Deloitte, <a href="https://www.deloitte.com/us/en/services/audit-assurance/blogs/accounting-finance/agentic-ai-in-audit.html" target="_blank">"Agentic AI in Audit: Deloitte's Next-Gen Approach to Audit Technology"</a>, August 2025</li>
+      <li>KPMG, <a href="https://kpmg.com/us/en/capabilities-services/audit-services/kpmg-clara.html" target="_blank">"KPMG Clara: AI-Enabled. Human-Led."</a>, 2026</li>
+    </ul>
+
+    <script>
+      (function() {
+        setTimeout(function() {
+          // Stat counter animation
+          document.querySelectorAll('#article-body .stat-num').forEach(function(el) {
+            var target = parseInt(el.getAttribute('data-target'), 10);
+            var duration = 1200;
+            var start = performance.now();
+            function step(now) {
+              var elapsed = now - start;
+              var progress = Math.min(elapsed / duration, 1);
+              var ease = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.round(ease * target) + '%';
+              if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          });
+          // Platform card expand/collapse
+          document.querySelectorAll('#article-body .platform-card').forEach(function(card) {
+            card.addEventListener('click', function() { card.classList.toggle('p-expanded'); });
+          });
+        }, 80);
+      })();
+    </script>
   </template>
 
 </body>

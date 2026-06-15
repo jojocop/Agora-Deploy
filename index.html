@@ -616,6 +616,7 @@
         <button class="nav-link"        id="nav-authors" onclick="showPage('authors')">Authors</button>
         <button class="nav-link"        id="nav-about"   onclick="showPage('about')">About</button>
         <button class="nav-link"        id="nav-connect" onclick="showPage('connect')">Connect</button>
+        <button class="nav-link"        id="nav-newsletter" onclick="showPage('newsletter')">Newsletter</button>
         <button class="theme-btn" id="themeBtn" onclick="toggleTheme()"><span id="themeIconWrap"><span id="themeIcon">☽</span></span> <span id="themeLabel">Dark</span></button>
       </nav>
     </div>
@@ -909,6 +910,52 @@
     </div>
   </div>
 
+  <!-- ══════════════ NEWSLETTER ══════════════ -->
+  <div class="page" id="page-newsletter">
+    <div class="connect-hero">
+      <div class="connect-hero-inner">
+        <div class="columns" id="newsletter-cols"></div>
+        <div class="page-eyebrow">Stay in the loop</div>
+        <h1 class="page-title">The Agora<br>Newsletter.</h1>
+      </div>
+    </div>
+    <div class="connect-body" style="max-width:640px;">
+      <p class="connect-intro">New essays delivered straight to your inbox. No noise, no algorithm — just the work, when it's ready.</p>
+
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
+          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Original analysis</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">Politics, business, finance, and philosophy — examined without deference.</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
+          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">No spam, ever</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">We only send when there's something worth reading. Unsubscribe any time.</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
+          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Written by students, for everyone</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">Four contributors. One forum. Ideas tested in the open.</p></div>
+        </div>
+      </div>
+
+      <div style="border-top:.5px solid var(--border);padding-top:36px;">
+        <div class="newsletter-eyebrow">Subscribe</div>
+        <div class="newsletter-heading" style="font-size:26px;">Join the Agora.</div>
+        <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form" style="margin-top:20px;">
+          <div class="newsletter-row">
+            <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
+            <input type="email" name="EMAIL" placeholder="Email address" required class="newsletter-input">
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </div>
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_fc853e3b6d230f6191a66a544_1cbf9becd3" tabindex="-1" value="">
+          </div>
+          <div class="newsletter-note">No spam. Unsubscribe any time.</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ══════════════ AUTHOR PROFILE ══════════════ -->
   <div class="page" id="page-author">
     <div class="author-profile-hero">
@@ -1131,7 +1178,7 @@
 
   var currentArticle = null;
 
-  var VALID_PAGES = ['home','authors','about','connect','article','author'];
+  var VALID_PAGES = ['home','authors','about','connect','newsletter','article','author'];
 
   function pageToPath(name) { return name === 'home' ? '/' : '/' + name; }
   function pathToPage(path) {
@@ -1140,7 +1187,7 @@
   }
 
   function setNavActive(name) {
-    ['home','authors','about','connect'].forEach(function(n) {
+    ['home','authors','about','connect','newsletter'].forEach(function(n) {
       var btn = document.getElementById('nav-' + n);
       if (btn) btn.classList.toggle('active', n === name || (name === 'author' && n === 'authors'));
     });
@@ -1150,7 +1197,7 @@
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('page-' + name).classList.add('active');
     setNavActive(name);
-    var pageTitles = { home: 'Agora — A Modern Public Forum', authors: 'Authors — Agora', about: 'About — Agora', connect: 'Connect — Agora', article: 'Agora' };
+    var pageTitles = { home: 'Agora — A Modern Public Forum', authors: 'Authors — Agora', about: 'About — Agora', connect: 'Connect — Agora', newsletter: 'Newsletter — Agora', article: 'Agora' };
     document.title = pageTitles[name] || 'Agora — A Modern Public Forum';
     window.scrollTo(0, 0);
     if (!skipHistory && location.pathname !== pageToPath(name)) {
@@ -1412,6 +1459,10 @@
 
   function renderConnect() { buildColumns('connect-cols', 6); }
 
+  // ── RENDER NEWSLETTER ─────────────────────────────────────────────────────
+
+  function renderNewsletter() { buildColumns('newsletter-cols', 6); }
+
   // ── INIT ──────────────────────────────────────────────────────────────────
 
   // ── QUOTE MACHINE ─────────────────────────────────────────────────────────
@@ -1610,6 +1661,7 @@
   renderAuthors();
   renderAbout();
   renderConnect();
+  renderNewsletter();
 
   setTimeout(function() {
     // Precompute reading times from templates for card display

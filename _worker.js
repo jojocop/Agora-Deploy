@@ -13,6 +13,11 @@ const OG = {
     title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done — Agora",
     desc:  "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.",
     img:   null
+  },
+  'ai-will-not-replace-accountants': {
+    title: "Why AI Will Not Replace Accountants — Agora",
+    desc:  "The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.",
+    img:   null
   }
 };
 
@@ -41,13 +46,13 @@ export default {
     // Pick values
     let title = 'Agora — A Modern Public Forum';
     let desc  = 'Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum.';
-    let img   = null;
+    let img   = url.origin + '/agora.jpg';
 
     const match = path.match(/^\/article\/(\w+)/);
     if (match && OG[match[1]]) {
       title = OG[match[1]].title;
       desc  = OG[match[1]].desc;
-      img   = OG[match[1]].img ? url.origin + OG[match[1]].img : null;
+      img   = OG[match[1]].img ? url.origin + OG[match[1]].img : url.origin + '/agora.jpg';
     }
 
     const imgTags = img

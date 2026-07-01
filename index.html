@@ -82,6 +82,13 @@
     .col-base   { width:  8px; height: 2px;  background: var(--gold); }
     .col-plinth { width: 12px; height: 3px;  background: var(--gold); border-radius: 1px; }
 
+    /* ── READING PROGRESS ── */
+    #reading-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: var(--gold); z-index: 200; pointer-events: none;
+      opacity: 0; transition: width .08s linear, opacity .2s;
+    }
+
     /* ── NAV ── */
     .site-nav {
       background: var(--bg);
@@ -570,6 +577,7 @@
   </style>
 </head>
 <body>
+  <div id="reading-progress"></div>
 
   <!-- NAV -->
   <header class="site-nav">
@@ -1049,15 +1057,22 @@
       email: 'sidhant.mathews@gmail.com', linkedin: 'https://www.linkedin.com/in/sidhant-mathews-a70a03344/',
       bio: 'Sidhant is fascinated by the architecture of financial systems — how regulations, institutions, and markets are built, tested, and remade as the world shifts beneath them. He believes that to understand finance is to understand history in motion: the rules that govern capital are never static, and the most revealing moments are the ones when they change. Beyond the mechanics of money, he is drawn to the human side of organisations: what separates real leaders from those who merely hold titles, and how people can come together around something larger than themselves. He is driven by a commitment to community and the conviction that shared success, carefully cultivated, is the most durable kind.',
     },
+    jack: {
+      id: 'jack', initials: 'JM', name: 'Jack Musselman',
+      location: 'Toronto, ON', beat: 'Philosophy · Politics',
+      education: 'Philosophy — Western University',
+      bio: 'Jack is a philosophy student at Western University with a deep interest in ethics, civil rights, and the hard questions that sit at the edge of law and lived experience. He believes clear thinking on difficult subjects is its own form of civic responsibility.',
+    },
   };
 
   var EMPTY_SLOTS = 0;
 
   var ARTICLES = [
     { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
+    { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, secondFeatured: true, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
+    { id: 'a5', slug: 'maid-eligibility-canada', topic: 'philosophy', topicLabel: 'Philosophy · Analysis', title: 'Expanding MAID Eligibility: The Challenge of Balancing Public Autonomy and Safety', deck: 'Canada has until 2027 to decide whether severe mental illness qualifies for assisted dying. What the debate reveals about democracy, rights, and where we draw the line.', author: 'jack', date: 'June 21, 2026', featured: false, heroImg: '/MAID.jpg', heroCredit: 'Photo: iStock', imgPos: 'center 40%' },
     { id: 'a2', slug: 'findlay-bc-conservatives', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
     { id: 'a3', slug: 'paramount-wbd-merger', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
-    { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, secondFeatured: true, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
   ];
 
   // ── THEME ─────────────────────────────────────────────────────────────────
@@ -1313,8 +1328,23 @@
     document.getElementById('page-article').classList.add('active');
     setNavActive('');
     window.scrollTo(0, 0);
+    var bar = document.getElementById('reading-progress');
+    if (bar) { bar.style.width = '0%'; bar.style.opacity = '1'; }
     if (!skipHistory) history.pushState({ page: 'article', id: article.id }, '', '/article/' + (article.slug || article.id));
   }
+
+  window.addEventListener('scroll', function() {
+    var bar = document.getElementById('reading-progress');
+    if (!bar) return;
+    var articlePage = document.getElementById('page-article');
+    if (!articlePage || !articlePage.classList.contains('active')) {
+      bar.style.opacity = '0';
+      return;
+    }
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (docHeight > 0 ? Math.min(scrollTop / docHeight * 100, 100) : 0) + '%';
+  }, { passive: true });
 
   // ── TOPIC FILTER ──────────────────────────────────────────────────────────
 
@@ -2171,6 +2201,161 @@
           // Platform card expand/collapse
           document.querySelectorAll('#article-body .platform-card').forEach(function(card) {
             card.addEventListener('click', function() { card.classList.toggle('p-expanded'); });
+          });
+        }, 80);
+      })();
+    </script>
+  </template>
+
+  <template id="body-a5">
+    <p>Over the last several years, the federal government has "heavily" debated the use of MAID (Medical Assistance in Dying). Since its introduction in 2016, MAID has specifically been granted to patients with severe medical conditions, in which the likelihood of their recovery or survival is unlikely. Common examples of those who qualify for MAID are patients with terminal cancer, organ failure, or severely impairing injuries.</p>
+
+    <h2>2024 MAID Report Overview</h2>
+    <p>Last fall, Health Canada published their report for the 2024 calendar year, confirming a total of 76,475 Canadians had received MAID since 2016. In 2024 alone, 16,499 received the procedure. The report asserted that "the vast majority of people receiving MAID had a reasonably foreseeable death," which included "95.6% of recipients." In many cases, MAID recipients were elderly, as the report revealed a median age of 78 years old, with 63% of the group having endured terminal cancer. For Canadians who fall under this category, the introduction of MAID has been viewed as both a progressive development of healthcare and civil rights, ultimately granting individuals greater autonomy on how to approach the end of their lives.</p>
+
+    <div class="art-chart-wrap" style="margin:36px 0;">
+      <div style="font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">Figure 2.2a &mdash; MAID provisions and rate of growth by year, 2019&ndash;2024</div>
+      <div style="position:relative;height:300px;">
+        <canvas id="maidChart"></canvas>
+      </div>
+      <div style="display:flex;gap:20px;margin-top:14px;font-family:var(--sans);font-size:12px;color:var(--text2);flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;background:#4DB6AC;border-radius:2px;"></span>Track 1 (physical conditions)</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;background:#9575CD;border-radius:2px;"></span>Track 2 (foreseeable natural death not required)</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:18px;height:2px;background:#333;border-radius:1px;"></span>% Change (right axis)</span>
+      </div>
+      <p style="font-family:var(--sans);font-size:11px;color:var(--text3);margin-top:10px;">Source: Health Canada, Sixth Annual Report on Medical Assistance in Dying in Canada, 2024</p>
+    </div>
+
+    <h2>MAID Eligibility and Expansion</h2>
+    <p>As of 2026, MAID remains exclusively for those with irremediable physical conditions; however, recent developments in parliament have explored expanding the eligibility to include those suffering from severe mental conditions. These discussions have sparked ethical and legal debate across the country. In March, a joint committee composed of MPs and Senators were tasked to review and advise the federal government regarding MAID eligibility and address these debates.</p>
+    <p>Prime Minister Mark Carney was asked in May about the possibility of expanding MAID eligibility, in which he stated that he will wait for the committee's formal review before he and his cabinet take action.</p>
+    <p>Now, following months of consultation, the Committee has completed its review and presented its 98-page report on June 17th, in which they have concluded, as of now, that MAID eligibility should "indefinitely exclude persons whose sole underlying medical condition is a mental illness from eligibility for medical assistance in dying."</p>
+
+    <p>The committee acknowledged the polarization surrounding this review, as the country remains divided on the future of MAID eligibility. Canadians who support the committee's recommendation argue that there are significant concerns regarding informed consent, the patient's state of mind when making a MAID request, and the potential legal challenges which could arise from expanding eligibility.</p>
+    <p>However, others have publicly shared testimonies regarding friends and family who they believe should have access to MAID. These accounts include various cases of individuals suffering from severe mental conditions such as schizophrenia, PTSD, and other disorders.</p>
+    <p>In addition, external organizations have also played a key role in advocating for the expansion of eligibility, such as the registered charity called Dying With Dignity. The organization is committed to advancing the distribution of MAID for individuals with these severe mental conditions, in which they argue the Charter of Rights and Freedoms should entitle the expansion of eligibility beyond merely severe physical conditions.</p>
+
+    <blockquote style="border-left:3px solid var(--gold);padding:14px 20px;margin:28px 0;font-family:var(--bserif);font-size:17px;font-style:italic;color:var(--text2);background:var(--bg2);border-radius:0 4px 4px 0;">
+      "Every individual is equal before and under the law and has the right to the equal protection and equal benefit of the law without discrimination&hellip; based on race, national or ethnic origin, colour, religion, sex, age or mental or physical disability."
+      <footer style="font-style:normal;font-size:13px;font-family:var(--sans);margin-top:8px;color:var(--text3);">Section 15, Canadian Charter of Rights and Freedoms</footer>
+    </blockquote>
+
+    <p>Dying With Dignity argues the exclusion of individuals with severe mental illness from MAID is "a breach of the Charter of Rights and Freedoms" as they are entitled to the same medical procedures as those with severe physical conditions by law.</p>
+    <p>As the federal government considers its next steps, the future of MAID eligibility for individuals with severe mental illness remains uncertain. While the committee has provided guidance and leadership, the decision will remain undecided for now. The federal government has until 2027 to make its final verdict due to Bill C-62, which was passed in 2024 and has allocated time for a more comprehensive review.</p>
+
+    <h2>Conclusion</h2>
+    <p>Regardless of where one stands on this issue, the federal review process demonstrates the strength of Canada's liberal democracy and how it successfully balances individual rights, public safety, medical ethics, and the rule of law.</p>
+    <p>Our nation's network of collective intelligence and public institutions invites these important discussions. The difficult questions are the most important ones, and as Parliament, advocacy groups, healthcare professionals, and Canadians continue to debate on the issue, maintaining a sense of civility and decorum is necessary.</p>
+    <p>The complexity of the subject and the ongoing review of MAID eligibility serve as a reminder that democratic institutions are successful when they encourage civil debate, diverse perspectives, and informed decision-making.</p>
+
+    <h2>Sources</h2>
+    <ul style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.9;padding-left:20px;">
+      <li>"Canada's Medical Assistance in Dying (MAID) Law." <a href="https://www.justice.gc.ca/eng/cj-jp/ad-am/bk-di.html" target="_blank">justice.gc.ca</a>, July 31, 2024.</li>
+      <li>"Charterpedia &mdash; Section 15: Equality Rights." <a href="https://www.justice.gc.ca/eng/csj-sjc/rfc-dlc/ccrf-ccdl/check/art15.html" target="_blank">justice.gc.ca</a>, August 20, 2025.</li>
+      <li>"MAID for Mental Illness." <a href="https://www.dyingwithdignity.ca/advocacy/maid-for-mental-illness/" target="_blank">dyingwithdignity.ca</a>, 2021.</li>
+      <li>Martin, Yonah, and Marcus Powlowski. <a href="https://www.parl.ca/Committees/en/AMAD" target="_blank">"Medical Assistance in Dying and Mental Disorder as the Sole Underlying Medical Condition."</a> Parliament of Canada, June 17, 2026.</li>
+      <li>"Sixth Annual Report on Medical Assistance in Dying in Canada." <a href="https://www.canada.ca/en/health-canada/services/publications/health-system-services/annual-report-medical-assistance-dying-2024.html" target="_blank">Government of Canada</a>, November 2025.</li>
+      <li>Yousif, Nadine. <a href="https://www.bbc.com/news/articles/crelwx1ye1do" target="_blank">"Canada Should 'indefinitely' Exclude People with Mental Illness from Assisted Dying, Report Says."</a> BBC, June 2026.</li>
+    </ul>
+
+    <script>
+      (function() {
+        setTimeout(function() {
+          var canvas = document.getElementById('maidChart');
+          if (!canvas || !window.Chart) return;
+          if (canvas._chartInstance) { canvas._chartInstance.destroy(); }
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#A89880' : '#5A5347';
+          var gridColor = isDark ? 'rgba(240,235,223,0.08)' : 'rgba(26,23,19,0.08)';
+          var years = ['2019', '2020', '2021', '2022', '2023', '2024'];
+          var track1 = [5461, 7451, 9842, 12730, 14802, 15767];
+          var track2 = [0, 18, 224, 469, 625, 732];
+          var pctChange = [null, 36.8, 34.8, 31.1, 16.9, 6.9];
+          canvas._chartInstance = new Chart(canvas, {
+            data: {
+              labels: years,
+              datasets: [
+                {
+                  type: 'bar',
+                  label: 'Track 1',
+                  data: track1,
+                  backgroundColor: '#4DB6AC',
+                  borderRadius: 3,
+                  yAxisID: 'y',
+                  order: 2,
+                },
+                {
+                  type: 'bar',
+                  label: 'Track 2',
+                  data: track2,
+                  backgroundColor: '#9575CD',
+                  borderRadius: 3,
+                  yAxisID: 'y',
+                  order: 2,
+                },
+                {
+                  type: 'line',
+                  label: '% Change',
+                  data: pctChange,
+                  borderColor: isDark ? '#E8C96A' : '#333',
+                  backgroundColor: 'transparent',
+                  pointBackgroundColor: isDark ? '#E8C96A' : '#333',
+                  pointRadius: 5,
+                  pointHoverRadius: 7,
+                  borderWidth: 2,
+                  tension: 0.3,
+                  yAxisID: 'y2',
+                  order: 1,
+                  spanGaps: false,
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  backgroundColor: isDark ? '#1A1812' : '#fff',
+                  borderColor: isDark ? 'rgba(240,235,223,0.15)' : 'rgba(26,23,19,0.12)',
+                  borderWidth: 1,
+                  titleColor: isDark ? '#F0EBDF' : '#1A1713',
+                  bodyColor: textColor,
+                  padding: 10,
+                  callbacks: {
+                    label: function(ctx) {
+                      if (ctx.dataset.label === '% Change') {
+                        return ctx.raw === null ? '' : ' % Change: ' + ctx.raw + '%';
+                      }
+                      return ' ' + ctx.dataset.label + ': ' + ctx.raw.toLocaleString();
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  stacked: true,
+                  grid: { color: gridColor },
+                  ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 12 } }
+                },
+                y: {
+                  stacked: true,
+                  position: 'left',
+                  grid: { color: gridColor },
+                  ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 11 }, callback: function(v) { return v.toLocaleString(); } },
+                  title: { display: true, text: 'Count', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } }
+                },
+                y2: {
+                  position: 'right',
+                  grid: { drawOnChartArea: false },
+                  ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 11 }, callback: function(v) { return v + '%'; } },
+                  title: { display: true, text: 'Percent Change (%)', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } },
+                  min: 0,
+                  max: 45
+                }
+              }
+            }
           });
         }, 80);
       })();

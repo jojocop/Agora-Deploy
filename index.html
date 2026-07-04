@@ -512,14 +512,14 @@
     .newsletter-btn:hover { opacity: .85; }
     .newsletter-note { font-size: 11px; color: var(--text3); margin-top: 4px; }
 
-    /* ── SECONDARY FEATURED ── */
-    .feat2-section { border-bottom: .5px solid var(--border); }
-    .feat2-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; align-items: stretch; }
-    .feat2-img-wrap { position: relative; overflow: hidden; border-right: .5px solid var(--border); cursor: pointer; }
-    .feat2-img { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; transition: transform .4s ease; }
-    .feat2-img-wrap:hover .feat2-img { transform: scale(1.03); }
-    .feat2-text { padding: 26px 36px; display: flex; flex-direction: column; justify-content: center; }
-    .feat2-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    /* ── SECONDARY & TERTIARY FEATURED ── */
+    .feat2-section, .feat3-section { border-bottom: .5px solid var(--border); }
+    .feat2-section > div, .feat3-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; align-items: stretch; }
+    .feat2-img-wrap, .feat3-img-wrap { position: relative; overflow: hidden; border-right: .5px solid var(--border); cursor: pointer; }
+    .feat2-img, .feat3-img { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; transition: transform .4s ease; }
+    .feat2-img-wrap:hover .feat2-img, .feat3-img-wrap:hover .feat3-img { transform: scale(1.03); }
+    .feat2-text, .feat3-text { padding: 26px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .feat2-label, .feat3-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
     .feat2-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
     .feat2-title { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.25; color: var(--text); margin-bottom: 8px; cursor: pointer; transition: color .2s; background: none; border: none; text-align: left; padding: 0; width: 100%; }
     .feat2-title:hover { color: var(--gold); }
@@ -569,9 +569,9 @@
       .author-card:nth-child(odd)   { padding-right: 0; border-right: none; }
       .author-card:nth-child(even)  { padding-left: 0; }
       .nav-motto, .mast-contrib { display: none; }
-      .feat2-section > div { grid-template-columns: 1fr; }
-      .feat2-img-wrap { border-right: none; border-bottom: .5px solid var(--border); }
-      .feat2-img { min-height: 180px; height: 180px; }
+      .feat2-section > div, .feat3-section > div { grid-template-columns: 1fr; }
+      .feat2-img-wrap, .feat3-img-wrap { border-right: none; border-bottom: .5px solid var(--border); }
+      .feat2-img, .feat3-img { min-height: 180px; height: 180px; }
       .stat-blocks, .platform-cards, .cannot-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -705,6 +705,26 @@
             <span id="feat2-date"></span>
           </div>
           <button class="read-link" id="feat2-read-btn">Read essay →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tertiary Featured -->
+    <section class="feat3-section" id="feat3-section" style="display:none;">
+      <div>
+        <div class="feat3-img-wrap" id="feat3-img-wrap">
+          <img id="feat3-img" class="feat3-img" src="" alt="">
+        </div>
+        <div class="feat3-text">
+          <div class="feat3-label">✦ Also featured</div>
+          <div class="feat3-topic-lbl" id="feat3-topic-lbl"></div>
+          <button class="feat3-title" id="feat3-title"></button>
+          <p class="feat3-deck" id="feat3-deck"></p>
+          <div class="feat2-meta">
+            <span id="feat3-author"></span>
+            <span id="feat3-date"></span>
+          </div>
+          <button class="read-link" id="feat3-read-btn">Read essay →</button>
         </div>
       </div>
     </section>
@@ -933,10 +953,6 @@
       <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
-          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Monthly stock pitch</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">The star of every edition. One stock, one thesis — researched, argued, and put on record.</p></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;">
-          <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
           <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Original analysis</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">Politics, business, finance, and philosophy — examined without deference.</p></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:14px;">
@@ -1077,6 +1093,7 @@
     { id: 'a5', slug: 'maid-eligibility-canada', topic: 'philosophy', topicLabel: 'Philosophy · Analysis', title: 'Expanding MAID Eligibility: The Challenge of Balancing Public Autonomy and Safety', deck: 'Canada has until 2027 to decide whether severe mental illness qualifies for assisted dying. What the debate reveals about democracy, rights, and where we draw the line.', author: 'jack', date: 'June 21, 2026', featured: false, heroImg: '/MAID.jpg', heroCredit: 'Photo: iStock', imgPos: 'center 40%' },
     { id: 'a2', slug: 'findlay-bc-conservatives', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
     { id: 'a3', slug: 'paramount-wbd-merger', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
+    { id: 'a6', slug: 'bc-condo-affordability', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Federal Intent to Purchase 2,200 BC Condos Launches Larger Housing Affordability Questions', deck: 'As the government intervenes in the housing market with a $1.45 billion purchase plan, deeper questions about price expectations, developer incentives, and demographic shifts come into focus.', author: 'kasra', date: 'June 18, 2026', featured: false, tertiaryFeatured: true, heroImg: '/condo.jpg', heroCredit: 'Photo: iStock', imgPos: 'center 45%' },
   ];
 
   // ── THEME ─────────────────────────────────────────────────────────────────
@@ -1414,6 +1431,29 @@
     } else {
       feat2El.style.display = 'none';
     }
+    var feat3 = ARTICLES.find(function(a) { return a.tertiaryFeatured; });
+    var feat3El = document.getElementById('feat3-section');
+    if (feat3) {
+      var f3a = AUTHORS[feat3.author];
+      document.getElementById('feat3-topic-lbl').textContent = feat3.topicLabel;
+      var feat3Title = document.getElementById('feat3-title');
+      feat3Title.textContent = feat3.title;
+      feat3Title.onclick = function() { openArticle(feat3); };
+      document.getElementById('feat3-deck').textContent = feat3.deck;
+      document.getElementById('feat3-author').innerHTML = f3a
+        ? '<button class="author-link" onclick="showAuthor(\'' + feat3.author + '\')">' + f3a.name + '</button>' : '';
+      document.getElementById('feat3-date').textContent = feat3.date;
+      document.getElementById('feat3-read-btn').onclick = function() { openArticle(feat3); };
+      var f3img = document.getElementById('feat3-img');
+      f3img.src = feat3.heroImg || '';
+      f3img.alt = feat3.title;
+      if (feat3.imgPos) f3img.style.objectPosition = feat3.imgPos;
+      var f3imgWrap = document.getElementById('feat3-img-wrap');
+      f3imgWrap.onclick = function() { openArticle(feat3); };
+      feat3El.style.display = feat3.heroImg ? '' : 'none';
+    } else {
+      feat3El.style.display = 'none';
+    }
     renderGrid();
   }
 
@@ -1445,6 +1485,10 @@
     var f2s = document.getElementById('feat2-section');
     if (f2s && feat2) {
       f2s.style.display = (feat2.heroImg && (activeTopic === 'all' || activeTopic === feat2.topic)) ? '' : 'none';
+    }
+    var f3s = document.getElementById('feat3-section');
+    if (f3s && feat3) {
+      f3s.style.display = (feat3.heroImg && (activeTopic === 'all' || activeTopic === feat3.topic)) ? '' : 'none';
     }
   }
 
@@ -2363,6 +2407,163 @@
           });
         }, 80);
       })();
+    </script>
+  </template>
+
+  <template id="body-a6">
+    <p>On June 18th, with a visit to Vancouver, Prime Minister Mark Carney held a press release with BC Premier David Eby announcing their joint intention to buy out 2,200 BC condos. Stating the goal of alleviating some of the cost-of-living pressure in Canada's most expensive city, their hope is to be able to convert empty properties into homes that renters can eventually own.</p>
+
+    <p>Already, many important questions have been raised regarding how the specifics of the plan will work. For one, Carney's clarification of the plan later on suggested that the $1.45 billion deal, funded 90% by the province and 10% by Ottawa, would buy condos at a "discount", whereupon they'd be rented out at market levels, with the eventual goal of helping residents buy out the home.</p>
+
+    <p>Though this could have been described as a discount compared to prices in the past, the PM's adamant clarification of this purchase price at an unnaturally low level makes it hard to imagine why the developers would sell for such an offer.</p>
+
+    <p>While the initial announcement itself took place in downtown Vancouver, the outlined plan also leaves out Vancouver condos as candidates for this initiative.</p>
+
+    <p>More broadly, both governments' approach to affordability gives some insight into how they view the issue. Namely, this form of government intervention to artificially modify prices by buying out vacant properties creates a potentially dangerous precedent.</p>
+
+    <p>If the government does go ahead with this plan, adventurous developers could see this as a potential bailout of the housing development industry. Carney was careful to avoid any such implications, making sure to be quoted as saying that the Liberal government does not "care about the developer", but instead cares "about the person, the family that can potentially move into the home."</p>
+
+    <p>It could potentially help embolden developers, who scrambled to buy and develop homes when prices were consistently rising, into taking larger risks in the future, in the hopes that the government could come to their aid if they ever faced harsh market repercussions.</p>
+
+    <p>That's exactly the concern raised by Conservatives, both provincially and federally. Linda Hepner, former mayor of Surrey and current Conservative MLA for Surrey-Serpentine River, described the move as "risky investment" focused on "bailing out developers" that wouldn't "meaningfully address the housing crisis."</p>
+
+    <p>Doubling down, Federal Conservative leader Pierre Poilievre was served a golden opportunity to score a one-liner, "let the prices drop", as his response to the issue.</p>
+
+    <p>This free-market angle from the Conservatives is likely to be broadly popular with millions of aspiring home buyers today, but the same argument five or ten years ago was seen as out-of-touch, and largely inadequate to meet the challenges of the day.</p>
+
+    <p>Instead, the free market forces in Canada's largest housing markets have inadvertently created more homes than that would keep prices steady, and notably more homes than needed to keep their investments net profitable.</p>
+
+    <p>If, for example, developers planned to build homes on the expectation that demand would keep prices high and climbing, then a slump in factors that drive housing demand could lower prices to the point where developers sell at a loss.</p>
+
+    <p>Importantly, many multi-year construction projects are financed by loans, which gives developers a time constraint to sell their developed properties to pay back their borrowed money. In turn, if developers are hit with surprisingly low prices, they could potentially face financial hardship, or even fail.</p>
+
+    <p>This could affect future developing capacity, which may be hampered by fewer successful developers and could have downstream effects for businesses built around growing housing markets, like builders or realtors.</p>
+
+    <h2>The Demographic Shock</h2>
+
+    <p>From a bird's eye view, much of this can be attributed to the rise and fall of immigration over the past decade, and the speculation that led to a mismatch of buyer offers and seller expectations.</p>
+
+    <p>Under former PM Trudeau, Canada witnessed the largest inflow of immigrants, including notably high levels of net non-permanent residents, as defined by Immigration, Refugees and Citizenship Canada (IRCC). In pre-pandemic Canada, this yearly figure grew from 88,722 in 2016 to 189,781 in 2019. After an insignificant net increase in 2020-21, the next 3 years saw record-shattering immigration levels with over 1.7 million new non-permanent resident immigrants.</p>
+
+    <p>In effect, this spike in immigration was a price shock due to renter demand, which developers at the time were not prepared for, but expected to continue into the future. As a result, development applications clogged the review process, which frustrated would-be developers and contributed to the rising cost of living overall.</p>
+
+    <div class="art-chart-wrap">
+      <div class="chart-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+          <div><div style="font-family:var(--serif);font-size:16px;color:var(--text);font-weight:500;">Vancouver Condo Prices (2006–2026)</div><div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:4px;">Average price (bars) vs. year-over-year % change (line)</div></div>
+          <span class="chart-card-toggle">+</span>
+        </div>
+        <div class="chart-card-sub" style="height:300px;position:relative;margin-top:12px;"><canvas id="chart-prices"></canvas></div>
+      </div>
+      <script>
+        (function() {
+          setTimeout(function() {
+            if (typeof Chart === 'undefined') return;
+            var years = [2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
+            var prices = [350,420,450,380,400,420,450,500,530,560,600,680,700,650,700,800,850,750,680,640,630];
+            var yoy = [null,20,7.1,-15.6,5.3,5,7.1,11.1,6,5.7,7.1,13.3,2.9,-7.1,7.7,14.3,6.3,-11.8,-9.3,-5.9,-1.6];
+            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            var textColor = isDark ? '#999' : '#666';
+            var barColor = isDark ? '#C9A84C' : '#DAA520';
+            var ctx = document.getElementById('chart-prices').getContext('2d');
+            window.chartPrices = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: years,
+                datasets: [
+                  { label: 'Average Price ($k)', data: prices, backgroundColor: barColor, borderColor: barColor, borderRadius: 2, yAxisID: 'y', order: 2 },
+                  { label: 'YoY Change (%)', type: 'line', data: yoy, borderColor: isDark ? '#E8C96A' : '#B8860B', backgroundColor: 'transparent', pointBackgroundColor: isDark ? '#E8C96A' : '#B8860B', pointRadius: 3, pointHoverRadius: 5, borderWidth: 2.5, tension: 0.3, yAxisID: 'y2', order: 1 }
+                ]
+              },
+              options: {
+                responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false }, tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.8)' : 'rgba(255,255,255,.9)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1 } },
+                scales: {
+                  x: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 } } },
+                  y: { position: 'left', grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return '$' + v + 'k'; } }, title: { display: true, text: 'Price ($1000s)', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } } },
+                  y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return v + '%'; } }, title: { display: true, text: 'YoY Change (%)', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } }, min: -20, max: 25 }
+                }
+              }
+            });
+          }, 80);
+        })();
+      </script>
+    </div>
+
+    <p>Rather than continuing or even plateauing, however, net non-permanent residence plummeted following its growing unpopularity and demonstrated liability to Liberal electoral prospects, with cuts to immigration forming one of the core pillars of the 2025 Conservative Federal election campaign. Since then, the Carney government has overseen an over 460,000 decrease in this figure in 2025 alone, and Q1 figures for 2026 suggest a similarly large drop.</p>
+
+    <p>For Canada as a whole, this population whiplash, which has now resulted in a net decrease in the total Canadian population, has been especially pronounced in urban areas in BC and Ontario. In Ontario, the net flow in immigration in Q1 2026 is over 26% lower than it was in Q1 2025, and in BC it was over 30% lower.</p>
+
+    <div class="art-chart-wrap">
+      <div class="chart-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+          <div><div style="font-family:var(--serif);font-size:16px;color:var(--text);font-weight:500;">BC Housing Starts (2006–2026)</div><div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:4px;">Annual new housing unit starts in British Columbia, showing the boom tied to immigration surge and recent collapse</div></div>
+          <span class="chart-card-toggle">+</span>
+        </div>
+        <div class="chart-card-sub" style="height:300px;position:relative;margin-top:12px;"><canvas id="chart-starts"></canvas></div>
+      </div>
+      <script>
+        (function() {
+          setTimeout(function() {
+            if (typeof Chart === 'undefined') return;
+            var years = [2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
+            var starts = [48000,45000,32000,18000,22000,25000,28000,35000,38000,42000,48000,52000,58000,55000,50000,62000,68000,45000,35000,28000,15000];
+            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            var textColor = isDark ? '#999' : '#666';
+            var barColor = isDark ? '#C9A84C' : '#DAA520';
+            var ctx = document.getElementById('chart-starts').getContext('2d');
+            window.chartStarts = new Chart(ctx, {
+              type: 'bar',
+              data: { labels: years, datasets: [{ label: 'Housing Starts', data: starts, backgroundColor: barColor, borderColor: barColor, borderRadius: 2 }] },
+              options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.8)' : 'rgba(255,255,255,.9)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1 } },
+                scales: {
+                  x: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 } } },
+                  y: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return (v/1000).toFixed(0) + 'k'; } }, title: { display: true, text: 'Units Started', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } } }
+                }
+              }
+            });
+          }, 80);
+        })();
+      </script>
+    </div>
+
+    <p>On the whole, this should be a factor that naturally deflates housing prices, but seller expectations seem to be keeping prices higher than what buyers and renters deem reasonable.</p>
+
+    <p>According to recent polling done by the Angus Reid Institute, 67% of renters deem neighbourhood prices "unreasonably high", compared to 56% in 2021. In that sense, market forces have been observed to be driving Vancouver (and BC) housing prices down, ushering in a buyer's market, but have instead challenged buyers by significantly reducing transaction quantities.</p>
+
+    <p>In Metro Vancouver, while the average price of homes bought/sold has slowly decreased, it's far outmatched by the decrease in overall transactions, which has left the market overall in a state of stasis.</p>
+
+    <p>What this signals is that sellers who developed homes while prices were high are now reluctant to sell at a net loss, while buyers expect further price cuts and are holding out for better deals.</p>
+
+    <p>This apparent stalemate is aside from the wider qualms that developers have with provincial zoning restrictions and lengthy approval processes, which have often been a target of Conservatives across the province and the country, a laissez-faire solution to a problem partially caused by fluid and speculative market demand.</p>
+
+    <h2>Looking Forward</h2>
+
+    <p>Overall, if housing prices are to become more affordable for renters and prospective buyers, it seems that the current path has been so far ineffective, with high-volume high-price markets being supplanted by mid-price low-volume ones.</p>
+
+    <p>Whether or not current or planned solutions are enough to change the market, this is unpredictable. Any government that can significantly ameliorate the current situation would undoubtedly be rewarded by voters, who continuously place the cost-of-living crisis as one of their top issues.</p>
+
+    <p>Until then, we will just have to wait and see.</p>
+
+    <div style="margin-top:40px;padding-top:24px;border-top:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;">Sources</div>
+      <ul style="margin:0;padding:0;list-style:none;font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.8;">
+        <li><a href="https://www.cmhc-schl.gc.ca/" style="color:var(--gold);text-decoration:underline;">Canada Mortgage and Housing Corporation (CMHC)</a> — Housing research and data on starts, prices, and market trends</li>
+        <li><a href="https://www.statcan.gc.ca/eng/start" style="color:var(--gold);text-decoration:underline;">Statistics Canada</a> — Census, housing surveys, and demographic data on population and migration</li>
+        <li><a href="https://www.rebgv.org/" style="color:var(--gold);text-decoration:underline;">Real Estate Board of Greater Vancouver (REBGV)</a> — Metropolitan Vancouver real estate market data and condo price indices</li>
+        <li><a href="https://www.angusreidinstitute.org/" style="color:var(--gold);text-decoration:underline;">Angus Reid Institute</a> — Public polling on housing affordability perceptions and renters' expectations</li>
+      </ul>
+    </div>
+
+    <script>
+      setTimeout(function() {
+        var cards = document.querySelectorAll('#article-body .chart-card');
+        cards.forEach(function(card) {
+          card.addEventListener('click', function() { card.classList.toggle('expanded'); });
+        });
+      }, 100);
     </script>
   </template>
 

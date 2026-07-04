@@ -18,6 +18,16 @@ const OG = {
     title: "Why AI Will Not Replace Accountants — Agora",
     desc:  "The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.",
     img:   null
+  },
+  'maid-eligibility-canada': {
+    title: "Expanding MAID Eligibility: The Challenge of Balancing Public Autonomy and Safety — Agora",
+    desc:  "Canada has until 2027 to decide whether severe mental illness qualifies for assisted dying. What the debate reveals about democracy, rights, and where we draw the line.",
+    img:   null
+  },
+  'bc-condo-affordability': {
+    title: "Federal Intent to Purchase 2,200 BC Condos Launches Larger Housing Affordability Questions — Agora",
+    desc:  "As the government intervenes in the housing market with a $1.45 billion purchase plan, deeper questions about price expectations, developer incentives, and demographic shifts come into focus.",
+    img:   null
   }
 };
 
@@ -48,7 +58,7 @@ export default {
     let desc  = 'Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum.';
     let img   = url.origin + '/agora.jpg';
 
-    const match = path.match(/^\/article\/(\w+)/);
+    const match = path.match(/^\/article\/([\w-]+)/);
     if (match && OG[match[1]]) {
       title = OG[match[1]].title;
       desc  = OG[match[1]].desc;

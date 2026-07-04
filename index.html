@@ -743,6 +743,12 @@
       <div class="newsletter-eyebrow">Newsletter</div>
       <div class="newsletter-heading">Stay in the loop.</div>
       <p class="newsletter-sub">New essays, straight to your inbox. No noise, no algorithm — just the work.</p>
+      <div style="margin:24px 0 32px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <span style="color:var(--gold);font-size:14px;margin-top:2px;">✦</span>
+          <div><strong style="font-family:var(--serif);font-size:15px;color:var(--text);">Monthly stock pitch</strong><p style="font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.6;margin-top:3px;">The star of every edition. One stock, one thesis — researched, argued, and put on record.</p></div>
+        </div>
+      </div>
       <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form">
         <div class="newsletter-row">
           <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
@@ -928,6 +934,12 @@
         <div class="newsletter-eyebrow">Newsletter</div>
         <div class="newsletter-heading">Stay in the loop.</div>
         <p class="newsletter-sub">New essays, straight to your inbox. No noise, no algorithm — just the work.</p>
+        <div style="margin:24px 0 32px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <span style="color:var(--gold);font-size:14px;margin-top:2px;">✦</span>
+            <div><strong style="font-family:var(--serif);font-size:15px;color:var(--text);">Monthly stock pitch</strong><p style="font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.6;margin-top:3px;">The star of every edition. One stock, one thesis — researched, argued, and put on record.</p></div>
+          </div>
+        </div>
         <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form">
           <div class="newsletter-row">
             <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
@@ -1467,7 +1479,8 @@
     var grid = document.getElementById('articles-grid');
     var featured = ARTICLES.find(function(a) { return a.featured; });
     var feat2 = ARTICLES.find(function(a) { return a.secondFeatured; });
-    var list = ARTICLES.filter(function(a) { return !a.featured && !a.secondFeatured; });
+    var feat3 = ARTICLES.find(function(a) { return a.tertiaryFeatured; });
+    var list = ARTICLES.filter(function(a) { return !a.featured && !a.secondFeatured && !a.tertiaryFeatured; });
     if (activeTopic !== 'all') list = list.filter(function(a) { return a.topic === activeTopic; });
     grid.innerHTML = list.map(function(a) {
       var auth = AUTHORS[a.author];

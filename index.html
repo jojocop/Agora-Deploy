@@ -1764,7 +1764,7 @@
   renderConnect();
   renderNewsletter();
 
-  setTimeout(function() {
+  function initRouting() {
     // Precompute reading times from templates for card display
     ARTICLES.forEach(function(a) {
       var tpl = document.getElementById('body-' + a.id);
@@ -1786,7 +1786,16 @@
       if (AUTHORS[uid]) { showAuthor(uid, true); return; }
     }
     showPage(pathToPage(path), true);
-  }, 0);
+  }
+
+  // DOMContentLoaded guarantees the full document (including every
+  // <template> below this script tag) has finished parsing before we
+  // look up article templates by id — a plain setTimeout(fn, 0) does not.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRouting);
+  } else {
+    initRouting();
+  }
   </script>
 
   <!-- QUOTE MACHINE -->

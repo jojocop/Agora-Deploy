@@ -59,6 +59,7 @@ export default {
     let img   = url.origin + '/agora.jpg';
 
     const match = path.match(/^\/article\/([\w-]+)/);
+
     if (match && OG[match[1]]) {
       title = OG[match[1]].title;
       desc  = OG[match[1]].desc;

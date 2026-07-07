@@ -42,7 +42,7 @@ export default {
     const path = url.pathname;
 
     // Serve static files directly
-    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff2?|ttf)$/i.test(path)) {
+    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff2?|ttf|xml|txt)$/i.test(path)) {
       return env.ASSETS.fetch(request);
     }
 

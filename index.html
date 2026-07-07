@@ -2685,52 +2685,71 @@
 
     <p>Their combined revenue of 1.12 trillion is higher than the GDP of Switzerland with room to spare.</p>
 
-    <div class="art-chart-wrap">
-      <div class="chart-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
-          <div><div style="font-family:var(--serif);font-size:16px;color:var(--text);font-weight:500;">$1.12 Trillion, in Perspective</div><div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:4px;">Combined Walmart + Costco + Home Depot revenue vs. national GDP</div></div>
-          <span class="chart-card-toggle">+</span>
-        </div>
-        <div class="chart-card-sub" style="height:320px;position:relative;margin-top:12px;"><canvas id="chart-gdp"></canvas></div>
-      </div>
-      <script>
-        (function() {
-          setTimeout(function() {
-            if (typeof Chart === 'undefined') return;
-            var labels = ['Austria', 'Ireland', 'Sweden', 'Belgium', 'Poland', 'Switzerland', 'Walmart + Costco + Home Depot'];
-            var values = [537, 587, 593, 658, 844, 947, 1120];
-            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            var textColor = isDark ? '#999' : '#666';
-            var barColor = isDark ? 'rgba(201,168,76,.55)' : 'rgba(218,165,32,.55)';
-            var highlightColor = isDark ? '#E8C96A' : '#B8860B';
-            var ctx = document.getElementById('chart-gdp').getContext('2d');
-            new Chart(ctx, {
-              type: 'bar',
-              data: {
-                labels: labels,
-                datasets: [{
-                  label: 'Billions (USD)',
-                  data: values,
-                  backgroundColor: labels.map(function(l) { return l.indexOf('Walmart') === 0 ? highlightColor : barColor; }),
-                  borderColor: labels.map(function(l) { return l.indexOf('Walmart') === 0 ? highlightColor : barColor; }),
-                  borderRadius: 2,
-                }]
-              },
-              options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false }, tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.8)' : 'rgba(255,255,255,.9)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1, callbacks: { label: function(ctx) { return '$' + ctx.parsed.x.toLocaleString() + 'B'; } } } },
-                scales: {
-                  x: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return '$' + v + 'B'; } }, title: { display: true, text: 'USD (Billions)', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } } },
-                  y: { grid: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 11 } } }
-                }
-              }
-            });
-          }, 80);
-        })();
-      </script>
+    <div style="margin:36px 0;padding:28px 28px 20px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">$1.12 Trillion, in Perspective</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:20px;">Combined annual revenue of Walmart, Costco, and Home Depot vs. the GDP of select national economies</div>
+      <div style="height:340px;position:relative;"><canvas id="chart-gdp"></canvas></div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:14px;letter-spacing:.02em;">Note: Figures in USD billions, most recent available. Revenue reflects most recent fiscal-year filings; GDP figures are IMF nominal estimates.</div>
     </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          if (typeof Chart === 'undefined') return;
+          var labels = ['Austria', 'Ireland', 'Sweden', 'Belgium', 'Poland', 'Switzerland', 'Walmart + Costco\n+ Home Depot'];
+          var values = [537, 587, 593, 658, 844, 947, 1120];
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#aaa' : '#444';
+          var barColor = isDark ? '#5b5b52' : '#d8d2c2';
+          var highlightColor = isDark ? '#E8C96A' : '#B8860B';
+          var ctx = document.getElementById('chart-gdp').getContext('2d');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                data: values,
+                backgroundColor: labels.map(function(l) { return l.indexOf('Walmart') === 0 ? highlightColor : barColor; }),
+                borderRadius: 1,
+                barPercentage: 0.68,
+                categoryPercentage: 0.82,
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              layout: { padding: { right: 46 } },
+              plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false },
+                datalabels: false
+              },
+              scales: {
+                x: { display: false, grid: { display: false }, max: 1250 },
+                y: { grid: { display: false }, border: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 12.5, weight: '500' } } }
+              },
+              animation: { duration: 700 }
+            },
+            plugins: [{
+              id: 'valueLabels',
+              afterDatasetsDraw: function(chart) {
+                var ctx = chart.ctx;
+                ctx.save();
+                ctx.font = "600 12.5px 'Jost', sans-serif";
+                ctx.textBaseline = 'middle';
+                chart.getDatasetMeta(0).data.forEach(function(bar, i) {
+                  var isHighlight = labels[i].indexOf('Walmart') === 0;
+                  ctx.fillStyle = isHighlight ? highlightColor : textColor;
+                  ctx.textAlign = 'left';
+                  ctx.fillText('$' + values[i].toLocaleString() + 'B', bar.x + 8, bar.y);
+                });
+                ctx.restore();
+              }
+            }]
+          });
+        }, 80);
+      })();
+    </script>
 
     <p>People, or, rather, their wallets, clearly love these companies.</p>
 
@@ -2765,6 +2784,18 @@
         <li><a href="https://www.costco.com/about.html" style="color:var(--gold);text-decoration:underline;">Costco Wholesale</a> — Mission statement, code of ethics, and the four pillars established by Jim Sinegal and Jeffrey Brotman</li>
         <li><a href="https://corporate.homedepot.com/" style="color:var(--gold);text-decoration:underline;">The Home Depot Corporate</a> — Company mission, price guarantee policy, and founding vision of Bernie Marcus and Arthur Blank</li>
         <li><a href="https://www.imf.org/en/Publications/WEO" style="color:var(--gold);text-decoration:underline;">International Monetary Fund, World Economic Outlook Database</a> — National GDP figures used for revenue comparison</li>
+        <li><a href="https://finance.yahoo.com/" style="color:var(--gold);text-decoration:underline;">Yahoo Finance</a> — Company revenue and financial data</li>
+        <li><a href="https://www.antoinebuteau.com/lessons-from-sol-price/" style="color:var(--gold);text-decoration:underline;">Antoine Buteau, "Lessons From Sol Price"</a> — Origins of the warehouse club model that shaped Costco's philosophy</li>
+        <li><a href="https://businessmodelhub.in/costco-business-model/" style="color:var(--gold);text-decoration:underline;">Business Model Hub, "Costco Business Model"</a> — Breakdown of Costco's membership and margin strategy</li>
+        <li><a href="https://massivemoats.substack.com/p/a-deep-dive-analysis-into-costco" style="color:var(--gold);text-decoration:underline;">Massive Moats, "A Deep Dive Analysis Into Costco"</a> — Analysis of Costco's competitive moat and pricing discipline</li>
+        <li><a href="https://qoblex.com/blog/markup-formula-complete-guide-to-calculate-markup-percentage-for-your-business/" style="color:var(--gold);text-decoration:underline;">Qoblex, "Markup Formula: Complete Guide"</a> — Retail markup benchmarks used for comparison</li>
+        <li><a href="https://www.8thandwalton.com/blog/walmart-rollback" style="color:var(--gold);text-decoration:underline;">8th & Walton, "Walmart Rollback"</a> — Explanation of Walmart's Rollback pricing mechanic</li>
+        <li><a href="https://www.businessinsider.com/walmart-low-price-strategy-tips-2019-4" style="color:var(--gold);text-decoration:underline;">Business Insider</a> — Reporting on Walmart's Every Day Low Price strategy</li>
+        <li><a href="https://www.theglobeandmail.com/investing/markets/stocks/HD/pressreleases/32977682/forget-the-fed-home-depot-is-the-real-gauge-of-the-us-consumer/" style="color:var(--gold);text-decoration:underline;">The Globe and Mail</a> — On Home Depot as a bellwether for U.S. consumer spending</li>
+        <li><a href="https://www.homedepot.ca/en/home/customer-support/home-depot-price-guarantee.html" style="color:var(--gold);text-decoration:underline;">Home Depot</a> — Official price guarantee policy</li>
+        <li><a href="https://www.statista.com/topics/1451/walmart/" style="color:var(--gold);text-decoration:underline;">Statista</a> — Walmart weekly visitor and traffic statistics</li>
+        <li><a href="https://finance.yahoo.com/news/nine-ten-costco-members-renew-134101228.html" style="color:var(--gold);text-decoration:underline;">Yahoo Finance</a> — Costco membership renewal rate data</li>
+        <li><a href="https://www.forbes.com/sites/robinlewis/2016/02/16/costcoholics-costcos-113-7-billion-addicts/" style="color:var(--gold);text-decoration:underline;">Forbes, "Costcoholics"</a> — On Costco member loyalty and shopping frequency</li>
       </ul>
     </div>
 

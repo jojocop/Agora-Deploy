@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D5VCN8CXFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-D5VCN8CXFQ', { send_page_view: false });
+  </script>
+
   <title>Agora — A Modern Public Forum</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231A1713'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-size='20' font-weight='700' font-family='Georgia,serif' fill='%238B6914'%3EA%3C/text%3E%3C/svg%3E">
   <meta name="description" content="Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum." />
@@ -1239,6 +1250,12 @@
 
   var VALID_PAGES = ['home','authors','about','connect','newsletter','article','author'];
 
+  function trackPageView(path, title) {
+    if (typeof gtag === 'function') {
+      gtag('event', 'page_view', { page_path: path, page_title: title, page_location: location.origin + path });
+    }
+  }
+
   function pageToPath(name) { return name === 'home' ? '/' : '/' + name; }
   function pathToPage(path) {
     var p = path.replace(/^\//, '') || 'home';
@@ -1262,6 +1279,7 @@
     if (!skipHistory && location.pathname !== pageToPath(name)) {
       history.pushState({ page: name }, '', pageToPath(name));
     }
+    trackPageView(pageToPath(name), document.title);
   }
 
   function showAuthor(id, skipHistory) {
@@ -1297,6 +1315,7 @@
     setNavActive('author');
     window.scrollTo(0, 0);
     if (!skipHistory) history.pushState({ page: 'author', id: id }, '', '/author/' + id);
+    trackPageView('/author/' + id, document.title);
   }
 
   window.addEventListener('popstate', function() {
@@ -1375,6 +1394,7 @@
     var bar = document.getElementById('reading-progress');
     if (bar) { bar.style.width = '0%'; bar.style.opacity = '1'; }
     if (!skipHistory) history.pushState({ page: 'article', id: article.id }, '', '/article/' + (article.slug || article.id));
+    trackPageView('/article/' + (article.slug || article.id), document.title);
   }
 
   window.addEventListener('scroll', function() {

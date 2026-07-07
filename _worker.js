@@ -28,6 +28,11 @@ const OG = {
     title: "Federal Intent to Purchase 2,200 BC Condos Launches Larger Housing Affordability Questions — Agora",
     desc:  "As the government intervenes in the housing market with a $1.45 billion purchase plan, deeper questions about price expectations, developer incentives, and demographic shifts come into focus.",
     img:   null
+  },
+  'walmart-costco-home-depot-customer-first': {
+    title: "Why Shoppers Choose Walmart, Costco, and Home Depot: The $1.12 Trillion Gold Standard in Retail — Agora",
+    desc:  "Three of America's top five retailers by revenue share one philosophy: the customer outranks the shareholder. Here's how that bet paid off.",
+    img:   null
   }
 };
 
@@ -59,7 +64,6 @@ export default {
     let img   = url.origin + '/agora.jpg';
 
     const match = path.match(/^\/article\/([\w-]+)/);
-
     if (match && OG[match[1]]) {
       title = OG[match[1]].title;
       desc  = OG[match[1]].desc;

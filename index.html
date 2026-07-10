@@ -1122,12 +1122,13 @@
 
   var ARTICLES = [
     { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
-    { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, secondFeatured: true, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
+    { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
     { id: 'a5', slug: 'maid-eligibility-canada', topic: 'philosophy', topicLabel: 'Philosophy · Analysis', title: 'Expanding MAID Eligibility: The Challenge of Balancing Public Autonomy and Safety', deck: 'Canada has until 2027 to decide whether severe mental illness qualifies for assisted dying. What the debate reveals about democracy, rights, and where we draw the line.', author: 'jack', date: 'July 1, 2026', featured: false, heroImg: '/MAID.jpg', heroCredit: 'Photo: iStock', imgPos: 'center 40%' },
     { id: 'a7', slug: 'walmart-costco-home-depot-customer-first', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why Shoppers Choose Walmart, Costco, and Home Depot: The $1.12 Trillion Gold Standard in Retail', deck: "Three of America's top five retailers by revenue share one philosophy: the customer outranks the shareholder. Here's how that bet paid off.", author: 'joven', date: 'July 7, 2026', featured: false, heroImg: '/walmart.jpg', heroCredit: 'Photo: Walmart', imgPos: 'center 40%' },
     { id: 'a2', slug: 'findlay-bc-conservatives', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: '/findlay.jpg', heroCredit: 'Photo: Flickr' },
     { id: 'a3', slug: 'paramount-wbd-merger', topic: 'business', topicLabel: 'Business · Analysis', title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done", deck: "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.", author: 'udhay', date: 'June 15, 2026', featured: false, heroImg: '/paramount.jpeg', heroCredit: 'Photo: Wikimedia Commons / CC BY-SA 3.0', imgPos: 'center 42%' },
     { id: 'a6', slug: 'bc-condo-affordability', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Federal Intent to Purchase 2,200 BC Condos Launches Larger Housing Affordability Questions', deck: 'As the government intervenes in the housing market with a $1.45 billion purchase plan, deeper questions about price expectations, developer incentives, and demographic shifts come into focus.', author: 'kasra', date: 'July 4, 2026', featured: false, tertiaryFeatured: true, heroImg: '/condo.jpg', heroCredit: 'Photo: iStock', imgPos: 'center 45%' },
+    { id: 'a8', slug: 'spacex-ipo-elon-musk-wall-street', topic: 'business', topicLabel: 'Business · Analysis', title: "Inside the SpaceX IPO: How Elon Musk's $2 Trillion Bet Is Dividing Wall Street", deck: "The largest IPO in history swung from record highs to a stunning crash in weeks. Now Wall Street's top banks can't agree on where SPCX goes next.", author: 'udhay', date: 'July 10, 2026', featured: false, secondFeatured: true, heroImg: '/spacex.jpg', heroCredit: 'Photo: SpaceX', imgPos: 'center 40%' },
   ];
 
   // ── THEME ─────────────────────────────────────────────────────────────────
@@ -2500,87 +2501,213 @@
 
     <p>In effect, this spike in immigration was a price shock due to renter demand, which developers at the time were not prepared for, but expected to continue into the future. As a result, development applications clogged the review process, which frustrated would-be developers and contributed to the rising cost of living overall.</p>
 
-    <div class="art-chart-wrap">
-      <div class="chart-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
-          <div><div style="font-family:var(--serif);font-size:16px;color:var(--text);font-weight:500;">Vancouver Condo Prices (2006–2026)</div><div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:4px;">Average price (bars) vs. year-over-year % change (line)</div></div>
-          <span class="chart-card-toggle">+</span>
+    <div style="margin:36px 0;padding:28px 28px 20px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">Vancouver Condo Prices, 2006–2026</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:18px;">Average condo price and year-over-year change · Hover for detail</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;">
+        <div style="border-left:2px solid var(--gold);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Peak · 2022</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--gold);">$850k</div>
         </div>
-        <div class="chart-card-sub" style="height:300px;position:relative;margin-top:12px;"><canvas id="chart-prices"></canvas></div>
+        <div style="border-left:2px solid var(--border2);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Today · 2026</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text);">~$630k</div>
+        </div>
+        <div style="border-left:2px solid #b5544f;padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">From Peak</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:#b5544f;">−26%</div>
+        </div>
+        <div style="border-left:2px solid var(--border2);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Declining</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text);">4 yrs</div>
+        </div>
       </div>
-      <script>
-        (function() {
-          setTimeout(function() {
-            if (typeof Chart === 'undefined') return;
-            var years = [2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-            var prices = [350,420,450,380,400,420,450,500,530,560,600,680,700,650,700,800,850,750,680,640,630];
-            var yoy = [null,20,7.1,-15.6,5.3,5,7.1,11.1,6,5.7,7.1,13.3,2.9,-7.1,7.7,14.3,6.3,-11.8,-9.3,-5.9,-1.6];
-            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            var textColor = isDark ? '#999' : '#666';
-            var barColor = isDark ? '#C9A84C' : '#DAA520';
-            var ctx = document.getElementById('chart-prices').getContext('2d');
-            window.chartPrices = new Chart(ctx, {
+      <div style="display:flex;gap:6px;margin-bottom:14px;">
+        <button id="condo-btn-price" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 16px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">Price</button>
+        <button id="condo-btn-yoy" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 16px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">YoY Change</button>
+      </div>
+      <div style="height:300px;position:relative;"><canvas id="chart-prices"></canvas></div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:14px;letter-spacing:.02em;">Note: Average annual condo prices, Metro Vancouver, approximate. Gold marks the 2022 peak; red marks the ongoing decline. Source: REBGV, CMHC, Statistics Canada.</div>
+    </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          if (typeof Chart === 'undefined') return;
+          var years = [2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
+          var prices = [350,420,450,380,400,420,450,500,530,560,600,680,700,650,700,800,850,750,680,640,630];
+          var yoy = [null,20,7.1,-15.6,5.3,5,7.1,11.1,6,5.7,7.1,13.3,2.9,-7.1,7.7,14.3,6.3,-11.8,-9.3,-5.9,-1.6];
+          var peakIdx = 16;
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#aaa' : '#444';
+          var mutedBar = isDark ? '#5b5b52' : '#d8d2c2';
+          var goldBar = isDark ? '#E8C96A' : '#B8860B';
+          var redBar = isDark ? '#e05555' : '#b5544f';
+          var upBar = isDark ? '#3ec97a' : '#2e8b57';
+          var canvas = document.getElementById('chart-prices');
+          if (!canvas) return;
+          var ctx = canvas.getContext('2d');
+          var tooltipBase = { backgroundColor: isDark ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,.95)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1, displayColors: false };
+
+          function makePrice() {
+            var colors = years.map(function(y, i) { return i === peakIdx ? goldBar : i > peakIdx ? redBar : mutedBar; });
+            var tt = Object.assign({}, tooltipBase, { callbacks: { label: function(c) {
+              var i = c.dataIndex;
+              var line = '$' + prices[i] + 'k average';
+              if (yoy[i] !== null) line += '  ·  ' + (yoy[i] > 0 ? '+' : '') + yoy[i] + '% YoY';
+              return line;
+            } } });
+            return new Chart(ctx, {
               type: 'bar',
-              data: {
-                labels: years,
-                datasets: [
-                  { label: 'Average Price ($k)', data: prices, backgroundColor: barColor, borderColor: barColor, borderRadius: 2, yAxisID: 'y', order: 2 },
-                  { label: 'YoY Change (%)', type: 'line', data: yoy, borderColor: isDark ? '#E8C96A' : '#B8860B', backgroundColor: 'transparent', pointBackgroundColor: isDark ? '#E8C96A' : '#B8860B', pointRadius: 3, pointHoverRadius: 5, borderWidth: 2.5, tension: 0.3, yAxisID: 'y2', order: 1 }
-                ]
-              },
+              data: { labels: years, datasets: [{ data: prices, backgroundColor: colors, borderRadius: 1, barPercentage: 0.72 }] },
               options: {
-                responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
-                plugins: { legend: { display: false }, tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.8)' : 'rgba(255,255,255,.9)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1 } },
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false }, hover: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false }, tooltip: tt },
                 scales: {
-                  x: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 } } },
-                  y: { position: 'left', grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return '$' + v + 'k'; } }, title: { display: true, text: 'Price ($1000s)', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } } },
-                  y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return v + '%'; } }, title: { display: true, text: 'YoY Change (%)', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } }, min: -20, max: 25 }
+                  x: { grid: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 11 } },
+                  y: { grid: { color: isDark ? 'rgba(200,200,200,.08)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return '$' + v + 'k'; } } }
                 }
               }
             });
-          }, 80);
-        })();
-      </script>
-    </div>
+          }
+
+          function makeYoy() {
+            var colors = yoy.map(function(v) { return v === null ? 'transparent' : v >= 0 ? upBar : redBar; });
+            var tt = Object.assign({}, tooltipBase, { callbacks: { label: function(c) {
+              var i = c.dataIndex;
+              if (yoy[i] === null) return 'No prior year';
+              return (yoy[i] > 0 ? '+' : '') + yoy[i] + '% vs prior year  ·  $' + prices[i] + 'k average';
+            } } });
+            return new Chart(ctx, {
+              type: 'bar',
+              data: { labels: years, datasets: [{ data: yoy, backgroundColor: colors, borderRadius: 1, barPercentage: 0.72 }] },
+              options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false }, hover: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false }, tooltip: tt },
+                scales: {
+                  x: { grid: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 11 } },
+                  y: { suggestedMin: -20, suggestedMax: 25, grid: { color: function(c) { return c.tick.value === 0 ? (isDark ? 'rgba(200,200,200,.35)' : 'rgba(0,0,0,.3)') : (isDark ? 'rgba(200,200,200,.08)' : 'rgba(0,0,0,.05)'); } }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return v + '%'; } } }
+                }
+              }
+            });
+          }
+
+          var btnPrice = document.getElementById('condo-btn-price');
+          var btnYoy = document.getElementById('condo-btn-yoy');
+          function setBtns(mode) {
+            [btnPrice, btnYoy].forEach(function(b, i) {
+              var active = (mode === 'price' && i === 0) || (mode === 'yoy' && i === 1);
+              b.style.background = active ? 'var(--gold)' : 'transparent';
+              b.style.color = active ? 'var(--bg)' : 'var(--text2)';
+              b.style.borderColor = active ? 'var(--gold)' : 'var(--border2)';
+            });
+          }
+          function render(mode) {
+            if (window.chartPrices) { try { window.chartPrices.destroy(); } catch (e) {} }
+            window.chartPrices = mode === 'yoy' ? makeYoy() : makePrice();
+            setBtns(mode);
+          }
+          btnPrice.addEventListener('click', function() { render('price'); });
+          btnYoy.addEventListener('click', function() { render('yoy'); });
+          render('price');
+        }, 80);
+      })();
+    </script>
 
     <p>Rather than continuing or even plateauing, however, net non-permanent residence plummeted following its growing unpopularity and demonstrated liability to Liberal electoral prospects, with cuts to immigration forming one of the core pillars of the 2025 Conservative Federal election campaign. Since then, the Carney government has overseen an over 460,000 decrease in this figure in 2025 alone, and Q1 figures for 2026 suggest a similarly large drop.</p>
 
     <p>For Canada as a whole, this population whiplash, which has now resulted in a net decrease in the total Canadian population, has been especially pronounced in urban areas in BC and Ontario. In Ontario, the net flow in immigration in Q1 2026 is over 26% lower than it was in Q1 2025, and in BC it was over 30% lower.</p>
 
-    <div class="art-chart-wrap">
-      <div class="chart-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
-          <div><div style="font-family:var(--serif);font-size:16px;color:var(--text);font-weight:500;">BC Housing Starts (2006–2026)</div><div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:4px;">Annual new housing unit starts in British Columbia, showing the boom tied to immigration surge and recent collapse</div></div>
-          <span class="chart-card-toggle">+</span>
+    <div style="margin:36px 0;padding:28px 28px 20px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">BC Housing Starts, 2006–2026</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:18px;">Annual new housing unit starts — the boom tied to the immigration surge, and the collapse that followed</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;">
+        <div style="border-left:2px solid var(--gold);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Peak · 2022</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--gold);">68,000</div>
         </div>
-        <div class="chart-card-sub" style="height:300px;position:relative;margin-top:12px;"><canvas id="chart-starts"></canvas></div>
+        <div style="border-left:2px solid #b5544f;padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">2026 (Proj.)</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:#b5544f;">15,000</div>
+        </div>
+        <div style="border-left:2px solid #b5544f;padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">From Peak</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:#b5544f;">−78%</div>
+        </div>
+        <div style="border-left:2px solid var(--border2);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">20-Yr Average</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text);">~40,000</div>
+        </div>
       </div>
-      <script>
-        (function() {
-          setTimeout(function() {
-            if (typeof Chart === 'undefined') return;
-            var years = [2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-            var starts = [48000,45000,32000,18000,22000,25000,28000,35000,38000,42000,48000,52000,58000,55000,50000,62000,68000,45000,35000,28000,15000];
-            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            var textColor = isDark ? '#999' : '#666';
-            var barColor = isDark ? '#C9A84C' : '#DAA520';
-            var ctx = document.getElementById('chart-starts').getContext('2d');
-            window.chartStarts = new Chart(ctx, {
-              type: 'bar',
-              data: { labels: years, datasets: [{ label: 'Housing Starts', data: starts, backgroundColor: barColor, borderColor: barColor, borderRadius: 2 }] },
-              options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false }, tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.8)' : 'rgba(255,255,255,.9)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1 } },
-                scales: {
-                  x: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 } } },
-                  y: { grid: { color: isDark ? 'rgba(200,200,200,.1)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return (v/1000).toFixed(0) + 'k'; } }, title: { display: true, text: 'Units Started', color: textColor, font: { family: "'Jost', sans-serif", size: 11 } } }
-                }
-              }
-            });
-          }, 80);
-        })();
-      </script>
+      <div style="height:300px;position:relative;"><canvas id="chart-starts"></canvas></div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:14px;letter-spacing:.02em;">Note: Approximate annual unit starts, all housing types. Dashed line marks the 20-year average; gold marks the 2022 peak, red the post-peak collapse. Source: CMHC Starts and Completions Survey, Statistics Canada.</div>
     </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          if (typeof Chart === 'undefined') return;
+          var years = [2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
+          var starts = [48000,45000,32000,18000,22000,25000,28000,35000,38000,42000,48000,52000,58000,55000,50000,62000,68000,45000,35000,28000,15000];
+          var avg = 40400;
+          var peakIdx = 16;
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#aaa' : '#444';
+          var mutedBar = isDark ? '#5b5b52' : '#d8d2c2';
+          var goldBar = isDark ? '#E8C96A' : '#B8860B';
+          var redBar = isDark ? '#e05555' : '#b5544f';
+          var canvas = document.getElementById('chart-starts');
+          if (!canvas) return;
+          var ctx = canvas.getContext('2d');
+          var colors = years.map(function(y, i) { return i === peakIdx ? goldBar : i > peakIdx ? redBar : mutedBar; });
+          if (window.chartStarts) { try { window.chartStarts.destroy(); } catch (e) {} }
+          window.chartStarts = new Chart(ctx, {
+            type: 'bar',
+            data: { labels: years, datasets: [{ data: starts, backgroundColor: colors, borderRadius: 1, barPercentage: 0.72 }] },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false }, hover: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { display: false },
+                tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,.95)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1, displayColors: false, callbacks: { label: function(c) {
+                  var i = c.dataIndex;
+                  var line = starts[i].toLocaleString() + ' units';
+                  if (i > 0) {
+                    var chg = Math.round((starts[i] - starts[i - 1]) / starts[i - 1] * 100);
+                    line += '  ·  ' + (chg > 0 ? '+' : '') + chg + '% vs prior year';
+                  }
+                  return line;
+                } } }
+              },
+              scales: {
+                x: { grid: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 11 } },
+                y: { grid: { color: isDark ? 'rgba(200,200,200,.08)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return (v / 1000).toFixed(0) + 'k'; } } }
+              }
+            },
+            plugins: [{
+              id: 'avgLine',
+              afterDraw: function(chart) {
+                var yPos = chart.scales.y.getPixelForValue(avg);
+                var c = chart.ctx;
+                c.save();
+                c.beginPath();
+                c.strokeStyle = isDark ? 'rgba(200,200,200,.3)' : 'rgba(0,0,0,.2)';
+                c.lineWidth = 1;
+                c.setLineDash([4, 4]);
+                c.moveTo(chart.scales.x.left, yPos);
+                c.lineTo(chart.scales.x.right, yPos);
+                c.stroke();
+                c.font = "10px 'Jost', sans-serif";
+                c.fillStyle = textColor;
+                c.textAlign = 'left';
+                c.fillText('20-yr avg ~40k', chart.scales.x.left + 4, yPos - 6);
+                c.restore();
+              }
+            }]
+          });
+        }, 80);
+      })();
+    </script>
 
     <p>On the whole, this should be a factor that naturally deflates housing prices, but seller expectations seem to be keeping prices higher than what buyers and renters deem reasonable.</p>
 
@@ -2609,15 +2736,6 @@
         <li><a href="https://www.angusreidinstitute.org/" style="color:var(--gold);text-decoration:underline;">Angus Reid Institute</a> — Public polling on housing affordability perceptions and renters' expectations</li>
       </ul>
     </div>
-
-    <script>
-      setTimeout(function() {
-        var cards = document.querySelectorAll('#article-body .chart-card');
-        cards.forEach(function(card) {
-          card.addEventListener('click', function() { card.classList.toggle('expanded'); });
-        });
-      }, 100);
-    </script>
   </template>
 
   <template id="body-a7">
@@ -2827,6 +2945,425 @@
         });
       }, 100);
     </script>
+  </template>
+
+  <template id="body-a8">
+    <p>Unless you've been living under a rock, you've probably heard about the SpaceX IPO one way or another.</p>
+
+    <p>Now, for those who have been living under rocks and are confused about what happened recently, SpaceX completed the largest IPO in history on June 12. As of July 7th, it also joined the Nasdaq-100, and Wall Street's biggest names still can't agree on what it's worth.</p>
+
+    <div style="margin:36px 0;padding:28px 28px 20px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">SPCX — IPO to Nasdaq-100 Inclusion</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:18px;">Daily prices, June 12 – July 7, 2026 · Hover the chart for prices</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;">
+        <div style="border-left:2px solid var(--border2);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">IPO Price</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text);">$135.00</div>
+        </div>
+        <div style="border-left:2px solid var(--gold);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Peak · Jun 16</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--gold);">$225.64</div>
+        </div>
+        <div style="border-left:2px solid var(--border2);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Low · Jun 23</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text2);">$147.11</div>
+        </div>
+        <div style="border-left:2px solid var(--border2);padding-left:10px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;">Today · Jul 7</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:600;color:var(--text);">~$150</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:14px;">
+        <button id="spcx-btn-line" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 16px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">Line</button>
+        <button id="spcx-btn-candle" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 16px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">Candles</button>
+      </div>
+      <div style="height:300px;position:relative;"><canvas id="chart-spcx"></canvas></div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:14px;letter-spacing:.02em;">Note: Daily trading data, all 17 sessions since listing. 52-week range $135.00–$225.64. First public earnings due Aug 6, 2026; first lock-up expiry Aug 8, 2026. Source: Yahoo Finance, Investing.com, TradingView.</div>
+    </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          if (typeof Chart === 'undefined') return;
+          var labels = ['Jun 12','Jun 15','Jun 16','Jun 17','Jun 18','Jun 19','Jun 22','Jun 23','Jun 24','Jun 25','Jun 26','Jun 29','Jun 30','Jul 1','Jul 2','Jul 6','Jul 7'];
+          // [open, high, low, close] per session
+          var ohlc = [
+            [148.00, 165.20, 144.30, 160.95],
+            [162.10, 178.90, 161.00, 172.00],
+            [176.40, 227.90, 175.80, 225.64],
+            [222.00, 224.50, 205.10, 209.80],
+            [208.00, 212.40, 194.60, 198.00],
+            [196.50, 199.80, 183.20, 186.40],
+            [184.00, 186.00, 168.90, 172.30],
+            [168.00, 170.20, 145.90, 147.11],
+            [148.50, 155.30, 146.20, 151.70],
+            [152.00, 157.80, 149.40, 153.00],
+            [153.80, 159.90, 152.10, 158.00],
+            [159.20, 166.40, 157.50, 164.80],
+            [165.00, 173.50, 163.20, 171.00],
+            [170.20, 171.90, 164.70, 166.90],
+            [166.00, 168.30, 160.80, 163.00],
+            [162.40, 164.10, 158.20, 159.90],
+            [158.00, 159.60, 148.70, 150.33]
+          ];
+          var closes = ohlc.map(function(d) { return d[3]; });
+          var peakIdx = 2, lowIdx = 7;
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#aaa' : '#444';
+          var lineColor = isDark ? '#E8C96A' : '#B8860B';
+          var upColor = isDark ? '#3ec97a' : '#2e8b57';
+          var downColor = isDark ? '#e05555' : '#c0392b';
+          var canvas = document.getElementById('chart-spcx');
+          if (!canvas) return;
+          var ctx = canvas.getContext('2d');
+
+          var ipoLinePlugin = {
+            id: 'ipoLine',
+            afterDraw: function(chart) {
+              var yPos = chart.scales.y.getPixelForValue(135);
+              var c = chart.ctx;
+              c.save();
+              c.beginPath();
+              c.strokeStyle = isDark ? 'rgba(200,200,200,.3)' : 'rgba(0,0,0,.2)';
+              c.lineWidth = 1;
+              c.setLineDash([4, 4]);
+              c.moveTo(chart.scales.x.left, yPos);
+              c.lineTo(chart.scales.x.right, yPos);
+              c.stroke();
+              c.font = "10px 'Jost', sans-serif";
+              c.fillStyle = textColor;
+              c.textAlign = 'left';
+              c.fillText('IPO price $135', chart.scales.x.left + 4, yPos - 6);
+              c.restore();
+            }
+          };
+
+          var tooltipBase = { backgroundColor: isDark ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,.95)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1, displayColors: false };
+
+          function commonScales() {
+            return {
+              x: { grid: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 9 } },
+              y: { suggestedMin: 130, suggestedMax: 235, grid: { color: isDark ? 'rgba(200,200,200,.08)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return '$' + v; } } }
+            };
+          }
+
+          function makeLine() {
+            var grad = ctx.createLinearGradient(0, 0, 0, 300);
+            grad.addColorStop(0, isDark ? 'rgba(232,201,106,.18)' : 'rgba(184,134,11,.14)');
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            var lineTooltip = Object.assign({}, tooltipBase, { callbacks: { label: function(c) { return '$' + c.parsed.y.toFixed(2) + ' / share'; } } });
+            return new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: labels,
+                datasets: [{
+                  data: closes,
+                  borderColor: lineColor,
+                  borderWidth: 2,
+                  backgroundColor: grad,
+                  fill: true,
+                  tension: 0.25,
+                  pointRadius: labels.map(function(l, i) { return (i === peakIdx || i === lowIdx || i === labels.length - 1) ? 5 : 0; }),
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                  pointBackgroundColor: labels.map(function(l, i) { return i === peakIdx ? upColor : i === lowIdx ? downColor : lineColor; }),
+                  pointBorderColor: isDark ? '#0c0f18' : '#fff',
+                  pointBorderWidth: 1.5,
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                hover: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false }, tooltip: lineTooltip },
+                scales: commonScales()
+              },
+              plugins: [ipoLinePlugin]
+            });
+          }
+
+          function makeCandles() {
+            var bodyColors = ohlc.map(function(d) { return d[3] >= d[0] ? upColor : downColor; });
+            var candleTooltip = Object.assign({}, tooltipBase, {
+              filter: function(item) { return item.datasetIndex === 1; },
+              callbacks: {
+                label: function(c) {
+                  var d = ohlc[c.dataIndex];
+                  return ['Open   $' + d[0].toFixed(2), 'High   $' + d[1].toFixed(2), 'Low    $' + d[2].toFixed(2), 'Close  $' + d[3].toFixed(2)];
+                }
+              }
+            });
+            return new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [
+                  { // high-low wicks
+                    data: ohlc.map(function(d) { return [d[2], d[1]]; }),
+                    backgroundColor: bodyColors,
+                    grouped: false,
+                    barPercentage: 0.14,
+                    borderWidth: 0,
+                  },
+                  { // open-close bodies
+                    data: ohlc.map(function(d) { return [Math.min(d[0], d[3]), Math.max(d[0], d[3])]; }),
+                    backgroundColor: bodyColors,
+                    grouped: false,
+                    barPercentage: 0.62,
+                    borderWidth: 0,
+                    minBarLength: 2,
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                hover: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false }, tooltip: candleTooltip },
+                scales: commonScales()
+              },
+              plugins: [ipoLinePlugin]
+            });
+          }
+
+          var btnLine = document.getElementById('spcx-btn-line');
+          var btnCandle = document.getElementById('spcx-btn-candle');
+          function setBtns(mode) {
+            [btnLine, btnCandle].forEach(function(b, i) {
+              var active = (mode === 'line' && i === 0) || (mode === 'candle' && i === 1);
+              b.style.background = active ? 'var(--gold)' : 'transparent';
+              b.style.color = active ? 'var(--bg)' : 'var(--text2)';
+              b.style.borderColor = active ? 'var(--gold)' : 'var(--border2)';
+            });
+          }
+          function render(mode) {
+            if (window.chartSpcx) { try { window.chartSpcx.destroy(); } catch (e) {} }
+            window.chartSpcx = mode === 'candle' ? makeCandles() : makeLine();
+            setBtns(mode);
+          }
+          btnLine.addEventListener('click', function() { render('line'); });
+          btnCandle.addEventListener('click', function() { render('candle'); });
+          render('line');
+        }, 80);
+      })();
+    </script>
+
+    <p>On June 12, SpaceX went public for the first time, opening its doors to institutional and retail investors after 24 years as a private company. They ended up selling close to 555 million shares at $135 each, raising close to $85.7 billion, making it the largest initial public offering ever recorded. In fact, it was more than double Saudi Aramco's 2019 IPO, which had previously held the record.</p>
+
+    <p>Share prices were trading at $160.95 after the first day, and then, four days later, the stock closed at $225.64.</p>
+
+    <p>SpaceX and Elon Musk were on top of the world, as Elon was briefly the world's first trillionaire. Everything seemed to go perfectly…until it fell apart.</p>
+
+    <p>By June 23, SPCX had fallen to $147.11, wiping out hundreds of billions in market value, even briefly falling below the price it debuted. As of July 7, it sits around $150, down another 6% on the day that SpaceX officially joins the Nasdaq-100 and Wall Street's biggest banks publish their first independent research on the company.</p>
+
+    <p>That's where we are now. The largest IPO in history, after all its ups and downs, is trading below where it closed on the first day.</p>
+
+    <p>To understand why, you need to understand what SpaceX actually is and the nature of IPOs.</p>
+
+    <h2>What's SpaceX?</h2>
+
+    <p>Founded by Elon Musk in 2002, SpaceX is an American aerospace, telecommunications, and artificial intelligence company that spent the first decade on the edge of insolvency before its breakthrough with the Falcon 1 rocket, which reached orbit in 2008.</p>
+
+    <p>Today, the company operates three distinct business segments.</p>
+
+    <p>The Space part of the company covers Falcon 9 and Falcon Heavy launch operations.</p>
+
+    <p>The Connectivity segment is Starlink, the satellite internet service that serves over 10.3 million subscribers across over 164 countries. This segment of the company generated close to $11.4 billion in 2025 revenue and kept a 63% adjusted EBITDA margin (kept 63% of revenue as profit), by far the most profitable part of the company.</p>
+
+    <p>Then there is the AI segment, merged recently with the all-stock acquisition of Musk's xAI in February 2026. This brought SpaceX the Grok language model, the Colossus data center platform, and the X social platform, which all fall under SpaceX's umbrella.</p>
+
+    <p>SpaceX lost $4.94 billion in 2025 despite generating $18.67 billion in revenue, and that pattern has continued as it lost another $4.28 billion in the first quarter of 2026.</p>
+
+    <p>These losses are mainly due to heavy spending on AI infrastructure, with more than $10 billion invested in the first quarter of 2026 alone. Since it was founded, the company has accumulated $41.3 billion in losses.</p>
+
+    <p>In other words, it's growing quickly, about 34% a year, but still spending like a startup.</p>
+
+    <h2>Why Go Public Now?</h2>
+
+    <p>Well, Musk initially spent years refusing to go public, arguing that his long-term ambitious goals were not compatible with the pressure of quarterly earnings and the public eye on stock prices. However, the numbers eventually changed his mind as xAI was burning through cash too fast, and private investor funding couldn't keep up.</p>
+
+    <p>Paired with Starship development costs, which continued to rise, and employee share payouts growing to more than $2 billion a year, an IPO appeared to be a logical next step.</p>
+
+    <p>In fact, given SpaceX's exceptionally strong investor demand, it seemed almost inevitable. The offering was oversubscribed by a factor of four, attracting more than $250 billion in orders for a $75 billion share sale. As a result, SpaceX set its IPO price at $135 per share. The real question that's been on everyone's mind is whether the company's valuation is justified or not.</p>
+
+    <h2>The Debate</h2>
+
+    <p>For the first 3 weeks of SpaceX's public company life, the skeptics dominated the narrative. Morningstar gave SpaceX a value of $63 a share, and Goldman Sachs further concluded that for SpaceX to justify its valuation, it would need to grow revenues at more than 40% annually for four years by 2030. That's a pace almost no company has ever sustained.</p>
+
+    <p>There are also governance controls, as Elon Musk controls roughly 85% of the company's voting power, while only owning a minority of shares through a dual-class share structure. What this means is that investors who bought into the IPO have almost no say in how the company is run.</p>
+
+    <p>Now today, as of July 7th, the other side finally got to speak: the bull side.</p>
+
+    <p>For some context, when a company goes public, its underwriting banks are barred from publishing independent research on the stock for 25 days. This is a period designed to keep hype separate from analysis. The window just passed this Tuesday morning, and it was followed by research drops.</p>
+
+    <p>Morgan Stanley came out first with "AI's Final Frontier" and a $300 price target, one of the highest on Wall Street, which implies 87% upside from Monday's closing price.</p>
+
+    <p>Lead analyst Adam Jonas framed the company as the infrastructure backbone of the AI era and a company that can "scale the conversion of energy into intelligence".</p>
+
+    <p>Goldman Sachs and UBS followed with buy ratings and targets of around $205 and $210. Across 11 analysts, the consensus was around $188.57, with the majority buys and holds. However, the stock still fell 6%.</p>
+
+    <p>Now that might sound strange, especially after all the strong projections from Goldman Sachs and UBS, but it fits a bigger pattern all traders know.</p>
+
+    <p>Index fund inclusion and analysts' invitations already get priced before the stock reaches its current day value. This is because the market moves in anticipation, so when the news happens, the benefit may have all diminished due to an increase in stock price, or there's nothing left to buy.</p>
+
+    <p>Palantir peaked and followed a similar path after its Nasdaq-100 inclusion, then sold off 25% over the following weeks.</p>
+
+    <p>So long story short, the debate between the $63 bear and the $800 bull hasn't been answered; it's just gotten a lot more crowded.</p>
+
+    <h2>Now What?</h2>
+
+    <p>With both the bear and bull colliding, what does all of this mean for the company and for you?</p>
+
+    <p>The first date that comes to mind is August 6th. That's when SpaceX will report its first-ever public earnings, and the moment there are real ingredients for the entire debate: performance backed by real numbers.</p>
+
+    <p>Every projection and every concern gets measured against an actual income statement. Then, two days later, on August 8th, the first lock-up window opens. This allows pre-IPO investors to sell shares which are equivalent to around 7% of the total float. This could potentially mean there would be more shares available on the market than when the IPO happened.</p>
+
+    <p>Beyond August, every Starship test flight acts as a valuation event; nearly every growth initiative SpaceX has pitched depends on the rocket.</p>
+
+    <p>For ordinary investors, SPCX sits in uncomfortable territory: not a mature company with predictable cash flows, not a pure startup with nothing to show, but something in between.</p>
+
+    <p>This is something the public markets really haven't seen before. The $63-to-$800 analyst range isn't a sign that Wall Street is confused; it just means the company's future can go in a multitude of ways.</p>
+
+    <p>What happens next will be decided in earnings calls, on launchpads, and in data centers that don't exist yet. SpaceX has spent 24 years proving the doubters wrong, but now, they have roughly 30 days to start convincing the market it can do it again; except this time there's $2 trillion on the line.</p>
+
+    <style>
+      .spcx-tl-btn { font-family: var(--sans); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 16px; border: .5px solid var(--border2); background: transparent; color: var(--text2); cursor: pointer; border-radius: 2px; transition: background .15s, color .15s, border-color .15s; }
+      .spcx-tl-btn.active { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+      .spcx-tl-item { display: grid; grid-template-columns: 60px 26px 1fr; column-gap: 12px; padding: 12px 10px 12px 0; border-radius: 3px; transition: background .15s; }
+      .spcx-tl-item:hover { background: var(--bg2); }
+      .spcx-tl-item:hover .spcx-tl-title { color: var(--gold); }
+      .spcx-tl-date { text-align: right; font-family: var(--sans); font-size: 11px; color: var(--text3); letter-spacing: .04em; padding-top: 3px; }
+      .spcx-tl-date b { display: block; font-weight: 600; }
+      .spcx-tl-date span { font-size: 9px; opacity: .7; }
+      .spcx-tl-item.tl-gold .spcx-tl-date { color: var(--gold); }
+      .spcx-tl-item.tl-red .spcx-tl-date { color: #b5544f; }
+      .spcx-tl-rail { position: relative; display: flex; justify-content: center; }
+      .spcx-tl-rail::before { content: ''; position: absolute; top: -12px; bottom: -12px; width: 1.5px; left: 50%; transform: translateX(-50%); background: var(--border2); }
+      .spcx-tl-item[data-phase="ahead"] .spcx-tl-rail::before { background: repeating-linear-gradient(to bottom, var(--border2) 0 4px, transparent 4px 9px); }
+      .spcx-tl-item.is-first .spcx-tl-rail::before { top: 9px; }
+      .spcx-tl-item.is-last .spcx-tl-rail::before { bottom: auto; height: 21px; }
+      .spcx-tl-dot { position: relative; z-index: 1; width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; background: var(--text3); box-shadow: 0 0 0 3px var(--bg); transition: transform .15s; }
+      .spcx-tl-item:hover .spcx-tl-dot { transform: scale(1.35); }
+      .spcx-tl-item.tl-gold .spcx-tl-dot { background: var(--gold); }
+      .spcx-tl-item.tl-red .spcx-tl-dot { background: #b5544f; }
+      .spcx-tl-item[data-phase="ahead"] .spcx-tl-dot { background: var(--bg); border: 1.5px solid var(--text3); }
+      .spcx-tl-tag { font-family: var(--sans); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); }
+      .spcx-tl-item.tl-gold .spcx-tl-tag { color: var(--gold); font-weight: 600; }
+      .spcx-tl-item.tl-red .spcx-tl-tag { color: #b5544f; font-weight: 600; }
+      .spcx-tl-title { font-family: var(--serif); font-size: 14.5px; font-weight: 600; color: var(--text); margin: 2px 0 3px; transition: color .15s; }
+      .spcx-tl-desc { font-family: var(--bserif); font-size: 13px; color: var(--text2); line-height: 1.6; }
+    </style>
+    <div style="margin:36px 0;padding:28px 28px 24px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">SpaceX: Key Dates to Watch</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:16px;">From IPO to first earnings · Filter by status</div>
+      <div style="display:flex;gap:6px;margin-bottom:14px;">
+        <button class="spcx-tl-btn" data-filter="all">All (11)</button>
+        <button class="spcx-tl-btn" data-filter="done">Completed (7)</button>
+        <button class="spcx-tl-btn" data-filter="ahead">Ahead (4)</button>
+      </div>
+      <div id="spcx-timeline" style="display:flex;flex-direction:column;">
+        <div class="spcx-tl-item" data-phase="done">
+          <div class="spcx-tl-date"><b>Feb 2</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Completed</span><div class="spcx-tl-title">xAI Merger Closes</div><div class="spcx-tl-desc">SpaceX completes all-stock acquisition of Elon Musk's xAI, adding Grok, Colossus data centers, and the X platform. Combined valuation hits $1.25T.</div></div>
+        </div>
+        <div class="spcx-tl-item" data-phase="done">
+          <div class="spcx-tl-date"><b>May 20</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Completed</span><div class="spcx-tl-title">S-1 Filed with SEC</div><div class="spcx-tl-desc">SpaceX files its IPO prospectus, disclosing $18.7B in 2025 revenue, a $4.9B net loss, and $41.3B in cumulative losses since 2002.</div></div>
+        </div>
+        <div class="spcx-tl-item tl-gold" data-phase="done">
+          <div class="spcx-tl-date"><b>Jun 12</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">IPO Day</span><div class="spcx-tl-title">SpaceX Lists on Nasdaq</div><div class="spcx-tl-desc">Shares price at $135, raising $85.7B — the largest IPO in history. Closes at $160.95, up 19.2% on day one. Musk briefly becomes world's first trillionaire.</div></div>
+        </div>
+        <div class="spcx-tl-item tl-gold" data-phase="done">
+          <div class="spcx-tl-date"><b>Jun 16</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">All-Time High</span><div class="spcx-tl-title">SPCX Peaks at $225.64</div><div class="spcx-tl-desc">Stock hits all-time high, +67% from IPO price. Market cap briefly exceeds $2.97T, making SPCX the 5th largest public company in the US.</div></div>
+        </div>
+        <div class="spcx-tl-item" data-phase="done">
+          <div class="spcx-tl-date"><b>Jun 22</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Completed</span><div class="spcx-tl-title">$25B Bond Offering</div><div class="spcx-tl-desc">SpaceX raises $25B in senior unsecured bonds, upsized from $20B after receiving ~$89B in orders. Proceeds repay bridge loan in full.</div></div>
+        </div>
+        <div class="spcx-tl-item tl-red" data-phase="done">
+          <div class="spcx-tl-date"><b>Jun 23</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Crash</span><div class="spcx-tl-title">Stock Hits Low of $147.11</div><div class="spcx-tl-desc">SPCX falls below its IPO-day open. Over $600B in market cap erased in three sessions. Stock settles below first-day close.</div></div>
+        </div>
+        <div class="spcx-tl-item tl-gold" data-phase="done">
+          <div class="spcx-tl-date"><b>Jul 7</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Today</span><div class="spcx-tl-title">Nasdaq-100 Inclusion + Analyst Initiations</div><div class="spcx-tl-desc">SPCX officially joins the Nasdaq-100, triggering ~$4.3B in forced passive buying. IPO quiet period expires — Morgan Stanley ($300), Goldman ($205), and others initiate coverage. Stock falls 6% anyway.</div></div>
+        </div>
+        <div class="spcx-tl-item" data-phase="ahead">
+          <div class="spcx-tl-date"><b>Aug 6</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Upcoming</span><div class="spcx-tl-title">First Public Earnings Report</div><div class="spcx-tl-desc">SpaceX reports Q1 and Q2 2026 results for the first time as a public company — the first real test of AI segment revenue, Starlink growth, and Starship cadence against analyst projections.</div></div>
+        </div>
+        <div class="spcx-tl-item" data-phase="ahead">
+          <div class="spcx-tl-date"><b>Aug 8</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Watch</span><div class="spcx-tl-title">First Lock-Up Expiry</div><div class="spcx-tl-desc">Pre-IPO investors can begin selling ~7% of total outstanding shares — a supply unlock larger than the IPO float itself.</div></div>
+        </div>
+        <div class="spcx-tl-item" data-phase="ahead">
+          <div class="spcx-tl-date"><b>Dec</b><span>2026</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">Watch</span><div class="spcx-tl-title">Full Lock-Up Expiry</div><div class="spcx-tl-desc">Musk's 50%+ insider stake becomes eligible to sell — the largest supply event in SPCX's short public life.</div></div>
+        </div>
+        <div class="spcx-tl-item tl-gold" data-phase="ahead">
+          <div class="spcx-tl-date"><b>TBD</b><span>20—?</span></div>
+          <div class="spcx-tl-rail"><div class="spcx-tl-dot"></div></div>
+          <div><span class="spcx-tl-tag">The Long Bet</span><div class="spcx-tl-title">Mars?</div><div class="spcx-tl-desc">The reason the company exists at all. Every launch, satellite, and data center is, by Musk's own telling, in service of making humanity multiplanetary. No date, no guarantee — just the biggest line item on the thesis.</div></div>
+        </div>
+      </div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:10px;letter-spacing:.02em;">Source: SpaceX S-1 (SEC EDGAR), Bloomberg, Reuters, Investing.com, TradingView, Morgan Stanley initiation note (Jul 7, 2026).</div>
+    </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          var wrap = document.getElementById('spcx-timeline');
+          if (!wrap) return;
+          var items = Array.prototype.slice.call(wrap.querySelectorAll('.spcx-tl-item'));
+          var btns = Array.prototype.slice.call(document.querySelectorAll('.spcx-tl-btn'));
+          function apply(filter) {
+            btns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-filter') === filter); });
+            var visible = [];
+            items.forEach(function(it) {
+              var show = filter === 'all' || it.getAttribute('data-phase') === filter;
+              it.style.display = show ? '' : 'none';
+              it.classList.remove('is-first', 'is-last');
+              if (show) visible.push(it);
+            });
+            if (visible.length) {
+              visible[0].classList.add('is-first');
+              visible[visible.length - 1].classList.add('is-last');
+            }
+          }
+          btns.forEach(function(b) {
+            b.addEventListener('click', function() { apply(b.getAttribute('data-filter')); });
+          });
+          apply('all');
+        }, 80);
+      })();
+    </script>
+
+    <div style="margin-top:40px;padding-top:24px;border-top:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;">Sources</div>
+      <ul style="margin:0;padding:0;list-style:none;font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.8;">
+        <li><a href="https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-morgan-stanley-split-143310108.html" style="color:var(--gold);text-decoration:underline;">Yahoo Finance</a> — Goldman Sachs and Morgan Stanley's split outlook on SpaceX valuation</li>
+        <li><a href="https://finance.yahoo.com/markets/stocks/article/spacex-snags-street-high-300-price-target-from-morgan-stanley-as-rocket-company-enters-nasdaq-100-160316317.html" style="color:var(--gold);text-decoration:underline;">Yahoo Finance</a> — Morgan Stanley's $300 price target on SPCX ahead of Nasdaq-100 entry</li>
+        <li><a href="https://www.benzinga.com/analyst-stock-ratings/initiation/26/07/60298333/morgan-stanley-analyst-initiates-spacex-coverage-sees-nearly-90-upside-for-elon-musks-spcx" style="color:var(--gold);text-decoration:underline;">Benzinga</a> — Morgan Stanley initiates SpaceX coverage with nearly 90% implied upside</li>
+        <li><a href="https://www.morningstar.com/stocks/why-we-think-spacex-ipo-is-overvalued" style="color:var(--gold);text-decoration:underline;">Morningstar</a> — Why Morningstar believes the SpaceX IPO is overvalued</li>
+        <li><a href="https://www.morningstar.com/stocks/spacex-pops-over-20-after-ipo-key-hurdles-lie-ahead" style="color:var(--gold);text-decoration:underline;">Morningstar</a> — SpaceX pops over 20% after IPO, key hurdles ahead</li>
+        <li><a href="https://www.thestreet.com/investing/stocks/morningstar-drops-bombshell-message-spacex-overvalued-ipo" style="color:var(--gold);text-decoration:underline;">TheStreet</a> — Morningstar's bombshell overvaluation call on the SpaceX IPO</li>
+        <li><a href="https://fortune.com/2026/06/03/spacex-ipo-stocks-elon-musk-morningstar-overvalued-half-smart-investors-wait-buy/" style="color:var(--gold);text-decoration:underline;">Fortune</a> — On investors weighing whether to wait before buying SPCX</li>
+        <li><a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262011296-spacex-spcx-stock-forecast-july-2026-nasdaq-100-inclusion-tradingkey" style="color:var(--gold);text-decoration:underline;">TradingKey</a> — SPCX stock forecast and Nasdaq-100 inclusion analysis</li>
+        <li><a href="https://www.investing.com/equities/spacex" style="color:var(--gold);text-decoration:underline;">Investing.com</a> — SPCX equity data and pricing history</li>
+      </ul>
+    </div>
   </template>
 
 </body>

@@ -134,6 +134,10 @@
       color: var(--text2); transition: color .2s;
     }
     .nav-link:hover, .nav-link.active { color: var(--text); }
+    /* Crawlable internal links: anchors styled like their old button/div counterparts */
+    a.nav-link, a.nav-logo, a.mast-author, a.article-card, a.feat2-title, a.feat3-title, a.author-link, a.related-link, a.ap-article-item, a.essay-link, a.author-name, .feat-title a { text-decoration: none; }
+    .feat-title a { color: inherit; }
+    a.article-card, a.mast-author, a.related-link, a.ap-article-item, a.essay-link, a.author-name, a.feat2-title, a.feat3-title { color: inherit; display: block; }
     .theme-btn {
       background: none; border: .5px solid var(--border2); border-radius: 99px;
       padding: 5px 14px; font-size: 11px; letter-spacing: .08em; color: var(--text2);
@@ -600,7 +604,7 @@
   <header class="site-nav">
     <div class="nav-inner">
       <div class="nav-left">
-        <button class="nav-logo" onclick="showPage('home')" aria-label="Agora home">
+        <a class="nav-logo" href="/" onclick="return goPage(event,'home')" aria-label="Agora home">
           <svg viewBox="0 0 220 86" xmlns="http://www.w3.org/2000/svg">
             <rect x="84" y="14" width="52" height="5" rx="1" class="logo-text"/>
             <rect x="87" y="19" width="46" height="3" class="logo-text"/>
@@ -634,14 +638,14 @@
             <text x="110" y="78" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="3" font-family="'Times New Roman', Times, serif" class="logo-text">AGORA</text>
             <text x="110" y="86" text-anchor="middle" font-size="5.5" font-style="italic" letter-spacing="1.5" font-family="'Times New Roman', Times, serif" class="logo-gold">μελέτη τὸ πᾶν</text>
           </svg>
-        </button>
+        </a>
       </div>
       <nav class="nav-links">
-        <button class="nav-link active" id="nav-home"    onclick="showPage('home')">Feed</button>
-        <button class="nav-link"        id="nav-authors" onclick="showPage('authors')">Authors</button>
-        <button class="nav-link"        id="nav-about"   onclick="showPage('about')">About</button>
-        <button class="nav-link"        id="nav-connect" onclick="showPage('connect')">Connect</button>
-        <button class="nav-link"        id="nav-newsletter" onclick="showPage('newsletter')">Newsletter</button>
+        <a class="nav-link active" id="nav-home"    href="/" onclick="return goPage(event,'home')">Feed</a>
+        <a class="nav-link"        id="nav-authors" href="/authors" onclick="return goPage(event,'authors')">Authors</a>
+        <a class="nav-link"        id="nav-about"   href="/about" onclick="return goPage(event,'about')">About</a>
+        <a class="nav-link"        id="nav-connect" href="/connect" onclick="return goPage(event,'connect')">Connect</a>
+        <a class="nav-link"        id="nav-newsletter" href="/newsletter" onclick="return goPage(event,'newsletter')">Newsletter</a>
         <button class="theme-btn" id="themeBtn" onclick="toggleTheme()"><span id="themeIconWrap"><span id="themeIcon">☽</span></span> <span id="themeLabel">Dark</span></button>
       </nav>
     </div>
@@ -663,13 +667,13 @@
         </div>
         <div class="mast-contrib">
           <div class="mast-contrib-label">Contributors</div>
-          <div class="mast-author" onclick="showAuthor('joven')" style="cursor:pointer;"><div class="mast-author-name">Joven Heer</div><div class="mast-author-beat">Politics · Business</div></div>
+          <a class="mast-author" href="/author/joven-heer" onclick="return goAuthor(event,'joven')" style="cursor:pointer;"><div class="mast-author-name">Joven Heer</div><div class="mast-author-beat">Politics · Business</div></a>
           <div class="mast-divider"></div>
-          <div class="mast-author" onclick="showAuthor('udhay')" style="cursor:pointer;"><div class="mast-author-name">Udhay Kapila</div><div class="mast-author-beat">Finance · Business</div></div>
+          <a class="mast-author" href="/author/udhay-kapila" onclick="return goAuthor(event,'udhay')" style="cursor:pointer;"><div class="mast-author-name">Udhay Kapila</div><div class="mast-author-beat">Finance · Business</div></a>
           <div class="mast-divider"></div>
-          <div class="mast-author" onclick="showAuthor('kasra')" style="cursor:pointer;"><div class="mast-author-name">Kasra Kazemialiakbar</div><div class="mast-author-beat">Economics · Intl. Relations</div></div>
+          <a class="mast-author" href="/author/kasra-kazemialiakbar" onclick="return goAuthor(event,'kasra')" style="cursor:pointer;"><div class="mast-author-name">Kasra Kazemialiakbar</div><div class="mast-author-beat">Economics · Intl. Relations</div></a>
           <div class="mast-divider"></div>
-          <div class="mast-author" onclick="showAuthor('sidhant')" style="cursor:pointer;"><div class="mast-author-name">Sidhant Matthews</div><div class="mast-author-beat">Finance · Accounting</div></div>
+          <a class="mast-author" href="/author/sidhant-matthews" onclick="return goAuthor(event,'sidhant')" style="cursor:pointer;"><div class="mast-author-name">Sidhant Matthews</div><div class="mast-author-beat">Finance · Accounting</div></a>
         </div>
       </div>
     </section>
@@ -690,7 +694,7 @@
         <div class="feat-text">
           <div class="feat-label">✦ Featured essay</div>
           <div class="feat-topic-lbl" id="feat-topic-lbl"></div>
-          <h2 class="feat-title" id="feat-title"></h2>
+          <h2 class="feat-title"><a id="feat-title" href="/"></a></h2>
           <p class="feat-deck" id="feat-deck"></p>
           <div class="feat-meta">
             <span id="feat-author"></span>
@@ -714,7 +718,7 @@
         <div class="feat2-text">
           <div class="feat2-label">✦ Also featured</div>
           <div class="feat2-topic-lbl" id="feat2-topic-lbl"></div>
-          <button class="feat2-title" id="feat2-title"></button>
+          <a class="feat2-title" id="feat2-title" href="/"></a>
           <p class="feat2-deck" id="feat2-deck"></p>
           <div class="feat2-meta">
             <span id="feat2-author"></span>
@@ -735,7 +739,7 @@
         <div class="feat3-text">
           <div class="feat3-label">✦ Also featured</div>
           <div class="feat3-topic-lbl" id="feat3-topic-lbl"></div>
-          <button class="feat3-title" id="feat3-title"></button>
+          <a class="feat3-title" id="feat3-title" href="/"></a>
           <p class="feat3-deck" id="feat3-deck"></p>
           <div class="feat2-meta">
             <span id="feat3-author"></span>
@@ -1283,6 +1287,27 @@
     trackPageView(pageToPath(name), document.title);
   }
 
+  function artHref(a) { return '/article/' + (a.slug || a.id); }
+  function authHref(id) { return '/author/' + ((AUTHORS[id] && AUTHORS[id].slug) || id); }
+  function goArticle(e, id) {
+    e.preventDefault();
+    e.stopPropagation();
+    var a = ARTICLES.find(function(x) { return x.id === id; });
+    if (a) openArticle(a);
+    return false;
+  }
+  function goAuthor(e, id) {
+    e.preventDefault();
+    e.stopPropagation();
+    showAuthor(id);
+    return false;
+  }
+  function goPage(e, name) {
+    e.preventDefault();
+    showPage(name);
+    return false;
+  }
+
   function showAuthor(id, skipHistory) {
     var au = AUTHORS[id];
     if (!au) return;
@@ -1305,10 +1330,10 @@
     var essays = ARTICLES.filter(function(a) { return a.author === id && a.title !== 'Coming Soon'; });
     document.getElementById('ap-articles').innerHTML = essays.length
       ? essays.map(function(a) {
-          return '<button class="ap-article-item" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+          return '<a class="ap-article-item" href="' + artHref(a) + '" onclick="return goArticle(event,\'' + a.id + '\')">'+
             '<div class="ap-article-topic">' + a.topicLabel + ' · ' + a.date + '</div>'+
             '<div class="ap-article-title">' + a.title + '</div>'+
-            '</button>';
+            '</a>';
         }).join('')
       : '<p style="font-size:13px;color:var(--text3);padding:12px 0;">No essays published yet.</p>';
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
@@ -1352,7 +1377,7 @@
     document.getElementById('art-title').textContent = article.title;
     document.getElementById('art-deck').textContent = article.deck;
     document.getElementById('art-author').innerHTML = author
-      ? '<button class="author-link" onclick="showAuthor(\'' + author.id + '\')">' + author.name + '</button>' : '';
+      ? '<a class="author-link" href="' + authHref(author.id) + '" onclick="return goAuthor(event,\'' + author.id + '\')">' + author.name + '</a>' : '';
     document.getElementById('art-date').textContent = article.date;
     var heroWrap = document.getElementById('art-hero-img-wrap');
     if (article.heroImg) {
@@ -1381,7 +1406,7 @@
     });
     article.readTime = Math.max(1, Math.round(wordCount / 200)) + ' min';
     document.getElementById('art-sidebar-author').innerHTML = author
-      ? '<button class="author-link" onclick="showAuthor(\'' + author.id + '\')" style="font-family:var(--serif);font-size:15px;color:var(--text);">' + author.name + '</button>' : '';
+      ? '<a class="author-link" href="' + authHref(author.id) + '" onclick="return goAuthor(event,\'' + author.id + '\')" style="font-family:var(--serif);font-size:15px;color:var(--text);">' + author.name + '</a>' : '';
     document.getElementById('art-sidebar-beat').textContent = author ? author.beat : '';
     document.getElementById('art-tags').innerHTML = '<span class="tag">' + article.topic + '</span>';
     var related = ARTICLES.filter(function(a) { return a.id !== article.id && a.topic === article.topic; }).slice(0, 3);
@@ -1390,10 +1415,10 @@
     if (related.length) {
       relBlock.style.display = '';
       relLinks.innerHTML = related.map(function(r) {
-        return '<button class="related-link" onclick="openArticle(ARTICLES.find(function(a){return a.id===\'' + r.id + '\'}))">' +
+        return '<a class="related-link" href="' + artHref(r) + '" onclick="return goArticle(event,\'' + r.id + '\')">' +
           '<div class="rl-topic">' + r.topicLabel + '</div>' +
           '<div class="rl-title">' + r.title + '</div>' +
-          '</button>';
+          '</a>';
       }).join('');
     } else {
       relBlock.style.display = 'none';
@@ -1444,11 +1469,12 @@
       document.getElementById('feat-topic-lbl').textContent = featured.topicLabel;
       var featTitle = document.getElementById('feat-title');
       featTitle.textContent = featured.title;
+      featTitle.href = artHref(featured);
       featTitle.style.cursor = 'pointer';
-      featTitle.onclick = function() { openArticle(featured); };
+      featTitle.onclick = function(e) { e.preventDefault(); openArticle(featured); };
       document.getElementById('feat-deck').textContent = featured.deck;
       document.getElementById('feat-author').innerHTML = fa
-        ? '<button class="author-link" onclick="showAuthor(\'' + featured.author + '\')">' + fa.name + '</button>' : '';
+        ? '<a class="author-link" href="' + authHref(featured.author) + '" onclick="return goAuthor(event,\'' + featured.author + '\')">' + fa.name + '</a>' : '';
       document.getElementById('feat-date').textContent = featured.date;
       document.getElementById('feat-read-btn').onclick = function() { openArticle(featured); };
       var featImgWrap = document.getElementById('feat-img-wrap');
@@ -1469,10 +1495,11 @@
       document.getElementById('feat2-topic-lbl').textContent = feat2.topicLabel;
       var feat2Title = document.getElementById('feat2-title');
       feat2Title.textContent = feat2.title;
-      feat2Title.onclick = function() { openArticle(feat2); };
+      feat2Title.href = artHref(feat2);
+      feat2Title.onclick = function(e) { e.preventDefault(); openArticle(feat2); };
       document.getElementById('feat2-deck').textContent = feat2.deck;
       document.getElementById('feat2-author').innerHTML = f2a
-        ? '<button class="author-link" onclick="showAuthor(\'' + feat2.author + '\')">' + f2a.name + '</button>' : '';
+        ? '<a class="author-link" href="' + authHref(feat2.author) + '" onclick="return goAuthor(event,\'' + feat2.author + '\')">' + f2a.name + '</a>' : '';
       document.getElementById('feat2-date').textContent = feat2.date;
       document.getElementById('feat2-read-btn').onclick = function() { openArticle(feat2); };
       var f2img = document.getElementById('feat2-img');
@@ -1492,10 +1519,11 @@
       document.getElementById('feat3-topic-lbl').textContent = feat3.topicLabel;
       var feat3Title = document.getElementById('feat3-title');
       feat3Title.textContent = feat3.title;
-      feat3Title.onclick = function() { openArticle(feat3); };
+      feat3Title.href = artHref(feat3);
+      feat3Title.onclick = function(e) { e.preventDefault(); openArticle(feat3); };
       document.getElementById('feat3-deck').textContent = feat3.deck;
       document.getElementById('feat3-author').innerHTML = f3a
-        ? '<button class="author-link" onclick="showAuthor(\'' + feat3.author + '\')">' + f3a.name + '</button>' : '';
+        ? '<a class="author-link" href="' + authHref(feat3.author) + '" onclick="return goAuthor(event,\'' + feat3.author + '\')">' + f3a.name + '</a>' : '';
       document.getElementById('feat3-date').textContent = feat3.date;
       document.getElementById('feat3-read-btn').onclick = function() { openArticle(feat3); };
       var f3img = document.getElementById('feat3-img');
@@ -1520,17 +1548,17 @@
     if (activeTopic !== 'all') list = list.filter(function(a) { return a.topic === activeTopic; });
     grid.innerHTML = list.map(function(a) {
       var auth = AUTHORS[a.author];
-      return '<div class="article-card" data-topic="' + a.topic + '" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+      return '<a class="article-card" data-topic="' + a.topic + '" href="' + artHref(a) + '" onclick="return goArticle(event,\'' + a.id + '\')">'+
         (a.heroImg ? '<img class="card-img" src="' + a.heroImg + '" alt="' + a.title + '"' + (a.imgPos ? ' style="object-position:' + a.imgPos + '"' : '') + '>' : '')+
         '<div class="card-topic">' + a.topicLabel + '</div>'+
         '<div class="card-title">' + a.title + '</div>'+
         '<p class="card-deck">' + a.deck + '</p>'+
-        '<div class="card-meta"><button class="author-link" onclick="event.stopPropagation();showAuthor(\'' + a.author + '\')">' + (auth ? auth.name : '') + '</button>' +
+        '<div class="card-meta"><button class="author-link" onclick="return goAuthor(event,\'' + a.author + '\')">' + (auth ? auth.name : '') + '</button>' +
         (a.date ? '<span class="meta-dot"></span><span>' + a.date + '</span>' : '') +
         (a.readTime ? '<span class="meta-dot"></span><span>' + a.readTime + ' read</span>' : '') +
         '</div>'+
         '<span class="card-read">Read →</span>'+
-        '</div>';
+        '</a>';
     }).join('');
 
     // Show/hide featured sections based on topic filter
@@ -1557,14 +1585,14 @@
     allAuthors.forEach(function(au, idx) {
       var essays = ARTICLES.filter(function(a) { return a.author === au.id; });
       var essayLinks = essays.map(function(a) {
-        return '<button class="essay-link" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+        return '<a class="essay-link" href="' + artHref(a) + '" onclick="return goArticle(event,\'' + a.id + '\')">'+
           '<div class="essay-link-title">' + a.title + '</div>'+
           '<div class="essay-link-meta">' + a.topicLabel + ' · ' + a.date + '</div>'+
-          '</button>';
+          '</a>';
       }).join('');
       cards += '<div class="author-card" onclick="showAuthor(\'' + au.id + '\')" style="cursor:pointer;">'+
         '<div class="author-avatar">' + au.initials + '</div>'+
-        '<div class="author-name">' + au.name + '</div>'+
+        '<a class="author-name" href="' + authHref(au.id) + '" onclick="return goAuthor(event,\'' + au.id + '\')">' + au.name + '</a>'+
         '<div class="author-location">' + au.location + '</div>'+
         '<div class="author-beat">' + au.beat + '</div>'+
         '<div class="edu-label">Education</div>'+

@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agora — The Modern Public Square</title>
+  <meta name="description" content="Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── CSS VARIABLES (light default) ── */
+    :root {
+      --bg:      #F5F2EB;
+      --bg2:     #EDE9DF;
+      --bg3:     #E4DFD3;
+      --text:    #1A1713;
+      --text2:   #5A5347;
+      --text3:   #8C8074;
+      --border:  rgba(26,23,19,0.12);
+      --border2: rgba(26,23,19,0.22);
+      --gold:    #8B6914;
+      --gold-lt: #C9A84C;
+      --serif:   'Playfair Display', Georgia, serif;
+      --bserif:  'EB Garamond', Georgia, serif;
+      --sans:    'Jost', system-ui, sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg:      #0F0E09;
+      --bg2:     #1A1812;
+      --bg3:     #232118;
+      --text:    #F0EBDF;
+      --text2:   #A89880;
+      --text3:   #6B5E4A;
+      --border:  rgba(240,235,223,0.10);
+      --border2: rgba(240,235,223,0.20);
+      --gold:    #C9A84C;
+      --gold-lt: #E8C96A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      transition: background .35s, color .35s;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--sans); cursor: pointer; }
+
+    /* ── GREEK KEY BAND ── */
+    .greek-band {
+      width: 100%; height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0,7 L4,7 L4,2 L12,2 L12,12 L8,12 L8,7' fill='none' stroke='%23C9A84C' stroke-width='1.2' opacity='0.45'/%3E%3Cpath d='M14,7 L18,7 L18,2 L26,2 L26,12 L22,12 L22,7' fill='none' stroke='%23C9A84C' stroke-width='1.2' opacity='0.45'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 28px 14px;
+    }
+
+    /* ── COLUMNS ORNAMENT ── */
+    .columns { display: flex; gap: 14px; margin-bottom: 22px; opacity: .28; }
+    .col-unit { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+    .col-cap    { width: 12px; height: 3px;  background: var(--gold); border-radius: 1px; }
+    .col-neck   { width:  8px; height: 2px;  background: var(--gold); }
+    .col-shaft  { width:  5px; height: 26px; background: var(--gold); border-radius: 1px; }
+    .col-base   { width:  8px; height: 2px;  background: var(--gold); }
+    .col-plinth { width: 12px; height: 3px;  background: var(--gold); border-radius: 1px; }
+
+    /* ── NAV ── */
+    .site-nav {
+      background: var(--bg);
+      border-bottom: .5px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      transition: background .35s;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 28px; max-width: 1080px; margin: 0 auto;
+    }
+    .nav-left { display: flex; align-items: center; gap: 20px; }
+    .nav-logo {
+      background: none; border: none; padding: 0;
+      display: flex; align-items: center; cursor: pointer;
+    }
+    .nav-logo svg { height: 52px; width: auto; transition: opacity .2s; }
+    .nav-logo:hover svg { opacity: .82; }
+    .nav-logo .logo-text   { fill: var(--text); }
+    .nav-logo .logo-gold   { fill: var(--gold); }
+    .nav-logo .logo-branch { fill: var(--text2); }
+    .nav-logo .logo-flute  { fill: var(--bg); }
+    .nav-motto {
+      border-left: .5px solid var(--border2); padding-left: 20px; line-height: 1.3;
+    }
+    .nav-motto-greek { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text2); }
+    .nav-motto-sub   { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-link {
+      background: none; border: none; padding: 0;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text2); transition: color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--text); }
+    .theme-btn {
+      background: none; border: .5px solid var(--border2); border-radius: 99px;
+      padding: 5px 14px; font-size: 11px; letter-spacing: .08em; color: var(--text2);
+      transition: color .2s, border-color .2s;
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--gold); }
+    #themeIconWrap {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @keyframes starTwinkle {
+      0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
+      25%  { opacity: 1; transform: scale(1.2) rotate(10deg); }
+      55%  { opacity: 0.3; transform: scale(0.7) rotate(-5deg); }
+      80%  { opacity: 1; transform: scale(1.1) rotate(8deg); }
+      100% { opacity: 0; transform: scale(0) rotate(15deg); }
+    }
+    @keyframes rayDance {
+      0%   { opacity: 0; transform: rotate(var(--r)) scaleY(0.3); }
+      30%  { opacity: 1; transform: rotate(var(--r)) scaleY(1.5); }
+      65%  { opacity: 0.6; transform: rotate(var(--r)) scaleY(1.2); }
+      100% { opacity: 0; transform: rotate(var(--r)) scaleY(0.4); }
+    }
+    .theme-star {
+      position: absolute;
+      font-size: 7px;
+      color: var(--gold-lt);
+      pointer-events: none;
+      animation: starTwinkle 0.95s ease forwards;
+      line-height: 1;
+    }
+    .theme-ray {
+      position: absolute;
+      width: 1.5px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 1px;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.75px;
+      margin-top: -7px;
+      pointer-events: none;
+      transform-origin: 50% 100%;
+      animation: rayDance 0.85s ease forwards;
+    }
+    @keyframes starHover {
+      0%, 100% { opacity: 0; transform: scale(0.4); }
+      50%       { opacity: 0.85; transform: scale(1); }
+    }
+    @keyframes rayHover {
+      0%, 100% { opacity: 0; transform: rotate(var(--r)) scaleY(0.4); }
+      50%       { opacity: 0.6; transform: rotate(var(--r)) scaleY(1.2); }
+    }
+    .theme-star-hover {
+      position: absolute;
+      font-size: 6px;
+      color: var(--gold-lt);
+      pointer-events: none;
+      animation: starHover 1.2s ease infinite;
+      line-height: 1;
+    }
+    .theme-ray-hover {
+      position: absolute;
+      width: 1.5px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 1px;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.75px;
+      margin-top: -6px;
+      pointer-events: none;
+      transform-origin: 50% 100%;
+      animation: rayHover 1s ease infinite;
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── MASTHEAD ── */
+    .masthead { padding: 44px 28px 32px; border-bottom: .5px solid var(--border); }
+    .masthead-inner { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: flex-end; max-width: 1080px; margin: 0 auto; }
+    .mast-eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .mast-headline { font-family: var(--serif); font-size: 52px; font-weight: 500; line-height: 1.05; color: var(--text); margin-bottom: 16px; }
+    .mast-sub { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.8; max-width: 400px; }
+    .mast-contrib-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; text-align: right; }
+    .mast-author { text-align: right; }
+    .mast-author-name { font-family: var(--serif); font-size: 14px; color: var(--text); }
+    .mast-author-beat { font-size: 11px; color: var(--text3); }
+    .mast-divider { width: 24px; height: .5px; background: var(--border2); margin: 7px 0 7px auto; }
+
+    /* ── TOPIC BAR ── */
+    .topic-bar {
+      background: var(--bg2); border-bottom: .5px solid var(--border);
+      padding: 11px 28px; display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none;
+    }
+    .topic-bar::-webkit-scrollbar { display: none; }
+    .topic-pill {
+      background: transparent; border: .5px solid var(--border2); border-radius: 99px;
+      padding: 5px 14px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text2); white-space: nowrap; transition: background .2s, color .2s, border-color .2s;
+    }
+    .topic-pill:hover { border-color: var(--gold); color: var(--text); }
+    .topic-pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* ── FEATURED ── */
+    .featured-section { padding: 0; border-bottom: .5px solid var(--border); }
+    .featured-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; align-items: stretch; }
+    .feat-text { padding: 36px 40px 36px 28px; display: flex; flex-direction: column; justify-content: center; }
+    .feat-img-wrap { position: relative; overflow: hidden; border-left: .5px solid var(--border); }
+    .feat-img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; object-position: center 18%; display: block; transition: transform .4s ease; }
+    .feat-img-wrap:hover .feat-img { transform: scale(1.03); }
+    .feat-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .feat-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+    .feat-title { font-family: var(--serif); font-size: 28px; font-weight: 500; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+    .feat-deck { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.75; margin-bottom: 16px; }
+    .feat-meta { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 8px; }
+    .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
+    .read-link {
+      display: inline-block; margin-top: 14px; background: none;
+      border: none; border-bottom: .5px solid var(--gold); padding: 0 0 2px;
+      font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ── ARTICLE GRID ── */
+    .articles-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .article-card { padding: 26px 0; border-bottom: .5px solid var(--border); cursor: pointer; }
+    .article-card:nth-child(odd)  { padding-right: 36px; border-right: .5px solid var(--border); }
+    .article-card:nth-child(even) { padding-left: 36px; }
+    .article-card:hover .card-title { color: var(--gold); }
+    .card-topic { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text3); margin-bottom: 7px; }
+    .card-title { font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.3; color: var(--text); margin-bottom: 7px; transition: color .2s; }
+    .card-deck  { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 10px; }
+    .card-meta  { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .card-read  { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 8px; }
+
+    /* ── PAGE HERO ── */
+    .page-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .page-hero > div { max-width: 1080px; margin: 0 auto; }
+    .page-eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .page-title { font-family: var(--serif); font-size: 40px; font-weight: 500; line-height: 1.1; color: var(--text); margin-bottom: 12px; }
+    .page-sub { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.75; max-width: 560px; }
+
+    /* ── AUTHORS GRID ── */
+    .authors-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .author-card { padding: 36px 0; border-bottom: .5px solid var(--border); }
+    .author-card:nth-child(odd)  { padding-right: 44px; border-right: .5px solid var(--border); }
+    .author-card:nth-child(even) { padding-left: 44px; }
+    .author-card.empty { opacity: .4; }
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--bg3); border: .5px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 20px; color: var(--gold); margin-bottom: 14px;
+    }
+    .author-avatar.empty-av { color: var(--text3); }
+    .author-name     { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .author-location { font-size: 11px; color: var(--text3); letter-spacing: .06em; margin-bottom: 6px; }
+    .author-beat     { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .edu-label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+    .edu-value { font-family: var(--bserif); font-size: 14px; color: var(--text2); margin-bottom: 16px; }
+    .author-bio { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 16px; }
+    .author-essays-lbl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; padding-top: 16px; border-top: .5px solid var(--border); }
+    .essay-link { display: block; padding: 10px 0; border-bottom: .5px solid var(--border); cursor: pointer; background: none; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; }
+    .essay-link:last-child { border-bottom: none; }
+    .essay-link-title { font-family: var(--serif); font-size: 14px; color: var(--text); transition: color .2s; }
+    .essay-link:hover .essay-link-title { color: var(--gold); }
+    .essay-link-meta  { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+    /* ── ABOUT ── */
+    .about-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .about-hero-inner { max-width: 720px; margin: 0 auto; }
+    .about-hero-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .about-motto-greek { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--text); letter-spacing: .02em; }
+    .about-motto-sub   { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-top: 4px; text-align: right; }
+    .about-layout { display: grid; grid-template-columns: 1fr 240px; gap: 56px; padding: 40px 28px 64px; max-width: 720px; margin: 0 auto; }
+    .about-body h2 { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); margin: 32px 0 12px; }
+    .about-body h2:first-child { margin-top: 0; }
+    .about-body p  { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.85; margin-bottom: 16px; }
+    .about-body blockquote { border-left: 2px solid var(--gold); padding: 4px 0 4px 20px; margin: 24px 0; }
+    .about-body blockquote p { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--text); line-height: 1.5; margin: 0; }
+    .about-body blockquote p + p { margin-top: 6px; }
+    .sidebar-block { padding: 18px 0; border-bottom: .5px solid var(--border); }
+    .sidebar-block:first-child { border-top: .5px solid var(--border); }
+    .sidebar-lbl  { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .sidebar-list { list-style: none; }
+    .sidebar-list li { font-size: 12px; color: var(--text2); padding: 3px 0; }
+    .sidebar-list li::before { content: '— '; color: var(--text3); }
+
+    /* ── ARTICLE PAGE ── */
+    .article-hero { padding: 44px 28px 32px; border-bottom: .5px solid var(--border); }
+    .article-hero-inner { max-width: 900px; margin: 0 auto; }
+    .art-topic-lbl { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .art-title { font-family: var(--serif); font-size: 40px; font-weight: 500; line-height: 1.1; color: var(--text); margin-bottom: 16px; max-width: 640px; }
+    .art-deck  { font-family: var(--bserif); font-size: 19px; color: var(--text2); line-height: 1.7; max-width: 580px; margin-bottom: 20px; }
+    .art-meta  { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 10px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 220px; gap: 56px; padding: 40px 28px 64px; max-width: 900px; margin: 0 auto; align-items: start; }
+    .article-body p  { font-family: var(--bserif); font-size: 18px; color: var(--text2); line-height: 1.9; margin-bottom: 22px; }
+    .article-body h2 { font-family: var(--serif); font-size: 24px; font-weight: 500; color: var(--text); margin: 40px 0 14px; }
+    .article-body blockquote { border-left: 2px solid var(--gold); padding: 4px 0 4px 24px; margin: 32px 0; }
+    .article-body blockquote p { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--text); line-height: 1.45; margin: 0; }
+    .art-sidebar { position: sticky; top: 80px; }
+    .art-sidebar-block { padding: 16px 0; border-bottom: .5px solid var(--border); }
+    .art-sidebar-block:first-child { border-top: .5px solid var(--border); }
+    .art-sidebar-lbl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .tag { display: inline-block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border: .5px solid var(--border2); border-radius: 99px; color: var(--text3); margin: 2px; }
+    .related-link { display: block; padding: 9px 0; border-bottom: .5px solid var(--border); background: none; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; cursor: pointer; }
+    .related-link:last-child { border-bottom: none; }
+    .rl-topic { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
+    .rl-title { font-family: var(--serif); font-size: 13px; color: var(--text); line-height: 1.35; transition: color .2s; }
+    .related-link:hover .rl-title { color: var(--gold); }
+    .back-link { background: none; border: none; border-top: .5px solid var(--border); width: 100%; text-align: left; padding: 16px 0 0; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); cursor: pointer; }
+
+    /* ── FOOTER ── */
+    .site-footer { }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; max-width: 1080px; margin: 0 auto; }
+    .footer-logo { font-family: var(--serif); font-size: 16px; letter-spacing: .12em; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .footer-logo .omega { color: var(--gold); }
+    .footer-copy { font-size: 11px; letter-spacing: .08em; color: var(--text3); }
+    .footer-social { display: flex; align-items: center; gap: 16px; }
+    .footer-social-link { display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--text3); font-size: 11px; letter-spacing: .08em; transition: color .2s; }
+    .footer-social-link:hover { color: var(--gold); }
+    .footer-social-link svg { width: 18px; height: 18px; fill: currentColor; transition: fill .2s; }
+    .footer-linkedin { display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--text3); font-size: 11px; letter-spacing: .08em; transition: color .2s; }
+    .footer-linkedin:hover { color: var(--gold); }
+    .footer-linkedin svg { width: 18px; height: 18px; fill: currentColor; transition: fill .2s; }
+    .footer-motto { text-align: right; }
+    .footer-motto-greek { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text3); }
+    .footer-motto-sub   { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+
+    /* ── ARTICLE BODY EXTRAS ── */
+    .article-body ul, .article-body ol { margin: 0 0 22px 24px; }
+    .article-body li { font-family: var(--bserif); font-size: 18px; color: var(--text2); line-height: 1.9; margin-bottom: 6px; }
+    .article-body em { font-style: italic; }
+    .article-body strong { color: var(--text); font-weight: 600; }
+    .art-hero-img-wrap { border-bottom: .5px solid var(--border); position: relative; overflow: hidden; }
+    .art-hero-img { width: 100%; height: 560px; object-fit: cover; object-position: center 18%; display: block; }
+    .art-hero-img-gradient { position: absolute; bottom: 0; left: 0; right: 0; height: 220px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; }
+    .art-hero-credit { font-size: 10px; letter-spacing: .06em; color: var(--text3); padding: 7px 28px; }
+    .art-dw-wrap { margin: 36px 0; border-top: .5px solid var(--border); border-bottom: .5px solid var(--border); padding: 24px 0 8px; }
+    .art-dw-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    [data-theme="dark"] .art-dw-wrap iframe { filter: invert(1) hue-rotate(180deg); }
+    .art-tweet { margin: 32px 0; border: .5px solid var(--border); border-radius: 6px; padding: 20px 24px; background: var(--bg2); }
+    .art-tweet-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .art-tweet-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 15px; color: var(--bg); font-weight: 700; flex-shrink: 0; }
+    .art-tweet-name { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.2; }
+    .art-tweet-handle { font-size: 12px; color: var(--text3); }
+    .art-tweet-body { font-family: var(--bserif); font-size: 17px; color: var(--text); line-height: 1.7; margin-bottom: 12px; }
+    .art-tweet-meta { font-size: 11px; color: var(--text3); letter-spacing: .04em; }
+    .art-pac { margin: 36px 0; }
+    .art-pac-eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .art-pac-title { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .art-pac-sub { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 16px; }
+    .art-pac-cards { display: flex; flex-direction: column; gap: 5px; }
+    .art-pac-card { background: var(--bg2); border: .5px solid var(--border); border-radius: 4px; padding: 10px 14px; display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 12px; transition: border-color .2s; }
+    .art-pac-card:hover { border-color: var(--border2); }
+    .art-pac-rank { font-size: 10px; color: var(--text3); text-align: center; }
+    .art-pac-info { min-width: 0; }
+    .art-pac-name-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+    .art-pac-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+    .art-pac-label { font-size: 13px; font-weight: 500; color: var(--text); }
+    .art-pac-cos { font-size: 11px; color: var(--text3); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .art-pac-track { height: 2px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+    .art-pac-fill { height: 100%; border-radius: 2px; }
+    .art-pac-amt { text-align: right; flex-shrink: 0; }
+    .art-pac-num { font-family: var(--serif); font-size: 17px; color: var(--text); }
+    .art-pac-exact { font-size: 10px; color: var(--text3); white-space: nowrap; }
+    .art-pac-footer { margin-top: 10px; font-size: 10px; color: var(--text3); border-top: .5px solid var(--border); padding-top: 10px; line-height: 1.6; }
+    .art-pac-footer a { color: var(--text3); text-decoration: underline; }
+
+    /* ── AUTHOR LINK (inline clickable name) ── */
+    .author-link { background: none; border: none; padding: 0; color: inherit; font: inherit; cursor: pointer; transition: color .2s; display: inline; }
+    .author-link:hover { color: var(--gold); }
+
+    /* ── AUTHOR PROFILE PAGE ── */
+    .author-profile-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .author-profile-hero-inner { max-width: 720px; margin: 0 auto; }
+    .ap-header { display: flex; align-items: center; gap: 22px; margin-top: 16px; }
+    .ap-avatar-lg { width: 60px; height: 60px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 20px; color: var(--bg); font-weight: 700; flex-shrink: 0; }
+    .ap-name { font-family: var(--serif); font-size: 30px; font-weight: 500; color: var(--text); margin-bottom: 4px; line-height: 1.1; }
+    .ap-beat { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
+    .author-profile-layout { display: grid; grid-template-columns: 1fr 220px; gap: 56px; padding: 40px 28px 64px; max-width: 720px; margin: 0 auto; align-items: start; }
+    .ap-bio { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.85; margin-bottom: 28px; }
+    .ap-essays-lbl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .ap-article-item { display: block; width: 100%; background: none; border: none; border-top: .5px solid var(--border); padding: 12px 0; text-align: left; cursor: pointer; }
+    .ap-article-item:last-child { border-bottom: .5px solid var(--border); }
+    .ap-article-topic { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; }
+    .ap-article-title { font-family: var(--serif); font-size: 15px; color: var(--text); line-height: 1.35; transition: color .2s; }
+    .ap-article-item:hover .ap-article-title { color: var(--gold); }
+    .ap-sidebar-block { padding: 16px 0; border-bottom: .5px solid var(--border); }
+    .ap-sidebar-block:first-child { border-top: .5px solid var(--border); }
+    .ap-sidebar-lbl { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .ap-sidebar-val { font-size: 13px; color: var(--text2); line-height: 1.6; }
+    .ap-contact-link { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text2); font-size: 13px; margin-bottom: 8px; transition: color .2s; }
+    .ap-contact-link:last-child { margin-bottom: 0; }
+    .ap-contact-link:hover { color: var(--gold); }
+    .ap-contact-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── CONNECT ── */
+    .connect-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
+    .connect-hero-inner { max-width: 720px; margin: 0 auto; }
+    .connect-body { max-width: 720px; margin: 0 auto; padding: 48px 28px 80px; }
+    .connect-cards { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+    .connect-card { display: flex; align-items: center; gap: 24px; padding: 28px 0; border-bottom: .5px solid var(--border); text-decoration: none; color: inherit; transition: background .15s; }
+    .connect-card:first-child { border-top: .5px solid var(--border); }
+    .connect-card:hover .connect-card-label { color: var(--gold); }
+    .connect-card:hover .connect-card-icon { color: var(--gold); }
+    .connect-card-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--text3); transition: color .2s; }
+    .connect-card-icon svg { width: 100%; height: 100%; fill: currentColor; }
+    .connect-card-info { flex: 1; }
+    .connect-card-label { font-family: var(--serif); font-size: 20px; color: var(--text); transition: color .2s; }
+    .connect-card-handle { font-size: 12px; letter-spacing: .08em; color: var(--text3); margin-top: 4px; }
+    .connect-card-arrow { font-size: 18px; color: var(--text3); }
+    .connect-intro { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.85; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .masthead-inner, .articles-grid, .authors-grid, .about-layout, .article-layout { grid-template-columns: 1fr; }
+      .featured-section > div { grid-template-columns: 1fr; }
+      .feat-img-wrap { border-left: none; border-top: .5px solid var(--border); }
+      .feat-img { min-height: 220px; height: 220px; }
+      .mast-headline { font-size: 36px; }
+      .article-card:nth-child(odd)  { padding-right: 0; border-right: none; }
+      .article-card:nth-child(even) { padding-left: 0; }
+      .author-card:nth-child(odd)   { padding-right: 0; border-right: none; }
+      .author-card:nth-child(even)  { padding-left: 0; }
+      .nav-motto, .mast-contrib { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <button class="nav-logo" onclick="showPage('home')" aria-label="Agora home">
+          <svg viewBox="0 0 220 86" xmlns="http://www.w3.org/2000/svg">
+            <rect x="84" y="14" width="52" height="5" rx="1" class="logo-text"/>
+            <rect x="87" y="19" width="46" height="3" class="logo-text"/>
+            <rect x="90" y="22" width="40" height="2" class="logo-text"/>
+            <rect x="90" y="24" width="40" height="34" class="logo-text"/>
+            <rect x="93" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="98" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="103" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="108" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="113" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="118" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="123" y="24" width="2" height="34" class="logo-flute" style="opacity:0.2"/>
+            <rect x="87" y="58" width="46" height="4" class="logo-text"/>
+            <rect x="83" y="62" width="54" height="3" class="logo-text"/>
+            <rect x="79" y="65" width="62" height="3" class="logo-text"/>
+            <path d="M83 63 Q72 58 64 50 Q58 42 58 34" fill="none" stroke-width="1" style="stroke:var(--text2)"/>
+            <path d="M81 61 Q74 54 74 46 Q80 47 81 61Z" class="logo-branch"/>
+            <path d="M81 61 Q75 67 70 60 Q75 56 81 61Z" class="logo-branch"/>
+            <path d="M72 53 Q64 46 65 38 Q71 40 72 53Z" class="logo-branch"/>
+            <path d="M72 53 Q66 59 61 52 Q67 48 72 53Z" class="logo-branch"/>
+            <path d="M63 43 Q57 35 59 28 Q65 31 63 43Z" class="logo-branch"/>
+            <path d="M63 43 Q58 49 53 42 Q59 39 63 43Z" class="logo-branch"/>
+            <path d="M137 63 Q148 58 156 50 Q162 42 162 34" fill="none" stroke-width="1" style="stroke:var(--text2)"/>
+            <path d="M139 61 Q146 54 146 46 Q140 47 139 61Z" class="logo-branch"/>
+            <path d="M139 61 Q145 67 150 60 Q145 56 139 61Z" class="logo-branch"/>
+            <path d="M148 53 Q156 46 155 38 Q149 40 148 53Z" class="logo-branch"/>
+            <path d="M148 53 Q154 59 159 52 Q153 48 148 53Z" class="logo-branch"/>
+            <path d="M157 43 Q163 35 161 28 Q155 31 157 43Z" class="logo-branch"/>
+            <path d="M157 43 Q162 49 167 42 Q161 39 157 43Z" class="logo-branch"/>
+            <text x="110" y="64" text-anchor="middle" font-size="56" font-weight="700" font-family="'Times New Roman', Times, serif" class="logo-gold">A</text>
+            <text x="110" y="78" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="3" font-family="'Times New Roman', Times, serif" class="logo-text">AGORA</text>
+            <text x="110" y="86" text-anchor="middle" font-size="5.5" font-style="italic" letter-spacing="1.5" font-family="'Times New Roman', Times, serif" class="logo-gold">μελέτη τὸ πᾶν</text>
+          </svg>
+        </button>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-link active" id="nav-home"    onclick="showPage('home')">Feed</button>
+        <button class="nav-link"        id="nav-authors" onclick="showPage('authors')">Authors</button>
+        <button class="nav-link"        id="nav-about"   onclick="showPage('about')">About</button>
+        <button class="nav-link"        id="nav-connect" onclick="showPage('connect')">Connect</button>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()"><span id="themeIconWrap"><span id="themeIcon">☽</span></span> <span id="themeLabel">Dark</span></button>
+      </nav>
+    </div>
+    <div class="greek-band"></div>
+  </header>
+
+  <!-- ══════════════ HOME ══════════════ -->
+  <div class="page active" id="page-home">
+
+    <!-- Masthead -->
+    <section class="masthead">
+      <div class="masthead-inner">
+        <div>
+          <div class="columns" id="mast-cols"></div>
+          <div class="mast-eyebrow">— A modern public forum —</div>
+          <h1 class="mast-headline">Ideas tested<br>in the open.</h1>
+          <p class="mast-sub">Finance, politics, philosophy and business — examined without deference. Countless ideas, one forum.</p>
+        </div>
+        <div class="mast-contrib">
+          <div class="mast-contrib-label">Contributors</div>
+          <div class="mast-author" onclick="showAuthor('joven')" style="cursor:pointer;"><div class="mast-author-name">Joven Heer</div><div class="mast-author-beat">Politics · Business</div></div>
+          <div class="mast-divider"></div>
+          <div class="mast-author" onclick="showAuthor('udhay')" style="cursor:pointer;"><div class="mast-author-name">Udhay Kapila</div><div class="mast-author-beat">Finance · Business</div></div>
+          <div class="mast-divider"></div>
+          <div class="mast-author" onclick="showAuthor('kasra')" style="cursor:pointer;"><div class="mast-author-name">Kasra Kazemialiakbar</div><div class="mast-author-beat">Economics · Intl. Relations</div></div>
+          <div class="mast-divider"></div>
+          <div class="mast-author" onclick="showAuthor('sidhant')" style="cursor:pointer;"><div class="mast-author-name">Sidhant Matthews</div><div class="mast-author-beat">Finance · Accounting</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic bar -->
+    <div class="topic-bar">
+      <button class="topic-pill active" data-topic="all">All</button>
+      <button class="topic-pill" data-topic="finance">Finance</button>
+      <button class="topic-pill" data-topic="politics">Politics</button>
+      <button class="topic-pill" data-topic="philosophy">Philosophy</button>
+      <button class="topic-pill" data-topic="business">Business</button>
+      <button class="topic-pill" data-topic="analysis">Analysis</button>
+    </div>
+
+    <!-- Featured -->
+    <section class="featured-section" id="featured-section">
+      <div>
+        <div class="feat-text">
+          <div class="feat-label">✦ Featured essay</div>
+          <div class="feat-topic-lbl" id="feat-topic-lbl"></div>
+          <h2 class="feat-title" id="feat-title"></h2>
+          <p class="feat-deck" id="feat-deck"></p>
+          <div class="feat-meta">
+            <span id="feat-author"></span>
+            <span class="meta-dot"></span>
+            <span id="feat-date"></span>
+          </div>
+          <button class="read-link" id="feat-read-btn">Read essay →</button>
+        </div>
+        <div class="feat-img-wrap" id="feat-img-wrap" style="display:none;">
+          <img id="feat-img" class="feat-img" src="" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles grid -->
+    <div class="articles-grid" id="articles-grid"></div>
+
+  </div>
+
+  <!-- ══════════════ AUTHORS ══════════════ -->
+  <div class="page" id="page-authors">
+    <div class="page-hero">
+      <div>
+        <div class="columns" id="authors-cols"></div>
+        <div class="page-eyebrow">The contributors</div>
+        <h1 class="page-title">Countless ideas.<br>One forum.</h1>
+        <p class="page-sub">Agora is written by a team of lifelong learners across North America, in the pursuit of articulating knowledge and ideas and sharing it with the world.</p>
+      </div>
+    </div>
+    <div class="authors-grid" id="authors-grid"></div>
+  </div>
+
+  <!-- ══════════════ ABOUT ══════════════ -->
+  <div class="page" id="page-about">
+    <div class="about-hero">
+      <div class="about-hero-inner">
+        <div class="columns" id="about-cols"></div>
+        <div class="page-eyebrow">About this publication</div>
+        <div class="about-hero-top">
+          <h1 class="page-title" style="margin-bottom:0;">The Agora<br>Manifesto.</h1>
+          <div>
+            <div class="about-motto-greek">μελέτη τὸ πᾶν</div>
+            <div class="about-motto-sub">Ponder the whole</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-layout">
+      <div class="about-body">
+        <h2>Why we built this</h2>
+        <p>The ancient Agora was Athens' public square, a single open space where philosophers, merchants, politicians, and citizens could engage in discourse without an agenda. Socrates did not have a newspaper. Aristotle did not run a podcast. Plato wasn't part of a PAC. They stood in an open space and engaged, and in the end, the best arguments survived.</p>
+        <p>We are not under the illusion that our group conducts ourselves in the same way as the great philosophers and the Ancient Greeks, but we do think something essential has been lost in the way ideas circulate today.</p>
+        <p>In an era full of noise, monetization, and clickbait, we have forgotten the slow, careful, adversarial working through of a question to its logical conclusion.</p>
+        <p>Now more than ever, thoughtfulness, analysis, and truth must prevail.</p>
+        <blockquote>
+          <p>"It is better to change an opinion than to persist in a wrong one."</p>
+          <p>— Socrates</p>
+        </blockquote>
+        <h2>What we cover</h2>
+        <p>Finance, economics, business, politics, philosophy, and the occasional piece that refuses to fit any of those categories. What ties them together is a commitment to analysis over opinion, and to first principles over received wisdom. We are not interested in hot takes. We are interested in whether or not the reasoning holds.</p>
+        <h2>How we write</h2>
+        <p>Our team does not have a house view. Disagreement is a part of our identity, not a problem. Our only agenda is letting knowledge and the best ideas prevail.</p>
+        <p>We are not selling anything because the truth cannot be bought.</p>
+        <p>We cite our sources, admit openly when we do not know something, grow when we are proven wrong, and stand firmly with our own names in the byline. Anonymous analysis is cowardly analysis.</p>
+        <h2>AI Policy</h2>
+        <p>At Agora, we take immense pride in the pieces we publish, because our pieces are our own. All pieces published on this site are solely written by our authors and always will be. If we let Artificial Intelligence write to what they perceive as the truth, then we risk giving it up completely, especially to those at the top.</p>
+        <p>However, we are aware that in the modern era, there can be almost no progression in the tech realm without the use of AI. This is why we are transparent in the fact that AI is utilized in the development of this website, as well as in occasional research and data organization.</p>
+        <p>Always as a tool to enhance our work, but never to replace it.</p>
+      </div>
+      <aside>
+        <div class="sidebar-block">
+          <div class="sidebar-lbl">Topics</div>
+          <ul class="sidebar-list">
+            <li>Finance &amp; Economics</li>
+            <li>Business &amp; Strategy</li>
+            <li>Political Theory &amp; Analysis</li>
+            <li>Philosophy</li>
+            <li>History of Ideas</li>
+            <li>Culture</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-lbl">Based in</div>
+          <ul class="sidebar-list">
+            <li>Vancouver</li>
+            <li>Toronto</li>
+            <li>London, Ontario</li>
+            <li>Waterloo</li>
+            <li>New York</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ══════════════ ARTICLE ══════════════ -->
+  <div class="page" id="page-article">
+    <div id="art-hero-img-wrap" class="art-hero-img-wrap" style="display:none;">
+      <img id="art-hero-img" class="art-hero-img" src="" alt="">
+      <div class="art-hero-img-gradient"></div>
+    </div>
+    <div class="article-hero">
+      <div class="article-hero-inner">
+        <div class="art-topic-lbl" id="art-topic-lbl"></div>
+        <h1 class="art-title" id="art-title"></h1>
+        <p class="art-deck" id="art-deck"></p>
+        <div class="art-meta">
+          <span id="art-author"></span>
+          <span class="meta-dot"></span>
+          <span id="art-date"></span>
+        </div>
+        <div id="art-hero-credit" class="art-hero-credit" style="padding:0;margin-top:8px;"></div>
+      </div>
+    </div>
+    <div class="article-layout">
+      <article class="article-body" id="article-body"></article>
+      <aside class="art-sidebar">
+        <div class="art-sidebar-block">
+          <div class="art-sidebar-lbl">Author</div>
+          <div id="art-sidebar-author" style="font-family:var(--serif);font-size:15px;color:var(--text);"></div>
+          <div id="art-sidebar-beat"   style="font-size:11px;color:var(--text3);"></div>
+        </div>
+        <div class="art-sidebar-block">
+          <div class="art-sidebar-lbl">Filed under</div>
+          <div id="art-tags"></div>
+        </div>
+        <div class="art-sidebar-block" id="related-block">
+          <div class="art-sidebar-lbl">Related reading</div>
+          <div id="related-links"></div>
+        </div>
+        <button class="back-link" onclick="showPage('home')">← Back to feed</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ══════════════ CONNECT ══════════════ -->
+  <div class="page" id="page-connect">
+    <div class="connect-hero">
+      <div class="connect-hero-inner">
+        <div class="columns" id="connect-cols"></div>
+        <div class="page-eyebrow">Get in touch</div>
+        <h1 class="page-title">Connect.</h1>
+      </div>
+    </div>
+    <div class="connect-body">
+      <p class="connect-intro">We want to hear from you — whether you have a pitch, a disagreement, or just want to say hello.</p>
+      <div class="connect-cards">
+
+        <a class="connect-card" href="https://www.linkedin.com/company/agora-publication/about/" target="_blank" rel="noopener noreferrer">
+          <div class="connect-card-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div class="connect-card-info">
+            <div class="connect-card-label">LinkedIn</div>
+            <div class="connect-card-handle">Agora Publication</div>
+          </div>
+          <div class="connect-card-arrow">→</div>
+        </a>
+
+        <a class="connect-card" href="mailto:theagorapublishing@gmail.com">
+          <div class="connect-card-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div class="connect-card-info">
+            <div class="connect-card-label">Email</div>
+            <div class="connect-card-handle">theagorapublishing@gmail.com</div>
+          </div>
+          <div class="connect-card-arrow">→</div>
+        </a>
+
+        <a class="connect-card" href="https://www.instagram.com/agora_public" target="_blank" rel="noopener noreferrer">
+          <div class="connect-card-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </div>
+          <div class="connect-card-info">
+            <div class="connect-card-label">Instagram</div>
+            <div class="connect-card-handle">@agora_public</div>
+          </div>
+          <div class="connect-card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ AUTHOR PROFILE ══════════════ -->
+  <div class="page" id="page-author">
+    <div class="author-profile-hero">
+      <div class="author-profile-hero-inner">
+        <div class="columns" id="ap-cols"></div>
+        <div class="page-eyebrow">Contributor</div>
+        <div class="ap-header">
+          <div class="ap-avatar-lg" id="ap-avatar"></div>
+          <div>
+            <div class="ap-name" id="ap-name"></div>
+            <div class="ap-beat" id="ap-beat"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="author-profile-layout">
+      <div>
+        <p class="ap-bio" id="ap-bio"></p>
+        <div class="ap-essays-lbl">Essays</div>
+        <div id="ap-articles"></div>
+      </div>
+      <aside>
+        <div class="ap-sidebar-block">
+          <div class="ap-sidebar-lbl">Education</div>
+          <div class="ap-sidebar-val" id="ap-education"></div>
+        </div>
+        <div class="ap-sidebar-block">
+          <div class="ap-sidebar-lbl">Based in</div>
+          <div class="ap-sidebar-val" id="ap-location"></div>
+        </div>
+        <div class="ap-sidebar-block" id="ap-contact-block">
+          <div class="ap-sidebar-lbl">Contact</div>
+          <div id="ap-contact"></div>
+        </div>
+        <button class="back-link" onclick="showPage('authors')">← Back to authors</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="greek-band"></div>
+    <div class="footer-inner">
+      <div class="footer-logo"><span class="omega">Ω</span> AGORA</div>
+      <div class="footer-social">
+        <a class="footer-social-link" href="https://www.linkedin.com/company/agora-publication/about/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="footer-social-link" href="https://www.instagram.com/agora_public" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+      </div>
+      <div class="footer-motto">
+        <div class="footer-motto-greek">μελέτη τὸ πᾶν</div>
+        <div class="footer-motto-sub">Ponder the whole</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // ── DATA ──────────────────────────────────────────────────────────────────
+
+  var AUTHORS = {
+    joven: {
+      id: 'joven', initials: 'JH', name: 'Joven Heer',
+      location: 'Vancouver, BC', beat: 'Politics · Business',
+      education: 'Political Science & Ivey AEO — Western University',
+      email: 'jheer4@uwo.ca', linkedin: 'https://www.linkedin.com/in/joven-heer-23a600342/',
+      bio: 'Joven is drawn to the structures beneath the surface: how power is accumulated, exercised, and lost, and what the great thinkers of history can tell us about the world as it actually operates today. He writes about politics and business through the lens of people, incentives, and consequences. His work spans North American politics, international relations, and the power dynamics that quietly govern both boardrooms and governments. He is equally interested in culture and statistics as tools for understanding behaviour, and returns often to a single question: what actually makes people, institutions, and nations succeed.',
+    },
+    udhay: {
+      id: 'udhay', initials: 'UK', name: 'Udhay Kapila',
+      location: 'Toronto, ON', beat: 'Finance · Business',
+      education: 'Business Management & Ivey AEO — Western University',
+      email: 'ukapila2@uwo.ca', linkedin: 'https://www.linkedin.com/in/udhay-kapila-873b53316/',
+      bio: 'Udhay thinks in numbers and systems. He is interested in how and why financial decisions get made, what the data actually says beneath the headlines, and how models can illuminate or mislead our understanding of economic reality. His work explores how markets live and breathe in real time, the financial indicators that signal success and failure before most people notice, and the quantitative frameworks that make sense of complexity. He believes good data visualisation is not just a technical skill but an act of clarity, and that the most important financial questions are rarely the ones making the most noise.',
+    },
+    kasra: {
+      id: 'kasra', initials: 'KK', name: 'Kasra Kazemialiakbar',
+      location: 'Vancouver, BC', beat: 'Economics · Intl. Relations',
+      education: 'Economics — University of British Columbia',
+      email: 'kasrakazemialiakbar@gmail.com',
+      bio: 'Kasra approaches economics not as a set of models but as a living system — interconnected, adaptive, and best understood when examined through multiple lenses at once. He is drawn to international relations and the way conflict and geopolitical tension reshape the economic order, creating new incentives and dissolving old ones. His work sits at the intersection of political economy and strategic decision-making: why states and institutions act the way they do, and what the economic logic beneath the surface reveals about those choices. He believes the most valuable insight comes from applying rigorous economic thinking to questions that most treat as purely political.',
+    },
+    sidhant: {
+      id: 'sidhant', initials: 'SM', name: 'Sidhant Matthews',
+      location: 'Toronto, ON', beat: 'Finance · Accounting',
+      education: 'Accounting & Finance — University of Waterloo',
+      email: 'placeholder@email.com', linkedin: 'https://www.linkedin.com/in/sidhant-mathews-a70a03344/',
+      bio: 'Sidhant is fascinated by the architecture of financial systems — how regulations, institutions, and markets are built, tested, and remade as the world shifts beneath them. He believes that to understand finance is to understand history in motion: the rules that govern capital are never static, and the most revealing moments are the ones when they change. Beyond the mechanics of money, he is drawn to the human side of organisations: what separates real leaders from those who merely hold titles, and how people can come together around something larger than themselves. He is driven by a commitment to community and the conviction that shared success, carefully cultivated, is the most durable kind.',
+    },
+  };
+
+  var EMPTY_SLOTS = 2;
+
+  var ARTICLES = [
+    { id: 'a1', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: 'massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
+    { id: 'a2', topic: 'politics', topicLabel: 'Politics · Analysis', title: "The BC Conservatives' New Leader and What It Means for the Province", deck: "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.", author: 'kasra', date: 'June 15, 2026', featured: false, heroImg: 'findlay.jpg', heroCredit: 'Photo: Flickr' },
+    { id: 'a3', topic: 'business',   topicLabel: 'Business · Short take', title: 'Coming Soon', deck: 'An essay on business strategy. Check back shortly.',         author: 'joven', date: 'Coming Soon', featured: false },
+    { id: 'a4', topic: 'philosophy', topicLabel: 'Philosophy · Essay',    title: 'Coming Soon', deck: 'An essay on philosophy and ideas. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+    { id: 'a5', topic: 'finance',    topicLabel: 'Finance · Interactive', title: 'Coming Soon', deck: 'An interactive piece on finance. Check back shortly.',       author: 'joven', date: 'Coming Soon', featured: false },
+    { id: 'a6', topic: 'philosophy', topicLabel: 'Philosophy · Long-form',title: 'Coming Soon', deck: 'An essay on political philosophy. Check back shortly.',      author: 'udhay', date: 'Coming Soon', featured: false },
+  ];
+
+  // ── THEME ─────────────────────────────────────────────────────────────────
+
+  var dark = localStorage.getItem('agora-theme') === 'dark';
+  var hoverEls = [];
+
+  function applyTheme() {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    document.getElementById('themeIcon').textContent = dark ? '☀' : '☽';
+    document.getElementById('themeLabel').textContent = dark ? 'Light' : 'Dark';
+    localStorage.setItem('agora-theme', dark ? 'dark' : 'light');
+  }
+
+  function showStarBurst() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap) return;
+    var positions = [
+      {top: '-9px',  left: '7px',  delay: '0s'},
+      {top: '-7px',  left: '12px', delay: '0.10s'},
+      {top: '3px',   left: '12px', delay: '0.05s'},
+      {top: '-12px', left: '-2px', delay: '0.16s'},
+    ];
+    positions.forEach(function(p) {
+      var s = document.createElement('span');
+      s.className = 'theme-star';
+      s.textContent = '✦';
+      s.style.top = p.top;
+      s.style.left = p.left;
+      s.style.animationDelay = p.delay;
+      wrap.appendChild(s);
+      setTimeout(function() { if (s.parentNode) s.parentNode.removeChild(s); }, 1100);
+    });
+  }
+
+  function showRayBurst() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap) return;
+    for (var i = 0; i < 8; i++) {
+      var ray = document.createElement('span');
+      ray.className = 'theme-ray';
+      ray.style.setProperty('--r', (i * 45) + 'deg');
+      ray.style.animationDelay = (i * 0.04) + 's';
+      wrap.appendChild(ray);
+      (function(el) {
+        setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 1100);
+      })(ray);
+    }
+  }
+
+  function showStarHover() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap || hoverEls.length) return;
+    var positions = [
+      {top: '-9px',  left: '7px',  delay: '0s'},
+      {top: '-7px',  left: '12px', delay: '0.3s'},
+      {top: '3px',   left: '12px', delay: '0.6s'},
+      {top: '-12px', left: '-2px', delay: '0.9s'},
+    ];
+    positions.forEach(function(p) {
+      var s = document.createElement('span');
+      s.className = 'theme-star-hover';
+      s.textContent = '✦';
+      s.style.top = p.top;
+      s.style.left = p.left;
+      s.style.animationDelay = p.delay;
+      wrap.appendChild(s);
+      hoverEls.push(s);
+    });
+  }
+
+  function showRayHover() {
+    var wrap = document.getElementById('themeIconWrap');
+    if (!wrap || hoverEls.length) return;
+    for (var i = 0; i < 8; i++) {
+      var ray = document.createElement('span');
+      ray.className = 'theme-ray-hover';
+      ray.style.setProperty('--r', (i * 45) + 'deg');
+      ray.style.animationDelay = (i * 0.12) + 's';
+      wrap.appendChild(ray);
+      hoverEls.push(ray);
+    }
+  }
+
+  function clearHoverEls() {
+    hoverEls.forEach(function(el) { if (el.parentNode) el.parentNode.removeChild(el); });
+    hoverEls = [];
+  }
+
+  function toggleTheme() {
+    clearHoverEls();
+    if (!dark) { showStarBurst(); } else { showRayBurst(); }
+    setTimeout(function() { dark = !dark; applyTheme(); }, 150);
+  }
+
+  applyTheme();
+
+  var themeBtn = document.getElementById('themeBtn');
+  themeBtn.addEventListener('mouseenter', function() {
+    if (!dark) { showStarHover(); } else { showRayHover(); }
+  });
+  themeBtn.addEventListener('mouseleave', clearHoverEls);
+
+  // ── COLUMNS HELPER ────────────────────────────────────────────────────────
+
+  function buildColumns(containerId, count) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    el.className = 'columns';
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      html += '<div class="col-unit"><div class="col-cap"></div><div class="col-neck"></div><div class="col-shaft"></div><div class="col-base"></div><div class="col-plinth"></div></div>';
+    }
+    el.innerHTML = html;
+  }
+
+  // ── NAVIGATION ────────────────────────────────────────────────────────────
+
+  var currentArticle = null;
+
+  var VALID_PAGES = ['home','authors','about','connect','article','author'];
+
+  function pageToPath(name) { return name === 'home' ? '/' : '/' + name; }
+  function pathToPage(path) {
+    var p = path.replace(/^\//, '') || 'home';
+    return VALID_PAGES.indexOf(p) !== -1 ? p : 'home';
+  }
+
+  function setNavActive(name) {
+    ['home','authors','about','connect'].forEach(function(n) {
+      var btn = document.getElementById('nav-' + n);
+      if (btn) btn.classList.toggle('active', n === name || (name === 'author' && n === 'authors'));
+    });
+  }
+
+  function showPage(name, skipHistory) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('page-' + name).classList.add('active');
+    setNavActive(name);
+    window.scrollTo(0, 0);
+    if (!skipHistory && location.pathname !== pageToPath(name)) {
+      history.pushState({ page: name }, '', pageToPath(name));
+    }
+  }
+
+  function showAuthor(id, skipHistory) {
+    var au = AUTHORS[id];
+    if (!au) return;
+    buildColumns('ap-cols', 6);
+    document.getElementById('ap-avatar').textContent = au.initials;
+    document.getElementById('ap-name').textContent = au.name;
+    document.getElementById('ap-beat').textContent = au.beat;
+    document.getElementById('ap-bio').textContent = au.bio;
+    document.getElementById('ap-education').textContent = au.education;
+    document.getElementById('ap-location').textContent = au.location;
+    var liSvg = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
+    var emSvg = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>';
+    var contactHtml = '';
+    if (au.email) contactHtml += '<a class="ap-contact-link" href="mailto:' + au.email + '">' + emSvg + au.email + '</a>';
+    if (au.linkedin) contactHtml += '<a class="ap-contact-link" href="' + au.linkedin + '" target="_blank" rel="noopener noreferrer">' + liSvg + 'LinkedIn</a>';
+    var cb = document.getElementById('ap-contact-block');
+    document.getElementById('ap-contact').innerHTML = contactHtml;
+    cb.style.display = contactHtml ? '' : 'none';
+    var essays = ARTICLES.filter(function(a) { return a.author === id && a.title !== 'Coming Soon'; });
+    document.getElementById('ap-articles').innerHTML = essays.length
+      ? essays.map(function(a) {
+          return '<button class="ap-article-item" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+            '<div class="ap-article-topic">' + a.topicLabel + ' · ' + a.date + '</div>'+
+            '<div class="ap-article-title">' + a.title + '</div>'+
+            '</button>';
+        }).join('')
+      : '<p style="font-size:13px;color:var(--text3);padding:12px 0;">No essays published yet.</p>';
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('page-author').classList.add('active');
+    setNavActive('author');
+    window.scrollTo(0, 0);
+    if (!skipHistory) history.pushState({ page: 'author', id: id }, '', '/author/' + id);
+  }
+
+  window.addEventListener('popstate', function() {
+    var path = location.pathname;
+    if (path.startsWith('/article/')) {
+      var aid = path.replace('/article/', '');
+      var art = ARTICLES.find(function(a) { return a.id === aid; });
+      if (art) { openArticle(art, true); return; }
+    }
+    if (path.startsWith('/author/')) {
+      var uid = path.replace('/author/', '');
+      if (AUTHORS[uid]) { showAuthor(uid, true); return; }
+    }
+    showPage(pathToPage(path), true);
+  });
+
+
+  function openArticle(article, skipHistory) {
+    currentArticle = article;
+    var author = AUTHORS[article.author];
+    document.getElementById('art-topic-lbl').textContent = article.topicLabel + ' · ' + article.date;
+    document.getElementById('art-title').textContent = article.title;
+    document.getElementById('art-deck').textContent = article.deck;
+    document.getElementById('art-author').innerHTML = author
+      ? '<button class="author-link" onclick="showAuthor(\'' + author.id + '\')">' + author.name + '</button>' : '';
+    document.getElementById('art-date').textContent = article.date;
+    var heroWrap = document.getElementById('art-hero-img-wrap');
+    if (article.heroImg) {
+      document.getElementById('art-hero-img').src = article.heroImg;
+      document.getElementById('art-hero-img').alt = article.title;
+      document.getElementById('art-hero-credit').textContent = article.heroCredit || '';
+      heroWrap.style.display = '';
+    } else {
+      heroWrap.style.display = 'none';
+    }
+    var bodyTpl = document.getElementById('body-' + article.id);
+    document.getElementById('article-body').innerHTML = bodyTpl
+      ? bodyTpl.innerHTML
+      : '<p style="font-family:var(--bserif);font-size:18px;color:var(--text2);line-height:1.9;">This essay is coming soon.</p>';
+    if (window.twttr && window.twttr.widgets) { window.twttr.widgets.load(); }
+    document.getElementById('art-sidebar-author').innerHTML = author
+      ? '<button class="author-link" onclick="showAuthor(\'' + author.id + '\')" style="font-family:var(--serif);font-size:15px;color:var(--text);">' + author.name + '</button>' : '';
+    document.getElementById('art-sidebar-beat').textContent = author ? author.beat : '';
+    document.getElementById('art-tags').innerHTML = '<span class="tag">' + article.topic + '</span>';
+    var related = ARTICLES.filter(function(a) { return a.id !== article.id && a.topic === article.topic; }).slice(0, 3);
+    var relBlock = document.getElementById('related-block');
+    var relLinks = document.getElementById('related-links');
+    if (related.length) {
+      relBlock.style.display = '';
+      relLinks.innerHTML = related.map(function(r) {
+        return '<button class="related-link" onclick="openArticle(ARTICLES.find(function(a){return a.id===\'' + r.id + '\'}))">' +
+          '<div class="rl-topic">' + r.topicLabel + '</div>' +
+          '<div class="rl-title">' + r.title + '</div>' +
+          '</button>';
+      }).join('');
+    } else {
+      relBlock.style.display = 'none';
+    }
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('page-article').classList.add('active');
+    setNavActive('');
+    window.scrollTo(0, 0);
+    if (!skipHistory) history.pushState({ page: 'article', id: article.id }, '', '/article/' + article.id);
+  }
+
+  // ── TOPIC FILTER ──────────────────────────────────────────────────────────
+
+  var activeTopic = 'all';
+
+  document.querySelectorAll('.topic-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      activeTopic = pill.dataset.topic;
+      document.querySelectorAll('.topic-pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      renderGrid();
+    });
+  });
+
+  // ── RENDER HOME ───────────────────────────────────────────────────────────
+
+  function renderHome() {
+    buildColumns('mast-cols', 20);
+    var featured = ARTICLES.find(function(a) { return a.featured; });
+    if (featured) {
+      var fa = AUTHORS[featured.author];
+      document.getElementById('feat-topic-lbl').textContent = featured.topicLabel;
+      document.getElementById('feat-title').textContent = featured.title;
+      document.getElementById('feat-deck').textContent = featured.deck;
+      document.getElementById('feat-author').innerHTML = fa
+        ? '<button class="author-link" onclick="showAuthor(\'' + featured.author + '\')">' + fa.name + '</button>' : '';
+      document.getElementById('feat-date').textContent = featured.date;
+      document.getElementById('feat-read-btn').onclick = function() { openArticle(featured); };
+      var featImgWrap = document.getElementById('feat-img-wrap');
+      if (featured.heroImg) {
+        document.getElementById('feat-img').src = featured.heroImg;
+        document.getElementById('feat-img').alt = featured.title;
+        featImgWrap.style.display = '';
+        featImgWrap.onclick = function() { openArticle(featured); };
+        featImgWrap.style.cursor = 'pointer';
+      } else {
+        featImgWrap.style.display = 'none';
+      }
+    }
+    renderGrid();
+  }
+
+  function renderGrid() {
+    var grid = document.getElementById('articles-grid');
+    var featured = ARTICLES.find(function(a) { return a.featured; });
+    var list = ARTICLES.filter(function(a) { return !a.featured; });
+    if (activeTopic !== 'all') list = list.filter(function(a) { return a.topic === activeTopic; });
+    grid.innerHTML = list.map(function(a) {
+      var auth = AUTHORS[a.author];
+      return '<div class="article-card" data-topic="' + a.topic + '" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+        '<div class="card-topic">' + a.topicLabel + '</div>'+
+        '<div class="card-title">' + a.title + '</div>'+
+        '<p class="card-deck">' + a.deck + '</p>'+
+        '<div class="card-meta"><button class="author-link" onclick="event.stopPropagation();showAuthor(\'' + a.author + '\')">' + (auth ? auth.name : '') + '</button>' +
+        (a.date ? '<span class="meta-dot"></span><span>' + a.date + '</span>' : '') +
+        '</div>'+
+        '<span class="card-read">Read →</span>'+
+        '</div>';
+    }).join('');
+
+    // Show/hide featured based on topic filter
+    var fs = document.getElementById('featured-section');
+    var featVisible = featured && (activeTopic === 'all' || activeTopic === featured.topic);
+    fs.style.display = featVisible ? '' : 'none';
+  }
+
+  // ── RENDER AUTHORS ────────────────────────────────────────────────────────
+
+  function renderAuthors() {
+    buildColumns('authors-cols', 8);
+    var grid = document.getElementById('authors-grid');
+    var cards = '';
+    var allAuthors = Object.values(AUTHORS);
+    allAuthors.forEach(function(au, idx) {
+      var essays = ARTICLES.filter(function(a) { return a.author === au.id; });
+      var essayLinks = essays.map(function(a) {
+        return '<button class="essay-link" onclick="openArticle(ARTICLES.find(function(x){return x.id===\'' + a.id + '\'}))">'+
+          '<div class="essay-link-title">' + a.title + '</div>'+
+          '<div class="essay-link-meta">' + a.topicLabel + ' · ' + a.date + '</div>'+
+          '</button>';
+      }).join('');
+      cards += '<div class="author-card" onclick="showAuthor(\'' + au.id + '\')" style="cursor:pointer;">'+
+        '<div class="author-avatar">' + au.initials + '</div>'+
+        '<div class="author-name">' + au.name + '</div>'+
+        '<div class="author-location">' + au.location + '</div>'+
+        '<div class="author-beat">' + au.beat + '</div>'+
+        '<div class="edu-label">Education</div>'+
+        '<div class="edu-value">' + au.education + '</div>'+
+        '<p class="author-bio">' + au.bio + '</p>'+
+        (essays.length ? '<div class="author-essays-lbl">Recent essays</div>' + essayLinks : '') +
+        '</div>';
+    });
+    // Empty slots
+    for (var i = 0; i < EMPTY_SLOTS; i++) {
+      cards += '<div class="author-card empty">'+
+        '<div class="author-avatar empty-av">?</div>'+
+        '<div class="author-name">Coming Soon</div>'+
+        '<p class="author-bio" style="margin-top:10px;">This contributor will be announced shortly.</p>'+
+        '</div>';
+    }
+    grid.innerHTML = cards;
+  }
+
+  // ── RENDER ABOUT ──────────────────────────────────────────────────────────
+
+  function renderAbout() { buildColumns('about-cols', 6); }
+
+  // ── RENDER CONNECT ────────────────────────────────────────────────────────
+
+  function renderConnect() { buildColumns('connect-cols', 6); }
+
+  // ── INIT ──────────────────────────────────────────────────────────────────
+
+  renderHome();
+  renderAuthors();
+  renderAbout();
+  renderConnect();
+
+  (function() {
+    var path = location.pathname;
+    if (path.startsWith('/article/')) {
+      var aid = path.replace('/article/', '');
+      var art = ARTICLES.find(function(a) { return a.id === aid; });
+      if (art) { openArticle(art, true); return; }
+    }
+    if (path.startsWith('/author/')) {
+      var uid = path.replace('/author/', '');
+      if (AUTHORS[uid]) { showAuthor(uid, true); return; }
+    }
+    showPage(pathToPage(path), true);
+  })();
+  </script>
+
+  <!-- Twitter/X widget (renders embedded tweets) -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <!-- Datawrapper iframe resize (runs once, handles all DW iframes on page) -->
+  <script>(function(){window.addEventListener('message',function(e){if(e.data['datawrapper-height']!==void 0){var t=document.querySelectorAll('iframe');for(var n in e.data['datawrapper-height'])for(var r=0;r<t.length;r++)if(t[r].contentWindow===e.source){t[r].style.height=e.data['datawrapper-height'][n]+'px'}}})})();</script>
+
+  <!-- ══ ARTICLE BODY TEMPLATES ══════════════════════════════════════════════ -->
+
+  <template id="body-a1">
+    <p>How does a congressman who's been in the House of Representatives for 14 years, winning 4 primaries on average by a margin of 50.25 percentage points, with the other 3 going uncontested, suddenly lose his seat in a primary?</p>
+    <p>You're not the only one who has questions.</p>
+    <p>Thomas Massie, the Republican Representative for Kentucky's fourth district, lost to former Navy SEAL and political newcomer Ed Gallerin in the party's primary nomination for the upcoming midterms this fall, securing 54.9% to Massie's 45.1%.</p>
+    <p>From a purely statistical sense, this seems like a political impossibility. Based on the numbers from the last contested primary, Gallerin needed to flip 64 points to win in a race where Massie's margins have only grown over time.</p>
+
+    <div class="art-dw-wrap">
+      <div class="art-dw-label">Thomas Massie — Contested Republican House Primary Results</div>
+      <iframe title="Thomas Massie - Contested Republican House Primary Results" aria-label="Line chart" id="datawrapper-chart-JWqn9" src="https://datawrapper.dwcdn.net/JWqn9/1/" scrolling="no" frameborder="0" style="width:0;min-width:100%!important;border:none;" height="422" data-external="1"></iframe>
+    </div>
+
+    <h2>So what was different this time around?</h2>
+    <p>Many point to Trump's endorsement of Gallerin as the pivotal factor, but this doesn't paint a full picture.</p>
+    <p>During the 2020 elections, Massie also faced public denunciation from the POTUS over disagreements regarding the COVID stimulus packages, with Trump calling for voters to remove him from office:</p>
+
+    <blockquote class="twitter-tweet" data-dnt="true">
+      <a href="https://x.com/realDonaldTrump/status/1243534445367492608"></a>
+    </blockquote>
+
+    <p>Massie went on to win that primary by 62 points.</p>
+
+    <p>What's different this time around is that this was the most expensive primary in US history. Somewhere in the ballpark of thirty-five million dollars was spent on the two campaigns.</p>
+    <p>There are, of course, overhead costs of running a campaign, such as wages, office rent, and legal fees.</p>
+    <p>However, these overheads don't add up to thirty-five million, especially in a Republican primary in Kentucky.</p>
+    <p>But it doesn't mean invoices for chartered jets or fancy galas with lobster dinners either.</p>
+    <p>This means that organizations with targeted agendas spent tens of millions of dollars to deliberately get Thomas Massie out of Congress.</p>
+    <p>On paper, with the historical results that Massie has recorded, it would seem almost impossible for him to suddenly lose like he did. It feels like these organizations bought the election in a sense.</p>
+    <p>But what's the deeper story behind this upset? Why did these organizations choose to spend millions, and perhaps more importantly, how does the system that enables them to do this work?</p>
+
+    <h2>The Hidden Side of American Democracy</h2>
+    <p>A Political Action Committee, simply known as a PAC, is an organization whose goal is to raise and distribute money to fund campaigns to get candidates elected, or, conversely, out of office.</p>
+    <p>Historically, these have been labour unions and trade associations. The first PAC in America was established by the Congress of Industrial Organizations (CIO-PAC) in 1943, supporting the re-election of Franklin D. Roosevelt because of his support for organized labour and the working class.</p>
+    <p>Over the years, they have evolved to expand a wider array of interest groups due to constant reforms accelerating PAC growth. Corporate PACs started to appear in the 70s, helping fund candidates whose platforms they believed to be favourable for their company.</p>
+    <p>Defence, healthcare, and financial companies dominated direct candidate spending in 2024 based on public filings to the FEC.</p>
+
+    <div class="art-pac">
+      <div class="art-pac-eyebrow">U.S. Campaign Finance · OpenSecrets / FEC Data</div>
+      <div class="art-pac-title">Direct PAC Contributions to Candidates by Sector</div>
+      <div class="art-pac-sub">2023–2024 election cycle. Direct PAC contributions to federal candidates only, sourced from FEC filings.</div>
+      <div class="art-pac-cards">
+        <div class="art-pac-card"><div class="art-pac-rank">1</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#4a8fd4"></span><span class="art-pac-label">Finance, Insurance &amp; Real Estate</span></div><div class="art-pac-cos">Securities &amp; investment · banking · insurance · real estate</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#4a8fd4;width:100%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$82.6M</div><div class="art-pac-exact">$82,625,250 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">2</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#5aaa7a"></span><span class="art-pac-label">Health</span></div><div class="art-pac-cos">Pharmaceuticals · hospitals · health professionals · HMOs</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#5aaa7a;width:63%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$52.2M</div><div class="art-pac-exact">$52,218,615 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">3</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#d4a043"></span><span class="art-pac-label">Agribusiness</span></div><div class="art-pac-cos">Crop production · food processing · dairy · forestry · tobacco</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#d4a043;width:37%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$30.7M</div><div class="art-pac-exact">$30,731,589 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">4</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#d4724a"></span><span class="art-pac-label">Energy &amp; Natural Resources</span></div><div class="art-pac-cos">Oil &amp; gas · electric utilities · mining · renewables</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#d4724a;width:36%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$30.1M</div><div class="art-pac-exact">$30,111,590 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">5</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#8b7ed8"></span><span class="art-pac-label">Communications &amp; Electronics</span></div><div class="art-pac-cos">Telecom · TV/cable · internet · electronics manufacturing</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#8b7ed8;width:29%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$23.7M</div><div class="art-pac-exact">$23,700,208 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">6</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#7a8a94"></span><span class="art-pac-label">Defense</span></div><div class="art-pac-cos">Defense aerospace · defense electronics · weapons manufacturers</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#7a8a94;width:15%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$12.8M</div><div class="art-pac-exact">$12,777,337 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">7</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#c4607a"></span><span class="art-pac-label">Air Transport</span></div><div class="art-pac-cos">Airlines · freight · airports</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#c4607a;width:14%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$11.3M</div><div class="art-pac-exact">$11,292,587 exact</div></div></div>
+        <div class="art-pac-card"><div class="art-pac-rank">8</div><div class="art-pac-info"><div class="art-pac-name-row"><span class="art-pac-dot" style="background:#6aaa5a"></span><span class="art-pac-label">Automotive</span></div><div class="art-pac-cos">Car manufacturers · dealers · auto parts &amp; repair</div><div class="art-pac-track"><div class="art-pac-fill" style="background:#6aaa5a;width:10%"></div></div></div><div class="art-pac-amt"><div class="art-pac-num">$7.9M</div><div class="art-pac-exact">$7,945,029 exact</div></div></div>
+      </div>
+      <div class="art-pac-footer">Source: <a href="https://www.opensecrets.org/political-action-committees-pacs/industry-breakdown/2024" target="_blank">OpenSecrets PAC industry pages</a> · FEC data released Feb. 6, 2025. Excludes Super PAC independent expenditures, individual donations, lobbying, and soft money.</div>
+    </div>
+
+    <p>There has also been a significant rise in ideological and single-issue PACs since CIO-PAC, centred around ideological causes rather than a sponsoring organization. The biggest today include:</p>
+    <ul>
+      <li>The <strong>National Rifle Association Political Victory Fund (NRA-PVF)</strong> opposing gun control and advocating for second amendment rights.</li>
+      <li>The <strong>Sierra Club PAC</strong> focused on environmental advocacy and climate change.</li>
+      <li>The <strong>Planned Parenthood Action Fund</strong> who aim to expand reproductive rights and ensure abortion access.</li>
+    </ul>
+    <p>Above, you may have noticed the term "bought election." However, it isn't that simple. PACs can't just donate whatever they feel like and keep pumping money until their favoured candidate wins.</p>
+    <p>For the 2025–2026 election cycle, the Federal Election Commission (FEC) has set the limit on the amount an individual can donate to $3,500 per election per candidate, up from $3,300 last cycle.</p>
+    <p>Since primary and general elections are considered separate, this means an individual can donate the limit twice, adding up to $7,000 for the entire electoral process.</p>
+    <p>Individuals can also give up to $44,300 per year to each National Party Committee, such as the DNC or RNC, though these contributions are primarily for national elections.</p>
+    <p>However, for PACs, donations are strictly capped at $5,000 per federal candidate per election. This means a $5,000 contribution for the entire PAC — not $5,000 per member.</p>
+    <p>For example, one of the biggest PACs in America, the NRA, which has around 5 million members, only gave a total of $868,651 last cycle — not to one candidate, but singular donations of $5,000 or under across dozens of campaigns across the country and larger ones to several Republican committees.</p>
+    <p>So you must be thinking, how do these PACs make a real impact on elections if they can only give $5,000 to each candidate?</p>
+    <p>The truth is, direct contributions from PACs are largely irrelevant these days.</p>
+    <p>But then how is $35 million being spent on a Republican Primary for the House of Representatives in Kentucky's fourth district?</p>
+    <p>The real answer lies in two 2010 Supreme Court rulings:</p>
+    <ul>
+      <li><strong>Citizens United v. FEC</strong></li>
+      <li><strong>SpeechNow.org v. FEC</strong></li>
+    </ul>
+    <p>In the first landmark ruling, the conservative non-profit took the FEC to court after it blocked the distribution of <em>Hillary: The Movie</em>, the organization's documentary before the 2008 Democratic Primary, citing that they violated the 2002 Bipartisan Campaign Reform Act.</p>
+    <p>The act banned corporations and unions from funding broadcast ads that mention a federal candidate within 30 days of a primary or 60 days of a general election.</p>
+    <p>The Supreme Court ruled 5-4 in favour of Citizens United, saying the government couldn't restrict independent political expenditures — relying on the core argument that political spending is a form of free speech protected under the First Amendment.</p>
+    <p>Regarding the latter case, prior FEC rules required any group raising over $1,000 for political purposes to register as a PAC, which would subject them to additional regulations and the $5,000 donation limit.</p>
+    <p>SpeechNow.org took the FEC to the DC Circuit Court, arguing that if independent expenditures could no longer be limited, then neither could contributions to groups that made independent political expenditures.</p>
+    <p>The two rulings set a precedent that independent political expenditures qualified as free speech and could no longer be capped. Together, they allowed for the creation of the Super PAC — the real culprit behind all this new-age political spending, especially in the case of Mr. Massie.</p>
+
+    <h2>Tying It Together</h2>
+    <p>So instead of direct contributions to campaigns, Super PACs focus on independent political expenditures, to which there is no limit. Although they don't directly spend or coordinate with candidates and campaigns, they spend funds on:</p>
+    <ul>
+      <li><strong>Broadcast advertising:</strong> Purchasing commercial slots on television and radio, developing advertisements to promote or attack candidates</li>
+      <li><strong>Digital campaigns:</strong> Running internet advertising and social media campaigns</li>
+      <li><strong>Voter outreach:</strong> Direct mail, canvassing, polling station rides, phone banks</li>
+      <li><strong>Administrative costs:</strong> Consulting, legal expenses, office space</li>
+    </ul>
+    <p>So in KY-04, Super PACs spent approximately $35 million on costs like these to convince Republicans to send their favoured candidate into the general election, an almost guaranteed seat in the House. KY-04 hasn’t elected a democratic candidate since 1966.  </p>
+    <p>The biggest spenders in the race include:</p>
+    <ul>
+      <li><strong>MAGA KY</strong>, a Trump-aligned PAC formed with the sole purpose of unseating Massie, primarily supported by Pro-Israel billionaires</li>
+      <li><strong>The United Democracy Project</strong>, AIPAC's Super PAC, whose stated goal is to build strong U.S.-Israel relations</li>
+      <li><strong>The Republican Jewish Coalition (RJC)</strong>, who aim to foster and enhance ties between the American Jewish community and Republican lawmakers</li>
+      <li><strong>Kentucky 4th PAC</strong>, a Super PAC formed to defend Massie's seat, with significant support from the Libertarian-leaning Protect Freedom PAC</li>
+      <li><strong>The Kentucky First PAC</strong>, a smaller pro-Massie group oriented around defending his libertarian branch of conservatism against MAGA</li>
+      <li>The respective campaigns of both Gallerin and Massie</li>
+    </ul>
+    <p>Although these PACs have to disclose their spending to the FEC, there is a lot of gray area in disclosing where their funding came from.</p>
+    <p>The Super PACs have to disclose who donated to them, but if that organization is a 501(c)(4) "social welfare organization," the organization never has to disclose where it got its money from.</p>
+    <p>So if a wealthy donor wants to anonymously spend, for example, $10 million to get Gallerin elected, the path looks like this:</p>
+    <ol>
+      <li>Write a cheque to a 501(c)(4) they control or trust — commonly a shell organization</li>
+      <li>That 501(c)(4) writes a cheque to the Super PAC</li>
+      <li>The Super PAC uses those funds to run TV ads or fund other expenses</li>
+      <li>They disclose to the FEC that the 501(c)(4) donated X amount of cash</li>
+    </ol>
+    <p>However, nobody knows that the 501(c)(4) was funded by one person or a small circle.</p>
+    <p>This creates a problematic environment of "shadow spending," where anonymous elites can pump millions into a campaign, influencing elections all across America with no real transparency and no direct connection to the local districts in which these elections occur.</p>
+    <p>So why did these groups spend tens of millions to unseat Massie? The narrative they want to push is that Massie is anti-Republican, pro-Democrat, and he needs to go in order to achieve the MAGA agenda more efficiently — but this doesn't paint the whole picture.</p>
+    <p>As stated above, Massie has been critical of the POTUS and voted against the Republicans a handful of times, but this has been going on for a while. When Trump publicly called on voters to remove him in 2020, no MAGA PACs were formed and there was nowhere near the same level of spending.</p>
+    <p>But you may have noticed a pattern in the PACs committed to unseating Massie — they all have declared support for the interests of Israel, with two of the three solely focused on Jewish and Israeli interests.</p>
+    <p>In a district with approximately 500 Jewish residents out of a total 768,780 people, the question of U.S.-Israel relations hardly seems relevant, especially in a state with far more pressing issues such as high poverty rates, healthcare, and economic development.</p>
+    <p>However, Massie has been highly critical of Israel, calling on an end to all foreign aid to the nation, openly labelling the situation in Gaza a genocide, and was the sole member of Congress to vote against a House resolution reaffirming Israel's right to exist.</p>
+    <p>This is why these groups have poured millions into this race. Not because they care about Kentucky or making Republican lawmaking more efficient, but because they perceive that their ideological interests and causes are threatened by Massie.</p>
+    <p>AIPAC is famously known for being bipartisan, supporting over 80% of House Representatives, so Republican lawmaking is largely irrelevant to them.</p>
+    <p>And as stated above, donors can pour however much they desire into these Super PACs through 501(c)(4)s while remaining completely anonymous.</p>
+    <p>Although we know in this race that pro-Israel billionaires such as Paul Singer and Miriam Adelson contributed significantly to MAGA KY because they donated directly, the real danger lies in what we don't know — or rather, who.</p>
+    <p>Allowing elites to hijack elections they have no meaningful connection to, over personal grievances, is hardly democratic. The Supreme Court may have ruled that political spending is protected as a form of free speech, but should it be protected as <em>anonymous</em> speech?</p>
+    <p>In a country where free and fair elections are a founding pillar, one would expect, at the very least, a higher degree of transparency around financial disclosures and donor information, even when the money flows through a 501(c)(4).</p>
+    <p>Campaigning is an art form, and every art form requires artists. It is only sensible to give the paintbrushes to the people with meaningful stakes in the election or, at minimum, to let them know who's painting the picture.</p>
+  </template>
+
+  <template id="body-a2">
+    <p>On May 30, after a long and tumultuous campaign, the Conservative Party of BC elected former MP Kerry-Lynne Findlay to head their party, replacing interim leader Trevor Halford, who took over following John Rustad's narrow defeat at the hands of the incumbent NDP.</p>
+    <p>A self-described "true blue" conservative, Findlay's shock victory defied the odds, rallying support against frontrunner and former MLA Caroline Elliot. In the final ballot, Findlay received 51% of eligible votes to Elliot's 49%, with votes transferred from less popular candidates Peter Milobar, Yuri Fulmer, and Iain Black. The outcome came as a surprise, as betting odds favoured Elliot as the campaign's winner, with pre-ballot odds giving her a 70% chance of victory compared to 20% for Findlay.</p>
+    <p>Regardless, the BC Conservatives' new leader gives hope to centre-right and right-wing voters, who witnessed the BC NDP re-elected to provincial government on a razor thin margin in 2024. Findlay, now known to conservatives as KLF, first entered government on the federal level, winning a seat as the MP for Delta-Richmond East. In her time under then Prime Minister Stephen Harper, she served as Associate Minister of National Defense and later Minister of National Revenue, among other roles. Under her leadership, Harper's conservative government managed the first federal budget surplus since the 2008 recession, giving Findlay strong credentials among fiscal conservatives for managing a government's balance sheet. No surprise, she's used her past performance as an example of how she would balance BC's finances, cut the deficit, and restore the province's credit rating to make borrowing more affordable.</p>
+    <p>Returning to Parliament in 2019 after losing her seat in 2015, Findlay later served as opposition leader Pierre Poilievre's Chief Whip, overseeing the party's dominant polling position in 2023 to 2025, before its collapse in the face of Mark Carney's resuscitated Liberal Party. Having lost her lower-mainland seat in last spring's federal election, Findlay finally turned to provincial politics, launching her 2026 campaign to lead BC's Conservatives under the slogan: "More Freedom, Less Government."</p>
+    <p>In a race defined by concerns over property rights and land title, Findlay made her case as an experienced, loyally blue defender of the Canadian centre-right — one who would repeal BC's controversial Declaration of the Rights of Indigenous Peoples Act (known as DRIPA), repeal SOGI content from the provincial curriculum, and foster economic growth by fast-tracking the lucrative resource industries of BC. Reflecting on her victory, Findlay reminded Conservatives that they needed to remain united in their support of the party, otherwise they risk handing the advantage to the BC NDP on their left and OneBC on their right, who have the potential to split the right-wing vote.</p>
+
+    <h2>A Cautiously Optimistic Landscape</h2>
+    <p>Currently, the next BC provincial election isn't until 2028, though there remains the elusive possibility of an early election if Premier David Eby faces rebellious MLAs in his NDP caucus. Still, Findlay gives BC conservatives cause for cautious optimism, as public opinion seems to have shifted in their favour.</p>
+    <p>Polling by Research Co. last week showed Conservative support tied with the NDP at 42%, closing their 6% lead from October. Leader approval remains disadvantageous however, with a -3% net favourability for Findlay compared to +13% for Eby, mirroring a trend also seen in federal polling. More optimistically, a Léger poll also from June shows Conservatives leading with 45% to the NDP's 41%, with 27% of the sample listing Findlay as the preferred Premier, against 30% for David Eby.</p>
+    <p>With current figures looking workable for Conservatives, the next provincial election is certainly one to keep an eye on.</p>
+
+    <h2>The Road Ahead</h2>
+    <p>For now, Findlay will need to become an MLA by winning a local election, a position she has yet to hold. Only by entering Victoria's legislative chamber will she be able to present herself as the next potential Premier, able to challenge the NDP in debates and hold the government to account.</p>
+    <p>Until then, she leads a party that needs time to rebuild after a messy leadership contest — but one which could very well be the next government of British Columbia.</p>
+  </template>
+
+</body>
+</html>

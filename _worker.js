@@ -38,6 +38,11 @@ const OG = {
     title: "Inside the SpaceX IPO: How Elon Musk's $2 Trillion Bet Is Dividing Wall Street — Agora",
     desc:  "The largest IPO in history swung from record highs to a stunning crash in weeks. Now Wall Street's top banks can't agree on where SPCX goes next.",
     img:   null
+  },
+  'video-game-prices-rising': {
+    title: "How Rising Prices Are Changing One of the World's Most Accessible Hobbies — Agora",
+    desc:  "$80 games, $2,000 graphics cards, and subscriptions that never end. Gaming still delivers unmatched value per hour — but the price of simply joining keeps climbing.",
+    img:   null
   }
 };
 

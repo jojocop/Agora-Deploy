@@ -43,6 +43,11 @@ const OG = {
     title: "How Rising Prices Are Changing One of the World's Most Accessible Hobbies — Agora",
     desc:  "$80 games, $2,000 graphics cards, and subscriptions that never end. Gaming still delivers unmatched value per hour — but the price of simply joining keeps climbing.",
     img:   null
+  },
+  'nexgen-energy-nxe-stock-pitch': {
+    title: "The Agora Stock Pitch: Why We're Buying NexGen Energy (NXE) — Agora",
+    desc:  "The mine is licensed, uranium contract prices sit at 18-year highs, and the stock fell 30% anyway. Our first monthly pitch: BUY, with a 12 to 18 month target of C$18.",
+    img:   null
   }
 };
 
@@ -52,7 +57,7 @@ export default {
     const path = url.pathname;
 
     // Serve static files directly
-    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff2?|ttf|xml|txt)$/i.test(path)) {
+    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|woff2?|ttf|xml|txt|pdf)$/i.test(path)) {
       return env.ASSETS.fetch(request);
     }
 

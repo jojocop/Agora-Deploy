@@ -80,6 +80,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://agorapublication.com/article/nexgen-energy-nxe-stock-pitch</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
   <url>
     <loc>https://agorapublication.com/author/joven-heer</loc>
@@ -103,6 +109,11 @@
   </url>
   <url>
     <loc>https://agorapublication.com/author/jack-musselman</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://agorapublication.com/author/gurkaran-deol</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

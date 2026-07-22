@@ -1128,12 +1128,19 @@
       linkedin: 'https://www.linkedin.com/in/gurkaran-deol-026639288/',
       bio: 'Gurkaran is a Health Science student at Western University from Toronto. He writes about technology, gaming, and the consumer side of modern industries.',
     },
+    team: {
+      id: 'team', slug: 'agora-team', initials: 'Α', name: 'The Agora Team', hidden: true,
+      location: 'The Forum', beat: 'Equity Research',
+      education: 'Agora Publication',
+      bio: 'The collective research desk of Agora. Once a month, the team puts one stock and one thesis on record, researched, argued, and published in full alongside the slide deck.',
+    },
   };
 
   var EMPTY_SLOTS = 0;
 
   var ARTICLES = [
-    { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: true, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
+    { id: 'a10', slug: 'nexgen-energy-nxe-stock-pitch', topic: 'finance', topicLabel: 'Finance · Stock Pitch', title: "The Agora Stock Pitch: Why We're Buying NexGen Energy (NXE)", deck: 'The mine is licensed, uranium contract prices sit at 18-year highs, and the stock fell 30% anyway. Our first monthly pitch: BUY, with a 12 to 18 month target of C$18.', author: 'team', date: 'July 22, 2026', featured: true, heroImg: '/nexgen.jpg', heroCredit: 'Photo: NexGen Energy', imgPos: 'center 55%' },
+    { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: false, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
     { id: 'a9', slug: 'video-game-prices-rising', topic: 'business', topicLabel: 'Business · Analysis', title: "How Rising Prices Are Changing One of the World's Most Accessible Hobbies", deck: '$80 games, $2,000 graphics cards, and subscriptions that never end. Gaming still delivers unmatched value per hour — but the price of simply joining keeps climbing.', author: 'gurkaran', date: 'July 19, 2026', featured: false, heroImg: '/videogames.jpg', heroCredit: 'Photo: Wikimedia Commons', imgPos: 'center 45%' },
     { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
     { id: 'a5', slug: 'maid-eligibility-canada', topic: 'philosophy', topicLabel: 'Philosophy · Analysis', title: 'Expanding MAID Eligibility: The Challenge of Balancing Public Autonomy and Safety', deck: 'Canada has until 2027 to decide whether severe mental illness qualifies for assisted dying. What the debate reveals about democracy, rights, and where we draw the line.', author: 'jack', date: 'July 1, 2026', featured: false, heroImg: '/MAID.jpg', heroCredit: 'Photo: iStock', imgPos: 'center 40%' },
@@ -1590,7 +1597,7 @@
     buildColumns('authors-cols', 8);
     var grid = document.getElementById('authors-grid');
     var cards = '';
-    var allAuthors = Object.values(AUTHORS);
+    var allAuthors = Object.values(AUTHORS).filter(function(au) { return !au.hidden; });
     allAuthors.forEach(function(au, idx) {
       var essays = ARTICLES.filter(function(a) { return a.author === au.id; });
       var essayLinks = essays.map(function(a) {
@@ -3604,6 +3611,277 @@
         <li><a href="https://www.statista.com/topics/868/video-games/" style="color:var(--gold);text-decoration:underline;">Statista</a> — Global video game industry revenue and market statistics</li>
         <li><a href="https://www.bls.gov/data/inflation_calculator.htm" style="color:var(--gold);text-decoration:underline;">U.S. Bureau of Labor Statistics, CPI Inflation Calculator</a> — Inflation adjustment used in the price comparison chart</li>
       </ul>
+    </div>
+  </template>
+
+  <template id="body-a10">
+    <div style="margin:0 0 36px;padding:24px 28px 20px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <table role="presentation" style="width:100%;border-collapse:collapse;">
+        <tr>
+          <td style="vertical-align:top;">
+            <div style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--text);letter-spacing:-.01em;">NexGen Energy Ltd.</div>
+            <div style="font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--text3);margin-top:4px;">NYSE / TSX: <span style="color:var(--gold);font-weight:600;">NXE</span> &nbsp;·&nbsp; ASX: NXG &nbsp;·&nbsp; Uranium · Athabasca Basin, Saskatchewan</div>
+            <div style="margin-top:14px;">
+              <span style="font-family:var(--serif);font-size:34px;font-weight:600;color:var(--text);">US$9.25</span>
+              <span style="font-family:var(--sans);font-size:13px;color:var(--text2);margin-left:8px;">C$13.00</span>
+              <span style="font-family:var(--sans);font-size:11px;font-weight:600;color:#b5544f;margin-left:12px;background:rgba(181,84,79,.1);padding:3px 8px;border-radius:2px;">&#9660; 33.5% from Jan high</span>
+            </div>
+          </td>
+          <td style="vertical-align:top;text-align:right;white-space:nowrap;">
+            <div style="display:inline-block;background:var(--gold);color:var(--bg);font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 18px;border-radius:2px;">Buy</div>
+            <div style="font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-top:12px;">12–18 mo. Target</div>
+            <div style="font-family:var(--serif);font-size:22px;font-weight:600;color:#2e8b57;">US$13 <span style="font-size:13px;color:var(--text2);">· C$18</span></div>
+            <div style="font-family:var(--sans);font-size:11px;color:var(--text2);">~38% implied upside</div>
+          </td>
+        </tr>
+      </table>
+      <div style="margin-top:18px;">
+        <div style="display:flex;justify-content:space-between;font-family:var(--sans);font-size:10px;color:var(--text3);margin-bottom:4px;"><span>52-wk low US$6.26</span><span>52-wk high US$13.96</span></div>
+        <div style="position:relative;height:5px;background:var(--bg2);border-radius:3px;">
+          <div style="position:absolute;left:0;top:0;height:5px;width:38.8%;background:linear-gradient(to right, var(--border2), var(--gold));border-radius:3px;"></div>
+          <div style="position:absolute;left:38.8%;top:-3px;width:11px;height:11px;background:var(--gold);border:2px solid var(--bg);border-radius:50%;margin-left:-6px;"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;margin:20px 0 12px;">
+        <button id="nxe-r3" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">3M</button>
+        <button id="nxe-r6" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">6M</button>
+        <button id="nxe-r12" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">1Y</button>
+        <button id="nxe-rall" style="font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border:.5px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:2px;">All</button>
+      </div>
+      <div style="height:280px;position:relative;"><canvas id="chart-nxe"></canvas></div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:12px;letter-spacing:.02em;">Note: Monthly closes since January 2023, NYSE, approximate. Dashed line marks our US$13 target. Gold point: the January 2026 peak near the all-time high. Red point: today. Source: NYSE/TSX quotes as of Jul 16, 2026.</div>
+    </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          if (typeof Chart === 'undefined') return;
+          var allLabels = ["Jan '23","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan '24","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan '25","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan '26","Feb","Mar","Apr","May","Jun","Jul '26"];
+          var allValues = [4.10, 4.30, 3.90, 4.20, 4.35, 4.60, 4.90, 4.75, 5.10, 5.60, 6.40, 6.90, 7.40, 8.30, 7.90, 7.50, 7.80, 7.30, 6.90, 6.50, 7.10, 7.60, 8.20, 7.60, 7.10, 6.40, 5.60, 4.90, 5.70, 6.30, 6.60, 7.10, 7.90, 9.20, 10.80, 12.10, 13.92, 12.60, 11.20, 10.40, 10.00, 9.60, 9.25];
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#aaa' : '#444';
+          var lineColor = isDark ? '#E8C96A' : '#B8860B';
+          var canvas = document.getElementById('chart-nxe');
+          if (!canvas) return;
+          var ctx = canvas.getContext('2d');
+
+          var targetLine = {
+            id: 'nxeTarget',
+            afterDraw: function(chart) {
+              var yPos = chart.scales.y.getPixelForValue(13);
+              var c = chart.ctx;
+              c.save();
+              c.beginPath();
+              c.strokeStyle = isDark ? 'rgba(62,201,122,.5)' : 'rgba(46,139,87,.45)';
+              c.lineWidth = 1;
+              c.setLineDash([4, 4]);
+              c.moveTo(chart.scales.x.left, yPos);
+              c.lineTo(chart.scales.x.right, yPos);
+              c.stroke();
+              c.font = "10px 'Jost', sans-serif";
+              c.fillStyle = isDark ? '#3ec97a' : '#2e8b57';
+              c.textAlign = 'right';
+              c.fillText('Target US$13', chart.scales.x.right - 4, yPos - 6);
+              c.restore();
+            }
+          };
+
+          function render(months) {
+            var labels = allLabels.slice(-months);
+            var values = allValues.slice(-months);
+            var peakIdx = values.indexOf(Math.max.apply(null, values));
+            var grad = ctx.createLinearGradient(0, 0, 0, 280);
+            grad.addColorStop(0, isDark ? 'rgba(232,201,106,.16)' : 'rgba(184,134,11,.12)');
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            if (window.chartNxe) { try { window.chartNxe.destroy(); } catch (e) {} }
+            window.chartNxe = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: labels,
+                datasets: [{
+                  data: values,
+                  borderColor: lineColor,
+                  borderWidth: 2.5,
+                  backgroundColor: grad,
+                  fill: true,
+                  tension: 0.3,
+                  pointRadius: values.map(function(v, i) { return (i === peakIdx || i === values.length - 1) ? 5 : 0; }),
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                  pointBackgroundColor: values.map(function(v, i) { return i === values.length - 1 ? '#b5544f' : lineColor; }),
+                  pointBorderColor: isDark ? '#0c0f18' : '#fff',
+                  pointBorderWidth: 1.5,
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                hover: { mode: 'index', intersect: false },
+                plugins: {
+                  legend: { display: false },
+                  tooltip: { backgroundColor: isDark ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,.95)', titleColor: isDark ? '#fff' : '#000', bodyColor: isDark ? '#ddd' : '#333', padding: 10, borderColor: isDark ? '#555' : '#ccc', borderWidth: 1, displayColors: false, callbacks: { label: function(c) { return 'US$' + c.parsed.y.toFixed(2) + ' / share'; } } }
+                },
+                scales: {
+                  x: { grid: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 } },
+                  y: { suggestedMin: Math.max(0, Math.floor(Math.min.apply(null, values)) - 1), suggestedMax: 14.5, grid: { color: isDark ? 'rgba(200,200,200,.08)' : 'rgba(0,0,0,.05)' }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 10 }, callback: function(v) { return '$' + v; } } }
+                }
+              },
+              plugins: [targetLine]
+            });
+          }
+
+          var btns = [[document.getElementById('nxe-r3'), 3], [document.getElementById('nxe-r6'), 6], [document.getElementById('nxe-r12'), 13], [document.getElementById('nxe-rall'), allValues.length]];
+          function setBtns(active) {
+            btns.forEach(function(b) {
+              var on = b[1] === active;
+              b[0].style.background = on ? 'var(--gold)' : 'transparent';
+              b[0].style.color = on ? 'var(--bg)' : 'var(--text2)';
+              b[0].style.borderColor = on ? 'var(--gold)' : 'var(--border2)';
+            });
+          }
+          btns.forEach(function(b) {
+            b[0].addEventListener('click', function() { render(b[1]); setBtns(b[1]); });
+          });
+          render(allValues.length);
+          setBtns(allValues.length);
+        }, 80);
+      })();
+    </script>
+
+    <p>Every month, the Agora team puts one stock and one thesis on record. This month: NexGen Energy, the company behind the largest uranium mine under development in the Western world, and what we think is one of the strangest disconnects on the market right now.</p>
+
+    <p>Here is the short version: the business got materially stronger in 2026, and the stock fell 30% anyway.</p>
+
+    <h2>What Just Changed</h2>
+
+    <p>NexGen owns 100% of the Rook I project in Saskatchewan's Athabasca Basin. It has no revenue; the value is the deposit. On March 5, 2026, the Canadian Nuclear Safety Commission issued the final construction licence. Twelve years of permitting risk ended that day, and the single biggest question in the company's history was answered. Construction begins this summer and takes about four years.</p>
+
+    <p>The market's response was to sell. The stock slid from a January peak near US$14 to about $9.25, dragged down by a soft uranium spot price and a headline Q1 loss. Look closer at that loss and $129 million of it is a non-cash accounting charge on convertible notes, the kind that actually grows when the share price rises. Meanwhile, the price that matters, the long-term contract price utilities sign, sits near US$93 a pound: the highest in over 18 years.</p>
+
+    <p>Risk went down. Price went down with it. That gap is the pitch.</p>
+
+    <h2>The Grade Engine</h2>
+
+    <p>Arrow, the deposit at the heart of Rook I, is the entire economic argument. Its ore runs 20 to 30 times richer than the global average. One tonne of Arrow ore yields roughly 50 pounds of uranium; a typical mine gets about 2. That grade translates into a cash cost near US$10 a pound, a build that pays itself back in roughly a year, and a 45% IRR at a US$95 uranium price. At today's contract price, the margin is over US$80 a pound on up to 30 million pounds a year, about a quarter of global mine supply, from one of the safest mining jurisdictions on Earth.</p>
+
+    <div style="margin:36px 0;padding:28px 28px 20px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">Ore Grade: Arrow vs. the World</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:18px;">% U&#8323;O&#8328; content. Grade determines cost, and cost determines who survives low prices.</div>
+      <div style="height:240px;position:relative;"><canvas id="chart-nxe-grade"></canvas></div>
+      <div style="font-family:var(--sans);font-size:10.5px;color:var(--text3);margin-top:12px;letter-spacing:.02em;">Note: Only Cameco and Orano's operating mines are richer; nothing of Arrow's scale remains undeveloped in the West. Source: NexGen disclosures, NI 43-101 feasibility study, World Nuclear Association averages.</div>
+    </div>
+    <script>
+      (function() {
+        setTimeout(function() {
+          if (typeof Chart === 'undefined') return;
+          var labels = ['Arrow — M&I resources', 'Arrow — reserves', 'Global mine average', 'Kazakh ISR mines (avg)'];
+          var values = [3.10, 2.37, 0.10, 0.08];
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var textColor = isDark ? '#aaa' : '#444';
+          var goldBar = isDark ? '#E8C96A' : '#B8860B';
+          var mutedBar = isDark ? '#5b5b52' : '#d8d2c2';
+          var canvas = document.getElementById('chart-nxe-grade');
+          if (!canvas) return;
+          var ctx = canvas.getContext('2d');
+          if (window.chartNxeGrade) { try { window.chartNxeGrade.destroy(); } catch (e) {} }
+          window.chartNxeGrade = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                data: values,
+                backgroundColor: [goldBar, goldBar, mutedBar, mutedBar],
+                borderRadius: 1,
+                barPercentage: 0.68,
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              layout: { padding: { right: 56 } },
+              plugins: { legend: { display: false }, tooltip: { enabled: false } },
+              scales: {
+                x: { display: false, max: 3.5 },
+                y: { grid: { display: false }, border: { display: false }, ticks: { color: textColor, font: { family: "'Jost', sans-serif", size: 12 } } }
+              }
+            },
+            plugins: [{
+              id: 'gradeLabels',
+              afterDatasetsDraw: function(chart) {
+                var c = chart.ctx;
+                c.save();
+                c.font = "600 12px 'Jost', sans-serif";
+                c.textBaseline = 'middle';
+                c.textAlign = 'left';
+                chart.getDatasetMeta(0).data.forEach(function(bar, i) {
+                  c.fillStyle = i < 2 ? goldBar : textColor;
+                  c.fillText(values[i].toFixed(2) + '%', bar.x + 8, bar.y);
+                });
+                c.restore();
+              }
+            }]
+          });
+        }, 80);
+      })();
+    </script>
+
+    <h2>Why the Timing Works</h2>
+
+    <p>Demand is in its strongest cycle since the 1970s, pulled by two forces at once: climate policy and the power appetite of AI data centers. Supply cannot answer quickly. Producers are sold out years forward, Niger's output vanished under junta control, and any mine approved today won't produce before the mid-2030s. The EIA projects a potential U.S. utility supply gap of roughly 184 million pounds over the next decade. That is more than three years of total American reactor consumption.</p>
+
+    <p>Rook I's first pounds arrive in 2029 or 2030, timed almost exactly into the projected peak of that deficit. And NexGen has deliberately kept about 95% of its future production unsold. It is a bet that those pounds will be worth more when the shortage bites hardest.</p>
+
+    <h2>What It's Worth</h2>
+
+    <p>Our numbers: core net asset value works out to about C$10.80 a share. That is the mine at a US$95 uranium price, plus roughly C$1.33 billion of cash and physical uranium, minus the convertibles. The current price sits modestly above that, and fairly so; what you're paying for beyond it is 117 million pounds of resources outside the mine plan, the new Patterson Corridor East discovery, and strategic scarcity. Our C$18 target assumes contract prices grind toward US$105 to 110 and the stock re-rates toward 1.2 times asset value once financing lands, which is how funded developers have historically traded. The street is ahead of us: Scotiabank's target is C$22.</p>
+
+    <div style="margin:36px 0;padding:28px 28px 24px;border-top:2px solid var(--text);border-bottom:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:19px;color:var(--text);font-weight:600;letter-spacing:-.01em;">Three Ways It Plays Out</div>
+      <div style="font-family:var(--bserif);font-size:13px;color:var(--text2);margin-top:5px;margin-bottom:20px;">12 to 18 month scenarios. The debate is financing and price, not the quality of the deposit.</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+        <div style="border-top:3px solid #b5544f;background:var(--bg2);padding:16px 16px 14px;border-radius:2px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#b5544f;font-weight:600;">Bear</div>
+          <div style="font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin:6px 0 8px;">C$9</div>
+          <div style="font-family:var(--bserif);font-size:12.5px;color:var(--text2);line-height:1.6;">Contract prices fade to the US$80s; the funding gap is closed with a dilutive share sale; the schedule slips past 2030.</div>
+        </div>
+        <div style="border-top:3px solid var(--gold);background:var(--bg2);padding:16px 16px 14px;border-radius:2px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;">Base</div>
+          <div style="font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin:6px 0 8px;">C$18</div>
+          <div style="font-family:var(--bserif);font-size:12.5px;color:var(--text2);line-height:1.6;">Contract prices hold US$105–110; financing lands with modest dilution; the four-year build stays on schedule.</div>
+        </div>
+        <div style="border-top:3px solid #2e8b57;background:var(--bg2);padding:16px 16px 14px;border-radius:2px;">
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#2e8b57;font-weight:600;">Bull</div>
+          <div style="font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin:6px 0 8px;">C$25+</div>
+          <div style="font-family:var(--bserif);font-size:12.5px;color:var(--text2);line-height:1.6;">A supply squeeze prints US$120+; a landmark financing, possibly data-center capital, arrives without dilution; takeover interest surfaces.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>What Breaks It</h2>
+
+    <p>Be clear-eyed: this is a high-risk long. The build costs C$2.2 billion against C$1.33 billion of liquidity, so a financing package must land. Management has guided to one between now and early 2027, and it is both the biggest risk and the biggest catalyst on the board. Shaft-sinking is the hardest phase of underground mining, the company is a single asset, and sentiment will stay hostage to the spot price until contracts do the talking. A 52-week range of US$6.26 to $13.96 is what you sign up for.</p>
+
+    <p>Watch August 5 (Q2 results), the financing package, and new supply contracts. Judge this company by its balance sheet and its contracts, never by quarterly earnings, and size the position for mining volatility.</p>
+
+    <p><strong>The verdict: BUY.</strong> The rare setup where the business improved while the price fell.</p>
+
+    <div style="margin:36px 0;padding:22px 26px;background:var(--bg2);border-left:3px solid var(--gold);border-radius:2px;">
+      <div style="font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px;">The Full Pitch</div>
+      <div style="font-family:var(--bserif);font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:14px;">This article condenses a 17-page equity research deck: the full NAV build, sensitivity table, competitive landscape, and catalyst path.</div>
+      <a href="/nxe-stock-pitch.pdf" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:var(--gold);color:var(--bg);font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 22px;border-radius:2px;text-decoration:none;">View the Slide Deck (PDF) &rarr;</a>
+    </div>
+
+    <div style="margin-top:40px;padding-top:24px;border-top:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;">Sources</div>
+      <ul style="margin:0;padding:0;list-style:none;font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.8;">
+        <li><a href="https://www.nexgenenergy.ca/" style="color:var(--gold);text-decoration:underline;">NexGen Energy</a> — News releases (CNSC licence, Mar 5, 2026; updated Rook I economics, Aug 2024), Q1 2026 MD&amp;A, and the 2021 NI 43-101 Feasibility Study</li>
+        <li><a href="https://www.tradetech.com/" style="color:var(--gold);text-decoration:underline;">TradeTech</a> — Uranium spot and long-term price indicators</li>
+        <li><a href="https://www.eia.gov/" style="color:var(--gold);text-decoration:underline;">U.S. Energy Information Administration</a> — U.S. utility uranium supply-gap analysis</li>
+        <li><a href="https://www.world-nuclear-news.org/" style="color:var(--gold);text-decoration:underline;">World Nuclear News</a> — Reactor programs, restarts, and supply developments</li>
+        <li>Street references — Scotiabank (C$22 target, May 2026); Buy ratings at UBS, Canaccord Genuity, and Morgans</li>
+      </ul>
+      <p style="font-family:var(--bserif);font-size:12px;font-style:italic;color:var(--text3);line-height:1.7;margin-top:18px;">This pitch is for informational and educational purposes only and does not constitute investment advice, an offer, or a solicitation to buy or sell any security. Figures are believed accurate as of July 2026 but are not guaranteed. The authors may hold positions in NXE. Always do your own diligence.</p>
     </div>
   </template>
 

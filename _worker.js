@@ -2,57 +2,57 @@ const OG = {
   'massie-primary': {
     title: 'Inside The Most Expensive Primary in US History — Agora',
     desc:  'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.',
-    img:   null
+    img:   '/massie.jpg'
   },
   'findlay-bc-conservatives': {
     title: "The BC Conservatives' New Leader and What It Means for the Province — Agora",
     desc:  "Kerry-Lynne Findlay's surprise victory reshapes BC's centre-right — and puts the next provincial election firmly in play.",
-    img:   null
+    img:   '/findlay.jpg'
   },
   'paramount-wbd-merger': {
     title: "The Clock Is Ticking: Why the Paramount-Warner Bros. Deal Still Isn't Done — Agora",
     desc:  "Shareholders said yes. Lawyers filed the papers. But regulatory headwinds, a restless industry, and a ticking clock mean Hollywood's biggest merger is far from finished.",
-    img:   null
+    img:   '/paramount.jpeg'
   },
   'ai-will-not-replace-accountants': {
     title: "Why AI Will Not Replace Accountants — Agora",
     desc:  "The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.",
-    img:   null
+    img:   '/kpmg.jpg'
   },
   'maid-eligibility-canada': {
     title: "Expanding MAID Eligibility: The Challenge of Balancing Public Autonomy and Safety — Agora",
     desc:  "Canada has until 2027 to decide whether severe mental illness qualifies for assisted dying. What the debate reveals about democracy, rights, and where we draw the line.",
-    img:   null
+    img:   '/MAID.jpg'
   },
   'bc-condo-affordability': {
     title: "Federal Intent to Purchase 2,200 BC Condos Launches Larger Housing Affordability Questions — Agora",
     desc:  "As the government intervenes in the housing market with a $1.45 billion purchase plan, deeper questions about price expectations, developer incentives, and demographic shifts come into focus.",
-    img:   null
+    img:   '/condo.jpg'
   },
   'walmart-costco-home-depot-customer-first': {
     title: "Why Shoppers Choose Walmart, Costco, and Home Depot: The $1.12 Trillion Gold Standard in Retail — Agora",
     desc:  "Three of America's top five retailers by revenue share one philosophy: the customer outranks the shareholder. Here's how that bet paid off.",
-    img:   null
+    img:   '/walmart.jpg'
   },
   'spacex-ipo-elon-musk-wall-street': {
     title: "Inside the SpaceX IPO: How Elon Musk's $2 Trillion Bet Is Dividing Wall Street — Agora",
     desc:  "The largest IPO in history swung from record highs to a stunning crash in weeks. Now Wall Street's top banks can't agree on where SPCX goes next.",
-    img:   null
+    img:   '/spacex.jpg'
   },
   'video-game-prices-rising': {
     title: "How Rising Prices Are Changing One of the World's Most Accessible Hobbies — Agora",
     desc:  "$80 games, $2,000 graphics cards, and subscriptions that never end. Gaming still delivers unmatched value per hour — but the price of simply joining keeps climbing.",
-    img:   null
+    img:   '/videogames.jpg'
   },
   'nexgen-energy-nxe-stock-pitch': {
     title: "The Agora Stock Pitch: Why We're Buying NexGen Energy (NXE) — Agora",
     desc:  "The mine is licensed, uranium contract prices sit at 18-year highs, and the stock fell 30% anyway. Our first monthly pitch: BUY, with a 12 to 18 month target of C$18.",
-    img:   null
+    img:   '/nexgen.jpg'
   },
   'ai-healthcare-tool-not-takeover': {
     title: "AI Is Not Taking Over Healthcare. It Is Learning to Assist It. — Agora",
     desc:  "From reading PET scans in one click to cutting a 30-day vaccine analysis down to 22 hours, AI is already reshaping medicine. The real risk is not the technology. It is who gets access to it.",
-    img:   null
+    img:   '/aihealthcarev2.jpg'
   }
 };
 

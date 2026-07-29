@@ -527,6 +527,36 @@
     .newsletter-btn:hover { opacity: .85; }
     .newsletter-note { font-size: 11px; color: var(--text3); margin-top: 4px; }
 
+    /* ── SUBSCRIBE CTAS ── */
+    .sub-cta-wrap { padding: 8px 28px 72px; }
+    .sub-cta { max-width: 680px; margin: 0 auto; padding: 36px 34px 30px; background: var(--bg2); border: .5px solid var(--border2); border-top: 3px solid var(--gold); border-radius: 2px; text-align: center; transition: transform .3s, box-shadow .3s, border-color .3s; }
+    .sub-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.08); border-color: var(--gold); }
+    .sub-cta-rule { width: 40px; height: 2px; background: var(--gold); margin: 0 auto 18px; transition: width .35s ease; }
+    .sub-cta:hover .sub-cta-rule { width: 96px; }
+    .sub-cta .newsletter-form { max-width: 440px; margin: 0 auto; }
+    .mini-input { flex: 1; min-width: 0; background: var(--bg); border: .5px solid var(--border2); color: var(--text); font-family: var(--sans); font-size: 13px; padding: 9px 12px; border-radius: 2px; outline: none; transition: border-color .2s; }
+    .mini-input:focus { border-color: var(--gold); }
+    .mini-input::placeholder { color: var(--text3); }
+    .sub-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 300; background: var(--bg2); border-top: 2px solid var(--gold); box-shadow: 0 -8px 28px rgba(0,0,0,.12); transform: translateY(110%); transition: transform .5s cubic-bezier(.19,1,.22,1); }
+    .sub-bar.show { transform: translateY(0); }
+    .sub-bar-inner { max-width: 880px; margin: 0 auto; padding: 13px 52px 13px 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; position: relative; }
+    .sub-bar-txt { font-family: var(--serif); font-size: 15px; color: var(--text); flex: 1 1 220px; }
+    .sub-bar-txt .omega { color: var(--gold); margin-right: 7px; }
+    .sub-bar-form { display: flex; gap: 10px; flex: 1 1 300px; }
+    .sub-bar .newsletter-btn, .footer-sub .newsletter-btn { padding: 9px 18px; }
+    .sub-bar-close { position: absolute; top: 50%; transform: translateY(-50%); right: 14px; background: none; border: none; color: var(--text3); font-size: 18px; cursor: pointer; padding: 4px 6px; line-height: 1; transition: color .2s; }
+    .sub-bar-close:hover { color: var(--text); }
+    .footer-sub { border-bottom: .5px solid var(--border); }
+    /* Hide the footer signup on pages that already end with their own subscribe form */
+    body:has(#page-connect.active) .footer-sub,
+    body:has(#page-newsletter.active) .footer-sub,
+    body:has(#page-article.active) .footer-sub { display: none; }
+    .footer-sub-inner { max-width: 1080px; margin: 0 auto; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-sub-head { font-family: var(--serif); font-size: 16px; color: var(--text); }
+    .footer-sub-tag { font-family: var(--bserif); font-size: 13px; color: var(--text3); margin-top: 2px; }
+    .footer-sub-form { display: flex; gap: 10px; flex: 0 1 380px; min-width: 260px; }
+    @media (max-width: 640px) { .sub-bar-inner { padding: 12px 46px 12px 16px; } .sub-cta { padding: 28px 20px 24px; } }
+
     /* ── SECONDARY & TERTIARY FEATURED ── */
     .feat2-section, .feat3-section { border-bottom: .5px solid var(--border); }
     .feat2-section > div, .feat3-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; align-items: stretch; }
@@ -753,30 +783,6 @@
     <!-- Articles grid -->
     <div class="articles-grid" id="articles-grid"></div>
 
-    <!-- Newsletter -->
-    <div style="max-width:1080px;margin:0 auto;padding:48px 28px 64px;border-top:.5px solid var(--border);">
-      <div class="newsletter-eyebrow">Newsletter</div>
-      <div class="newsletter-heading">Stay in the loop.</div>
-      <p class="newsletter-sub">New essays, straight to your inbox. No noise, no algorithm — just the work.</p>
-      <div style="margin:24px 0 32px;display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;align-items:flex-start;gap:12px;">
-          <span style="color:var(--gold);font-size:14px;margin-top:2px;">✦</span>
-          <div><strong style="font-family:var(--serif);font-size:15px;color:var(--text);">Monthly stock pitch</strong><p style="font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.6;margin-top:3px;">The star of every edition. One stock, one thesis — researched, argued, and put on record.</p></div>
-        </div>
-      </div>
-      <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form">
-        <div class="newsletter-row">
-          <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
-          <input type="email" name="EMAIL" placeholder="Email address" required class="newsletter-input">
-          <button type="submit" class="newsletter-btn">Subscribe</button>
-        </div>
-        <div aria-hidden="true" style="position:absolute;left:-5000px;">
-          <input type="text" name="b_fc853e3b6d230f6191a66a544_1cbf9becd3" tabindex="-1" value="">
-        </div>
-        <div class="newsletter-note">No spam. Unsubscribe any time.</div>
-      </form>
-    </div>
-
   </div>
 
   <!-- ══════════════ AUTHORS ══════════════ -->
@@ -895,6 +901,24 @@
         <button class="back-link" onclick="showPage('home')">← Back to feed</button>
       </aside>
     </div>
+    <div class="sub-cta-wrap">
+      <div class="sub-cta">
+        <div class="sub-cta-rule"></div>
+        <div class="newsletter-eyebrow">The Agora Newsletter</div>
+        <div class="newsletter-heading" style="font-size:24px;">Enjoyed this essay? There's more coming.</div>
+        <p class="newsletter-sub" style="margin-bottom:20px;">New essays across politics, business, finance, and philosophy, plus the occasional stock pitch. One email a month, no noise.</p>
+        <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form">
+          <div class="newsletter-row">
+            <input type="email" name="EMAIL" placeholder="Email address" required class="newsletter-input">
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </div>
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_fc853e3b6d230f6191a66a544_1cbf9becd3" tabindex="-1" value="">
+          </div>
+          <div class="newsletter-note">No spam. Unsubscribe any time.</div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <!-- ══════════════ CONNECT ══════════════ -->
@@ -949,12 +973,7 @@
         <div class="newsletter-eyebrow">Newsletter</div>
         <div class="newsletter-heading">Stay in the loop.</div>
         <p class="newsletter-sub">New essays, straight to your inbox. No noise, no algorithm — just the work.</p>
-        <div style="margin:24px 0 32px;display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;align-items:flex-start;gap:12px;">
-            <span style="color:var(--gold);font-size:14px;margin-top:2px;">✦</span>
-            <div><strong style="font-family:var(--serif);font-size:15px;color:var(--text);">Monthly stock pitch</strong><p style="font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.6;margin-top:3px;">The star of every edition. One stock, one thesis — researched, argued, and put on record.</p></div>
-          </div>
-        </div>
+        <p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin:20px 0 28px;max-width:560px;">New essays across politics, business, finance, and philosophy, plus a stock pitch when we have one worth making. One email a month, no noise.</p>
         <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form">
           <div class="newsletter-row">
             <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
@@ -981,16 +1000,16 @@
       </div>
     </div>
     <div class="connect-body" style="max-width:640px;">
-      <p class="connect-intro">New essays delivered straight to your inbox. No noise, no algorithm — just the work, when it's ready.</p>
+      <p class="connect-intro">One email a month. New essays, straight to your inbox.</p>
 
-      <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="margin-top:36px;display:flex;flex-direction:column;gap:12px;">
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
-          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Monthly stock pitch</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">The star of every edition. One stock, one thesis — researched, argued, and put on record.</p></div>
+          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">The stock pitch</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">When we have conviction, we put it on the record: one company, one thesis.</p></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
-          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Original analysis</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">Politics, business, finance, and philosophy — examined without deference.</p></div>
+          <div><strong style="font-family:var(--serif);font-size:16px;color:var(--text);">Original essays</strong><p style="font-family:var(--bserif);font-size:15px;color:var(--text2);line-height:1.7;margin-top:4px;">The month's writing on politics, business, finance, and philosophy.</p></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:14px;">
           <span style="color:var(--gold);font-size:16px;margin-top:2px;">✦</span>
@@ -1002,20 +1021,11 @@
         </div>
       </div>
 
-      <div style="border-top:.5px solid var(--border);padding-top:36px;margin-bottom:40px;">
-        <div class="newsletter-eyebrow">The Archive</div>
-        <div class="newsletter-heading" style="font-size:26px;">Past editions.</div>
-        <a href="/newsletter-july-2026" target="_blank" rel="noopener" style="display:block;margin-top:20px;padding:22px 24px;border:.5px solid var(--border2);border-radius:2px;text-decoration:none;background:var(--bg2);transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border2)'">
-          <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Vol. I &middot; July 2026</div>
-          <div style="font-family:var(--serif);font-size:19px;font-weight:500;color:var(--text);">The First Edition</div>
-          <p style="font-family:var(--bserif);font-size:14px;color:var(--text2);line-height:1.7;margin-top:6px;">The NexGen Energy stock pitch, six essays, and a letter from the editor. Read it exactly as it landed in inboxes. &rarr;</p>
-        </a>
-      </div>
-
-      <div style="border-top:.5px solid var(--border);padding-top:36px;">
+      <div class="sub-cta" style="margin:44px 0 48px;">
+        <div class="sub-cta-rule"></div>
         <div class="newsletter-eyebrow">Subscribe</div>
         <div class="newsletter-heading" style="font-size:26px;">Join the Agora.</div>
-        <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form" style="margin-top:20px;">
+        <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="newsletter-form" style="margin-top:22px;max-width:560px;">
           <div class="newsletter-row">
             <input type="text" name="FNAME" placeholder="First name" class="newsletter-input">
             <input type="email" name="EMAIL" placeholder="Email address" required class="newsletter-input">
@@ -1026,6 +1036,16 @@
           </div>
           <div class="newsletter-note">No spam. Unsubscribe any time.</div>
         </form>
+      </div>
+
+      <div style="border-top:.5px solid var(--border);padding-top:36px;margin-bottom:40px;">
+        <div class="newsletter-eyebrow">The Archive</div>
+        <div class="newsletter-heading" style="font-size:26px;">Past editions.</div>
+        <a href="/newsletter-july-2026" target="_blank" rel="noopener" style="display:block;margin-top:20px;padding:22px 24px;border:.5px solid var(--border2);border-radius:2px;text-decoration:none;background:var(--bg2);transition:border-color .2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border2)'">
+          <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Vol. I &middot; July 2026</div>
+          <div style="font-family:var(--serif);font-size:19px;font-weight:500;color:var(--text);">The First Edition</div>
+          <p style="font-family:var(--bserif);font-size:14px;color:var(--text2);line-height:1.7;margin-top:6px;">The NexGen Energy stock pitch, six essays, and a letter from the editor. Read it exactly as it landed in inboxes. &rarr;</p>
+        </a>
       </div>
 
     </div>
@@ -1071,8 +1091,37 @@
   </div>
 
   <!-- FOOTER -->
+  <div class="sub-bar" id="sub-bar">
+    <div class="sub-bar-inner">
+      <div class="sub-bar-txt"><span class="omega">Ω</span>Enjoying the essay? Get the next one first.</div>
+      <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="sub-bar-form">
+        <input type="email" name="EMAIL" placeholder="Email address" required class="mini-input">
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+        <div aria-hidden="true" style="position:absolute;left:-5000px;">
+          <input type="text" name="b_fc853e3b6d230f6191a66a544_1cbf9becd3" tabindex="-1" value="">
+        </div>
+      </form>
+      <button class="sub-bar-close" aria-label="Dismiss" onclick="dismissSubBar()">×</button>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="greek-band"></div>
+    <div class="footer-sub">
+      <div class="footer-sub-inner">
+        <div>
+          <div class="footer-sub-head">The Agora Newsletter</div>
+          <div class="footer-sub-tag">New essays and the occasional stock pitch, straight to your inbox.</div>
+        </div>
+        <form action="https://agorapublication.us19.list-manage.com/subscribe/post?u=fc853e3b6d230f6191a66a544&amp;id=1cbf9becd3&amp;f_id=00bbafe4f0" method="post" target="_blank" class="footer-sub-form">
+          <input type="email" name="EMAIL" placeholder="Email address" required class="mini-input">
+          <button type="submit" class="newsletter-btn">Subscribe</button>
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_fc853e3b6d230f6191a66a544_1cbf9becd3" tabindex="-1" value="">
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="footer-inner">
       <div class="footer-logo"><span class="omega">Ω</span> AGORA</div>
       <div class="footer-social">
@@ -1460,17 +1509,28 @@
     trackPageView('/article/' + (article.slug || article.id), document.title);
   }
 
+  function subBarHidden() {
+    try { return sessionStorage.getItem('agora-subbar') === 'hidden'; } catch (e) { return false; }
+  }
+  function dismissSubBar() {
+    try { sessionStorage.setItem('agora-subbar', 'hidden'); } catch (e) {}
+    var el = document.getElementById('sub-bar');
+    if (el) el.classList.remove('show');
+  }
+
   window.addEventListener('scroll', function() {
     var bar = document.getElementById('reading-progress');
-    if (!bar) return;
+    var subBar = document.getElementById('sub-bar');
     var articlePage = document.getElementById('page-article');
     if (!articlePage || !articlePage.classList.contains('active')) {
-      bar.style.opacity = '0';
+      if (bar) bar.style.opacity = '0';
+      if (subBar) subBar.classList.remove('show');
       return;
     }
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (docHeight > 0 ? Math.min(scrollTop / docHeight * 100, 100) : 0) + '%';
+    if (bar) bar.style.width = (docHeight > 0 ? Math.min(scrollTop / docHeight * 100, 100) : 0) + '%';
+    if (subBar) subBar.classList.toggle('show', !subBarHidden() && docHeight > 0 && scrollTop / docHeight > 0.45);
   }, { passive: true });
 
   // ── TOPIC FILTER ──────────────────────────────────────────────────────────

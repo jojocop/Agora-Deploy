@@ -1126,7 +1126,7 @@
       location: 'Toronto, ON', beat: 'Business · Technology',
       education: 'Health Science — Western University',
       linkedin: 'https://www.linkedin.com/in/gurkaran-deol-026639288/',
-      bio: 'Gurkaran is a Health Science student at Western University from Toronto. He writes about technology, gaming, and the consumer side of modern industries.',
+      bio: 'Gurkaran is a Health Sciences student at Western University with a passion for understanding the connection between human performance, health, and personal growth. Growing up just outside of Toronto, he developed a lifelong love for basketball, which shaped his appreciation for discipline, teamwork, and pushing physical limits. Beyond academics and athletics, he is interested in the habits and ideas that influence how people live, improve, and find fulfillment. He enjoys exploring topics around health, technology, and the human experience, while spending his free time reading books like Red Rising, staying active, and occasionally diving into video games as a creative escape.',
     },
     team: {
       id: 'team', slug: 'agora-team', initials: 'Α', name: 'The Agora Team', hidden: true,
@@ -1140,6 +1140,7 @@
 
   var ARTICLES = [
     { id: 'a10', slug: 'nexgen-energy-nxe-stock-pitch', topic: 'finance', topicLabel: 'Finance · Stock Pitch', title: "The Agora Stock Pitch: Why We're Buying NexGen Energy (NXE)", deck: 'The mine is licensed, uranium contract prices sit at 18-year highs, and the stock fell 30% anyway. Our first monthly pitch: BUY, with a 12 to 18 month target of C$18.', author: 'team', date: 'July 22, 2026', featured: true, heroImg: '/nexgen.jpg', heroCredit: 'Photo: NexGen Energy', imgPos: 'center 55%' },
+    { id: 'a11', slug: 'ai-healthcare-tool-not-takeover', topic: 'business', topicLabel: 'Business · Analysis', title: 'AI Is Not Taking Over Healthcare. It Is Learning to Assist It.', deck: 'From reading PET scans in one click to cutting a 30-day vaccine analysis down to 22 hours, AI is already reshaping medicine. The real risk is not the technology. It is who gets access to it.', author: 'gurkaran', date: 'July 29, 2026', featured: false, heroImg: '/healthcareai.jpg', heroCredit: 'Photo: Unsplash', imgPos: 'center 40%' },
     { id: 'a1', slug: 'massie-primary', topic: 'politics', topicLabel: 'Politics · Analysis', title: 'Inside The Most Expensive Primary in US History', deck: 'How a 14-year incumbent lost his seat — and what it reveals about the hidden machinery of American democracy.', author: 'joven', date: 'June 15, 2026', featured: false, heroImg: '/massie.jpg', heroCredit: 'Photo: Gage Skidmore / Flickr (CC BY-SA 2.0)' },
     { id: 'a9', slug: 'video-game-prices-rising', topic: 'business', topicLabel: 'Business · Analysis', title: "How Rising Prices Are Changing One of the World's Most Accessible Hobbies", deck: '$80 games, $2,000 graphics cards, and subscriptions that never end. Gaming still delivers unmatched value per hour — but the price of simply joining keeps climbing.', author: 'gurkaran', date: 'July 19, 2026', featured: false, heroImg: '/videogames.jpg', heroCredit: 'Photo: Wikimedia Commons', imgPos: 'center 45%' },
     { id: 'a4', slug: 'ai-will-not-replace-accountants', topic: 'business', topicLabel: 'Business · Analysis', title: 'Why AI Will Not Replace Accountants', deck: 'The firms spending the most money on AI are not building tools to remove accountants. They are building tools to make them irreplaceable.', author: 'sidhant', date: 'June 15, 2026', featured: false, heroImg: '/kpmg.jpg', heroCredit: 'Photo: Flickr / CC BY 2.0', imgPos: 'center 28%' },
@@ -3882,6 +3883,107 @@
         <li>Street references — Scotiabank (C$22 target, May 2026); Buy ratings at UBS, Canaccord Genuity, and Morgans</li>
       </ul>
       <p style="font-family:var(--bserif);font-size:12px;font-style:italic;color:var(--text3);line-height:1.7;margin-top:18px;">This pitch is for informational and educational purposes only and does not constitute investment advice, an offer, or a solicitation to buy or sell any security. Figures are believed accurate as of July 2026 but are not guaranteed. The authors may hold positions in NXE. Always do your own diligence.</p>
+    </div>
+  </template>
+
+  <template id="body-a11">
+    <p>AI is on the cusp of taking over the world. Some say it already has.</p>
+
+    <p>It's breaking into everything: our phones, our academics, even our jobs. With these changes, of course, comes speculation.</p>
+
+    <p>Will AI really help humanity, or is it merely a tool to dumb down our brains so we can no longer think for ourselves?</p>
+
+    <p>Focusing on human lives, the most common causes of death have always been disease-related: malaria, heart disease, cancer, COVID-19, to name a few.</p>
+
+    <p>Humans have attempted trial and error methodologies to fight these ailments for as long as medicine has existed.</p>
+
+    <p>There have been millions of experiments, thousands of failures, and decades of slow progress. AI has already accelerated much of that.</p>
+
+    <p>Just like our phones, laptops, and cars, AI is a tool, and its value depends on how you use it. So how are humans, in this day and age, actually using AI to move healthcare forward?</p>
+
+    <h2>How AI Is Used Today</h2>
+
+    <p>Before we can predict the future, we have to look at how AI is used in the present, because that's where the next progression naturally starts.</p>
+
+    <p>At the administrative level, AI streamlines the brute work: data analysis, spreadsheets, documents. Repetitive and dull processes that used to eat up a healthcare worker's day are now handled seamlessly, freeing them up to spend more time where it actually matters, with patients, and not buried in insurance paperwork and prescriptions.</p>
+
+    <p>The Pfizer COVID-19 vaccine was a good example of what this looks like at scale.</p>
+
+    <p>Researchers were able to analyze clinical trial data in just 22 hours with AI, a process that would normally take 30 days.</p>
+
+    <p>But AI efficiency isn't just administrative anymore; it's showing up directly in diagnosis and treatment.</p>
+
+    <p>GE HealthCare's MIM is a vendor-neutral imaging platform used across radiation oncology, radiology, nuclear medicine, theranostics, and urology. The term "vendor-neutral" matters more than it might sound.</p>
+
+    <p>Most hospitals run scanners from a mix of manufacturers, and normally that data doesn't talk to each other cleanly. MIM sits on top of all of it, pulling scattered imaging data into one workflow instead of leaving it locked in silos.</p>
+
+    <p>One clear example is MIM LesionID Pro, cleared by the FDA in early 2026. It automates whole-body tumour burden analysis for PSMA PET/CT and SPECT/CT scans, a process that has historically required slow, manual review and, as a result, hasn't become standard practice despite its clinical value.</p>
+
+    <p>With one click, the software segments PSMA uptake across the entire body, filters out normal physiological uptake, and produces a quantitative "total tumour burden" score clinicians can review, edit, and trust.</p>
+
+    <p>These results directly support theranostics, the combined diagnose-and-treat approach used in prostate cancer care, turning a measurement that used to be impractical into something a hospital can run routinely.</p>
+
+    <p>The same technology takes a similar approach to the brain. MIMneuro's Centiloid scaling tool, cleared by the FDA in 2024, helps physicians quantify amyloid plaque density, a routine characteristic of Alzheimer's, in brain PET scans using a standardized 0-to-100 scale.</p>
+
+    <p>This means a scan from one hospital can finally be compared meaningfully against a scan from another.</p>
+
+    <p>The timing isn't a coincidence. New amyloid-targeting drugs like Leqembi and Kisunla have reached the market in the last couple of years, and doctors need a reliable way to identify which patients actually qualify for them.</p>
+
+    <p>GE HealthCare isn't alone here. Aidoc runs a comparable model with its aiOS™ platform, an always-on system connected to 17 of its own FDA-cleared algorithms plus eight more FDA-cleared partner algorithms for radiology.</p>
+
+    <p>Its triage algorithms flag both suspected and unsuspected acute findings so the most urgent cases get seen first, while separate measurement algorithms automate the repetitive, time-consuming parts of the workflow.</p>
+
+    <p>The scale is already real: the system runs live in more than 150 medical centers and processes around 3 million patients a month.</p>
+
+    <h2>Problems With AI</h2>
+
+    <p>However impressive AI may be, people are still skeptical.</p>
+
+    <p>The problem most people already sense, even if they can't name it, is the black box. We don't fully comprehend the process behind how an AI reaches a given conclusion, which means doctors are forced to trust an outcome built from inputs they can't fully audit.</p>
+
+    <p>Some AI systems can now cite their sources and reasoning, but with how hard the industry is pushing for efficiency, it feels counterintuitive to expect clinicians to comb through countless data points just to double-check reliability on every case.</p>
+
+    <p>That black box becomes especially dangerous when the data feeding it can be biased. In one widely cited real-world example, a healthcare algorithm used cost of care as a stand-in for medical need. Because less money has historically been spent treating Black patients for the same conditions as white patients, the algorithm scored Black patients as healthier than they actually were, underflagging people who needed more care.</p>
+
+    <p>There's also the question of where all this data lives. Generative AI doesn't just analyze large datasets; it generates them, and all of that has to be stored somewhere. Healthcare data is uniquely sensitive, containing everything from diagnoses to insurance details for millions of patients, which makes it an especially high-value target for breaches.</p>
+
+    <p>None of this runs on its own, either. Programs like MIM or Aidoc don't operate autonomously but require trained staff to configure, interpret, and act on what they produce, the same way a tool like ChatGPT can't write an essay for you unless you give it the right instructions.</p>
+
+    <p>That level of technical fluency requires training, which costs hospitals and corporations time and money. AI's impact is ultimately dependent on the humans who build, install, and operate it, and until the broader workforce has that capability, it won't be the complete revolutionary force it's often promised to be.</p>
+
+    <p>That gap shows up unevenly, too. Cutting-edge AI tools tend to reach well-funded hospitals first, which risks widening the gap between rich and poor healthcare systems rather than closing it.</p>
+
+    <h2>The Future of AI</h2>
+
+    <p>Over the next 10 years, artificial intelligence will shift healthcare from a reactive, hospital-based system to a proactive, personalized, digital-first model. The next wave isn't about developing sharper versions of what already exists; it's about entirely new capabilities being built from the ground up.</p>
+
+    <p>Researchers are working on AI systems that can predict disease years before symptoms appear, using genomics, wearable data, and health records together to flag risk while there's still time to intervene. Instead of a yearly checkup, healthcare starts to look continuous.</p>
+
+    <p>Drug discovery is being rebuilt around AI as well. Rather than testing compounds one at a time in a lab, models are being trained to simulate how a molecule will behave in the human body before it's ever synthesized, compressing years of trial and error into months, and opening the door to treatments for diseases previously too rare or too complex to justify the cost of traditional research.</p>
+
+    <p>There's also a push toward AI that treats each patient as an individual case rather than a statistical average, matching drug type and dosage to a person's specific genetic makeup and response patterns. And underlying all of it, an entirely new field is emerging around building AI that can explain its own reasoning, so the black box problem stops being something doctors just have to accept.</p>
+
+    <h2>Conclusion</h2>
+
+    <p>AI is growing at an exponential rate, becoming more complex, advanced, and useful with every year, even every month, that passes. The fear most people carry is some version of AI and robots taking over the world, putting us into the Matrix. But it's worth remembering: artificial intelligence is fundamentally no different from our phones, our laptops, or our cars.</p>
+
+    <p>They all function as tools, and they're useful rather than dangerous when a human is actively guiding them.</p>
+
+    <p>AI won't take us over. We just have to stay in the driver's seat.</p>
+
+    <p>But at the end of the day, that's just one opinion. What do you think? Will the future be one where doctors have more time for patients because AI handles the busywork, or one where clinical judgment slowly atrophies because AI handles too much?</p>
+
+    <div style="margin-top:40px;padding-top:24px;border-top:.5px solid var(--border);">
+      <div style="font-family:var(--serif);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:.1em;">Sources</div>
+      <ul style="margin:0;padding:0;list-style:none;font-family:var(--bserif);font-size:13px;color:var(--text2);line-height:1.8;">
+        <li><a href="https://www.skillsforhealth.org.uk/article/what-role-does-ai-play-in-healthcare/" style="color:var(--gold);text-decoration:underline;">Skills for Health</a> — What role does AI play in healthcare</li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11612599/" style="color:var(--gold);text-decoration:underline;">PubMed Central</a> — Research on algorithmic bias and healthcare AI outcomes</li>
+        <li><a href="https://info.gehealthcare.com/AAPM2026" style="color:var(--gold);text-decoration:underline;">GE HealthCare</a> — Adaptive theranostics and imaging platform overview</li>
+        <li><a href="https://www.gehealthcare.com/en-us/about/newsroom/press-releases/ge-healthcare-receives-fda-510k-clearance-for-mim-lesionid-pro-helping-transform-whole-body-tumor-burden-analysis" style="color:var(--gold);text-decoration:underline;">GE HealthCare</a> — FDA 510(k) clearance for MIM LesionID Pro</li>
+        <li><a href="https://www.gehealthcare.com/en-us/about/newsroom/press-releases/ge-healthcares-mim-software-announces-fda-clearance-of-new-centiloid-scaling-tool-to-quantify-amyloid-plaque-in-brain-imaging" style="color:var(--gold);text-decoration:underline;">GE HealthCare</a> — FDA clearance of the MIMneuro Centiloid scaling tool</li>
+        <li><a href="https://www.aidoc.com/solutions/radiology/" style="color:var(--gold);text-decoration:underline;">Aidoc</a> — aiOS radiology platform and triage algorithms</li>
+        <li><a href="https://www.science.org/doi/10.1126/science.aax2342" style="color:var(--gold);text-decoration:underline;">Science</a> — Obermeyer et al., dissecting racial bias in a healthcare risk algorithm</li>
+      </ul>
     </div>
   </template>
 

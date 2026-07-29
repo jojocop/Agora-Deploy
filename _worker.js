@@ -48,6 +48,11 @@ const OG = {
     title: "The Agora Stock Pitch: Why We're Buying NexGen Energy (NXE) — Agora",
     desc:  "The mine is licensed, uranium contract prices sit at 18-year highs, and the stock fell 30% anyway. Our first monthly pitch: BUY, with a 12 to 18 month target of C$18.",
     img:   null
+  },
+  'ai-healthcare-tool-not-takeover': {
+    title: "AI Is Not Taking Over Healthcare. It Is Learning to Assist It. — Agora",
+    desc:  "From reading PET scans in one click to cutting a 30-day vaccine analysis down to 22 hours, AI is already reshaping medicine. The real risk is not the technology. It is who gets access to it.",
+    img:   null
   }
 };
 

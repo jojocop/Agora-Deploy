@@ -66,6 +66,11 @@ export default {
       return env.ASSETS.fetch(request);
     }
 
+    // Serve standalone newsletter editions directly (bypass the SPA shell)
+    if (/^\/newsletter-[\w-]+(\.html)?$/i.test(path)) {
+      return env.ASSETS.fetch(new Request(url.origin + path.replace(/\.html$/i, '')));
+    }
+
     // Get index.html — fall back to normal serving if anything fails
     let html;
     try {

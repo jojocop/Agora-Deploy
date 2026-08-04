@@ -617,6 +617,19 @@
     .cannot-title { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
     .cannot-desc { font-family: var(--bserif); font-size: 14px; color: var(--text2); line-height: 1.6; }
 
+    /* ── AGORA RUN (easter egg) ── */
+    .run-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
+    .run-overlay.active { opacity: 1; pointer-events: all; }
+    .run-modal { background: var(--bg); border: 1px solid var(--border2); border-radius: 3px; max-width: 720px; width: calc(100% - 40px); padding-bottom: 16px; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    .run-modal > .greek-band { border-radius: 3px 3px 0 0; }
+    .run-close { position: absolute; top: 24px; right: 16px; background: none; border: none; color: var(--text3); font-size: 15px; cursor: pointer; transition: color .2s; z-index: 2; }
+    .run-close:hover { color: var(--text); }
+    .run-head { display: flex; align-items: baseline; gap: 14px; padding: 16px 22px 10px; }
+    .run-title { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--text); }
+    .run-eyebrow { font-family: var(--serif); font-style: italic; font-size: 12px; color: var(--gold); }
+    #runCanvas { display: block; width: calc(100% - 44px); height: auto; margin: 0 auto; background: var(--bg2); border: .5px solid var(--border2); border-radius: 2px; touch-action: none; cursor: pointer; }
+    .run-hint { font-size: 10.5px; color: var(--text3); padding: 10px 22px 0; letter-spacing: .04em; line-height: 1.6; }
+
     /* ── ACCESSIBILITY ── */
     a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     @media (prefers-reduced-motion: reduce) {
@@ -1143,7 +1156,7 @@
       </div>
     </div>
     <div class="footer-inner">
-      <div class="footer-logo"><span class="omega">Ω</span> AGORA</div>
+      <div class="footer-logo" onclick="openAgoraRun()" style="cursor:pointer;" title="The Agora Run"><span class="omega">Ω</span> AGORA</div>
       <div class="footer-social">
         <a class="footer-social-link" href="https://www.linkedin.com/company/agora-publication/about/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1914,6 +1927,445 @@
     document.getElementById('quoteOverlay').classList.remove('active');
   }
 
+  // ── AGORA RUN (easter egg) ────────────────────────────────────────────────
+  // Chrome-dino homage: pixel Aristotle leaps mini Parthenons and ducks
+  // Zeus's thunderbolts. Drawn black-figure-pottery style from theme colors.
+
+  var runState = null;
+  var runCanvasBound = false;
+
+  // K = ink, G = gold, S = skin. Laurel wreath, bearded face, robe, walking staff.
+  var RUN_TOP = [
+    '....GG.GG.....',
+    '...KKKKKKK....',
+    '...KSSSSSK....',
+    '...KSSSSSK....',
+    '...KKSSSKK....',
+    '..KKKKKKKK....',
+    '..KKKKKKKK....',
+    '...KKKKKK.....',
+    '....KKKK......',
+    '..KKKKKKKK.G..',
+    '.KKKKKKKKKKG..',
+    '.KK.KKKKKK.G..',
+    '....KKKKKG.G..',
+    '....KKKKG..G..',
+    '...KKKKKKK.G..',
+    '...KKKKKKK.G..',
+    '..KKKKKKKKKG..'
+  ];
+  var RUN_LEGS_A = ['..KK....KK.G..', '.KK......KKG..', '.K.........G..'];
+  var RUN_LEGS_B = ['...KKK.KK..G..', '....KK..K..G..', '...KK...KK.G..'];
+  var RUN_LEGS_JUMP = ['...KKKKKK..G..', '....KK.KK..G..', '...........G..'];
+  var DUCK_A = [
+    '.............GKK..',
+    '...........KKKKK..',
+    '..........KKSSSK..',
+    '.KKKKKKKKKKKSSSK..',
+    'KKKKKKKKKKKKKKKK..',
+    'KKKKKKKKKKKKKKK...',
+    '.KKKKKKKKKKKKK....',
+    '..KKK....KKK......',
+    '..KK......KK......'
+  ];
+  var DUCK_B = DUCK_A.slice(0, 7).concat(['...KKK...KKK......', '....KK....KK......']);
+
+  var RUN_QUIPS = [
+    'Even Aristotle stumbled.',
+    'The unexamined run is not worth running.',
+    'Zeus sends his regards.',
+    'Not every column can be dodged.',
+    'Virtue is a habit. So is jumping.'
+  ];
+
+  function runColors() {
+    var cs = getComputedStyle(document.documentElement);
+    return {
+      ink:  cs.getPropertyValue('--text').trim(),
+      dim:  cs.getPropertyValue('--text3').trim(),
+      gold: cs.getPropertyValue('--gold').trim()
+    };
+  }
+
+  function drawRunMap(ctx, map, x, y, s, C) {
+    for (var r = 0; r < map.length; r++) {
+      for (var c = 0; c < map[r].length; c++) {
+        var ch = map[r][c];
+        if (ch === '.') continue;
+        ctx.fillStyle = ch === 'G' ? C.gold : (ch === 'S' ? '#C89B6B' : C.ink);
+        ctx.fillRect(x + c * s, y + r * s, s, s);
+      }
+    }
+  }
+
+  function drawAmphora(ctx, o, C, GROUND) {
+    for (var i = 0; i < o.n; i++) {
+      var x = o.x + i * 24, cx = x + 9;
+      ctx.fillStyle = C.ink;
+      ctx.fillRect(x + 4, GROUND - 27, 10, 2);
+      ctx.fillRect(x + 6, GROUND - 25, 6, 5);
+      ctx.beginPath();
+      ctx.ellipse(cx, GROUND - 12, 8.5, 9, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillRect(x + 7, GROUND - 5, 4, 3);
+      ctx.fillRect(x + 5, GROUND - 2, 8, 2);
+      ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(x + 2.5, GROUND - 20, 3.5, Math.PI * 0.5, Math.PI * 1.6); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x + 15.5, GROUND - 20, 3.5, Math.PI * 1.4, Math.PI * 0.5); ctx.stroke();
+      ctx.fillStyle = C.gold;
+      ctx.fillRect(x + 2, GROUND - 14, 14, 2);
+    }
+  }
+
+  function drawColumnStump(ctx, o, C, GROUND) {
+    var x = o.x, lens = [o.h - 6, o.h - 13, o.h - 9, o.h - 16];
+    ctx.fillStyle = C.ink;
+    ctx.fillRect(x - 2, GROUND - 4, o.w + 4, 4);
+    for (var i = 0; i < 4; i++) ctx.fillRect(x + i * 4, GROUND - 4 - lens[i], 3, lens[i]);
+    ctx.fillStyle = C.gold;
+    ctx.fillRect(x + 5, GROUND - 4 - lens[1] - 3, 2, 2);
+  }
+
+  function runRoundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+    ctx.fill();
+  }
+
+  function drawDrums(ctx, o, C, GROUND) {
+    var x = o.x;
+    ctx.fillStyle = C.ink;
+    runRoundRect(ctx, x, GROUND - 11, 17, 11, 3);
+    runRoundRect(ctx, x + 19, GROUND - 11, 17, 11, 3);
+    runRoundRect(ctx, x + 9, GROUND - 22, 18, 11, 3);
+    ctx.fillStyle = C.gold;
+    ctx.fillRect(x + 17, GROUND - 18, 2, 3);
+  }
+
+  function drawOliveTree(ctx, tr, C, GROUND) {
+    ctx.save();
+    ctx.globalAlpha = 0.32;
+    ctx.translate(tr.x, GROUND);
+    ctx.scale(tr.s, tr.s);
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-3, -14, 2, -26); ctx.stroke();
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(-1, -12); ctx.quadraticCurveTo(-8, -18, -9, -27); ctx.stroke();
+    ctx.fillStyle = C.ink;
+    [[-9, -32, 8], [2, -34, 9], [-3, -38, 8], [8, -30, 6]].forEach(function(b) {
+      ctx.beginPath(); ctx.arc(b[0], b[1], b[2], 0, Math.PI * 2); ctx.fill();
+    });
+    ctx.globalAlpha = 0.55;
+    ctx.fillStyle = C.gold;
+    ctx.fillRect(-6, -34, 2, 2); ctx.fillRect(4, -31, 2, 2);
+    ctx.restore();
+  }
+
+  function drawAcropolis(ctx, ax, C, GROUND) {
+    ctx.save();
+    ctx.globalAlpha = 0.15;
+    ctx.fillStyle = C.ink;
+    ctx.beginPath();
+    ctx.ellipse(ax + 70, GROUND + 34, 95, 58, 0, Math.PI, Math.PI * 2);
+    ctx.fill();
+    var ty = GROUND - 22, tx = ax + 42;
+    ctx.fillRect(tx - 2, ty, 60, 2.5);
+    for (var i = 0; i < 7; i++) ctx.fillRect(tx + 1 + i * 8.5, ty - 9, 2.5, 9);
+    ctx.fillRect(tx - 2, ty - 12, 60, 3);
+    ctx.beginPath();
+    ctx.moveTo(tx - 4, ty - 12); ctx.lineTo(tx + 28, ty - 20); ctx.lineTo(tx + 60, ty - 12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawRunBolt(ctx, o, C, t) {
+    ctx.save();
+    ctx.translate(o.x, o.y + Math.sin(t / 6) * 3);
+    ctx.globalAlpha = 0.75 + 0.25 * Math.sin(t / 3);
+    ctx.fillStyle = C.gold;
+    ctx.beginPath();
+    ctx.moveTo(14, 0); ctx.lineTo(26, 0); ctx.lineTo(16, 12); ctx.lineTo(24, 12);
+    ctx.lineTo(6, 30); ctx.lineTo(12, 16); ctx.lineTo(4, 16);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function runBoxesHit(ax, ay, aw, ah, bx, by, bw, bh) {
+    var p = 3;
+    return ax + p < bx + bw - p && ax + aw - p > bx + p && ay + p < by + bh - p && ay + ah - p > by + p;
+  }
+
+  function startAgoraRun() {
+    if (runState) cancelAnimationFrame(runState.raf);
+    var cv = document.getElementById('runCanvas');
+    var ctx = cv.getContext('2d');
+    var W = cv.width, H = cv.height;
+    var GROUND = H - 30;
+    var RX = 50;
+    var S = {
+      alive: true, started: false, over: false,
+      t: 0, speed: 4.2, score: 0,
+      hi: parseInt(localStorage.getItem('agora-run-hi') || '0', 10),
+      y: 0, vy: 0, duckHeld: false,
+      obstacles: [], nextSpawn: 300,
+      bgCols: [], trees: [], mounts: [], clouds: [], props: [],
+      acroX: W * 0.55,
+      quip: RUN_QUIPS[Math.floor(Math.random() * RUN_QUIPS.length)],
+      raf: 0
+    };
+    for (var i = 0; i < 4; i++) S.bgCols.push({ x: Math.random() * W, h: 24 + Math.random() * 26 });
+    S.trees.push({ x: W * 0.25 + Math.random() * 120, s: 0.9 + Math.random() * 0.5 });
+    S.trees.push({ x: W * 0.75 + Math.random() * 120, s: 0.9 + Math.random() * 0.5 });
+    S.mounts.push({ x: W * 0.08, w: 300, h: 58 }, { x: W * 0.5, w: 400, h: 78 });
+    for (var ic = 0; ic < 3; ic++) S.clouds.push({ x: Math.random() * W, y: 34 + Math.random() * 50 });
+    var propTypes = ['stone', 'grass', 'stone', 'shard', 'grass', 'stone', 'grass', 'shard'];
+    for (var ip = 0; ip < 8; ip++) S.props.push({ x: Math.random() * W, y: 5 + Math.random() * 14, type: propTypes[ip] });
+    runState = S;
+
+    if (!runCanvasBound) {
+      runCanvasBound = true;
+      cv.addEventListener('mousedown', function() { runInputJump(); });
+      cv.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (!runState) return;
+        var rect = cv.getBoundingClientRect();
+        var ty = (e.touches[0].clientY - rect.top) / rect.height;
+        if (ty > 0.6 && runState.started && !runState.over) runState.duckHeld = true;
+        else runInputJump();
+      }, { passive: false });
+      cv.addEventListener('touchend', function() { if (runState) runState.duckHeld = false; });
+      document.getElementById('runOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeAgoraRun();
+      });
+    }
+
+    function spawn() {
+      var canBolt = S.score > 150;
+      if (canBolt && Math.random() < 0.35) {
+        S.obstacles.push({ type: 'bolt', x: W + 20, y: GROUND - 64 });
+      } else {
+        var kind = Math.random();
+        if (kind < 0.3)       S.obstacles.push({ type: 'amphora', x: W + 20, w: 18, h: 27, n: 1 });
+        else if (kind < 0.55) S.obstacles.push({ type: 'amphora', x: W + 20, w: 42, h: 27, n: 2 });
+        else if (kind < 0.8)  S.obstacles.push({ type: 'column', x: W + 20, w: 15, h: 40 });
+        else                  S.obstacles.push({ type: 'drums', x: W + 20, w: 36, h: 22 });
+      }
+      S.nextSpawn = 250 + Math.random() * 300;
+    }
+
+    function frame() {
+      if (!S.alive) return;
+      var C = runColors();
+      ctx.clearRect(0, 0, W, H);
+      S.t++;
+
+      var ducking = S.duckHeld && S.y === 0 && S.started && !S.over;
+
+      if (S.started && !S.over) {
+        S.speed = Math.min(9, S.speed + 0.0016);
+        S.score += S.speed * 0.028;
+        if (S.y > 0 || S.vy !== 0) {
+          S.vy += S.duckHeld ? 1.15 : 0.55;
+          S.y -= S.vy;
+          if (S.y <= 0) { S.y = 0; S.vy = 0; }
+        }
+        S.nextSpawn -= S.speed;
+        if (S.nextSpawn <= 0) spawn();
+        for (var i = S.obstacles.length - 1; i >= 0; i--) {
+          S.obstacles[i].x -= S.speed;
+          if (S.obstacles[i].x < -80) S.obstacles.splice(i, 1);
+        }
+        S.mounts.forEach(function(m) {
+          m.x -= S.speed * 0.06;
+          if (m.x + m.w < 0) m.x = W + 40;
+        });
+        S.acroX -= S.speed * 0.12;
+        if (S.acroX < -230) S.acroX = W + 140;
+        S.bgCols.forEach(function(bc) {
+          bc.x -= S.speed * 0.2;
+          if (bc.x < -20) { bc.x = W + 10; bc.h = 24 + Math.random() * 26; }
+        });
+        S.trees.forEach(function(tr) {
+          tr.x -= S.speed * 0.35;
+          if (tr.x < -50) { tr.x = W + 60 + Math.random() * 120; tr.s = 0.9 + Math.random() * 0.5; }
+        });
+        S.clouds.forEach(function(cl) {
+          cl.x -= S.speed * 0.05 + 0.05;
+          if (cl.x < -40) { cl.x = W + 40; cl.y = 34 + Math.random() * 50; }
+        });
+        S.props.forEach(function(p) {
+          p.x -= S.speed;
+          if (p.x < -12) { p.x = W + Math.random() * 60; p.y = 5 + Math.random() * 14; }
+        });
+      }
+
+      // sky: sun and clouds
+      ctx.globalAlpha = 0.25; ctx.fillStyle = C.gold;
+      ctx.beginPath(); ctx.arc(W - 230, 48, 15, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 0.3; ctx.strokeStyle = C.gold; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(W - 230, 48, 20, 0, Math.PI * 2); ctx.stroke();
+      ctx.globalAlpha = 0.09; ctx.fillStyle = C.ink;
+      S.clouds.forEach(function(cl) {
+        ctx.beginPath();
+        ctx.ellipse(cl.x, cl.y, 20, 6, 0, 0, Math.PI * 2);
+        ctx.ellipse(cl.x + 14, cl.y + 2, 13, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      // distant mountains
+      ctx.globalAlpha = 0.07;
+      ctx.fillStyle = C.ink;
+      S.mounts.forEach(function(m) {
+        ctx.beginPath();
+        ctx.moveTo(m.x, GROUND); ctx.lineTo(m.x + m.w * 0.5, GROUND - m.h); ctx.lineTo(m.x + m.w, GROUND);
+        ctx.closePath(); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      // the acropolis on its hill
+      drawAcropolis(ctx, S.acroX, C, GROUND);
+
+      // ruined column silhouettes
+      ctx.globalAlpha = 0.16;
+      ctx.fillStyle = C.ink;
+      S.bgCols.forEach(function(bc) {
+        ctx.fillRect(bc.x, GROUND - bc.h, 6, bc.h);
+        ctx.fillRect(bc.x - 2, GROUND - bc.h, 10, 3);
+      });
+      ctx.globalAlpha = 1;
+
+      // olive trees
+      S.trees.forEach(function(tr) { drawOliveTree(ctx, tr, C, GROUND); });
+
+      // ground
+      ctx.fillStyle = C.ink;
+      ctx.fillRect(0, GROUND, W, 1.5);
+      ctx.fillStyle = C.dim;
+      var dashOff = (S.t * S.speed) % 26;
+      for (var d = -dashOff; d < W; d += 26) ctx.fillRect(d, GROUND + 8, 8, 1.5);
+
+      // ground clutter: stones, grass tufts, pottery shards
+      S.props.forEach(function(p) {
+        var py = GROUND + p.y;
+        if (p.type === 'stone') {
+          ctx.globalAlpha = 0.3; ctx.fillStyle = C.ink;
+          ctx.beginPath(); ctx.ellipse(p.x, py, 3, 1.8, 0, 0, Math.PI * 2); ctx.fill();
+        } else if (p.type === 'grass') {
+          ctx.globalAlpha = 0.35; ctx.strokeStyle = C.ink; ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, py); ctx.lineTo(p.x - 2, py - 4);
+          ctx.moveTo(p.x, py); ctx.lineTo(p.x, py - 5);
+          ctx.moveTo(p.x, py); ctx.lineTo(p.x + 2, py - 4);
+          ctx.stroke();
+        } else {
+          ctx.globalAlpha = 0.5; ctx.fillStyle = C.gold;
+          ctx.beginPath();
+          ctx.moveTo(p.x, py); ctx.lineTo(p.x + 5, py); ctx.lineTo(p.x + 1.5, py - 4);
+          ctx.closePath(); ctx.fill();
+        }
+      });
+      ctx.globalAlpha = 1;
+
+      // obstacles
+      S.obstacles.forEach(function(o) {
+        if (o.type === 'bolt') drawRunBolt(ctx, o, C, S.t);
+        else if (o.type === 'amphora') drawAmphora(ctx, o, C, GROUND);
+        else if (o.type === 'column') drawColumnStump(ctx, o, C, GROUND);
+        else drawDrums(ctx, o, C, GROUND);
+      });
+
+      // runner
+      var s3 = 3;
+      if (ducking) {
+        var dmap = (Math.floor(S.t / 6) % 2) ? DUCK_A : DUCK_B;
+        drawRunMap(ctx, dmap, RX, GROUND - 27, s3, C);
+      } else {
+        var legs = (S.y > 0) ? RUN_LEGS_JUMP : ((Math.floor(S.t / 6) % 2) ? RUN_LEGS_A : RUN_LEGS_B);
+        drawRunMap(ctx, RUN_TOP.concat(legs), RX, GROUND - 60 - S.y, s3, C);
+      }
+
+      // collisions
+      if (S.started && !S.over) {
+        var rx, ry, rw, rh;
+        if (ducking) { rx = RX; ry = GROUND - 27; rw = 50; rh = 27; }
+        else { rx = RX + 5; ry = GROUND - 58 - S.y; rw = 28; rh = 56; }
+        for (var j = 0; j < S.obstacles.length; j++) {
+          var o = S.obstacles[j], hitIt = false;
+          if (o.type === 'bolt') hitIt = runBoxesHit(rx, ry, rw, rh, o.x + 4, o.y, 22, 30);
+          else hitIt = runBoxesHit(rx, ry, rw, rh, o.x - 2, GROUND - o.h - 2, o.w + 4, o.h + 2);
+          if (hitIt) {
+            S.over = true;
+            var sc = Math.floor(S.score);
+            if (sc > S.hi) { S.hi = sc; try { localStorage.setItem('agora-run-hi', String(sc)); } catch (e) {} }
+            break;
+          }
+        }
+      }
+
+      // score
+      ctx.fillStyle = C.dim;
+      ctx.font = '600 13px Georgia, serif';
+      ctx.textAlign = 'right';
+      ctx.fillText('HI ' + String(S.hi).padStart(4, '0') + '   ' + String(Math.floor(S.score)).padStart(4, '0'), W - 16, 26);
+
+      // prompts
+      ctx.textAlign = 'center';
+      if (!S.started) {
+        ctx.fillStyle = C.ink;
+        ctx.font = 'italic 17px Georgia, serif';
+        ctx.fillText('Press space, or tap, to begin the run.', W / 2, H / 2 - 14);
+      } else if (S.over) {
+        ctx.fillStyle = C.gold;
+        ctx.font = '700 30px Georgia, serif';
+        ctx.fillText('ΤΕΛΟΣ', W / 2, H / 2 - 22);
+        ctx.fillStyle = C.ink;
+        ctx.font = 'italic 15px Georgia, serif';
+        ctx.fillText(S.quip, W / 2, H / 2 + 4);
+        ctx.fillStyle = C.dim;
+        ctx.font = '12px Georgia, serif';
+        ctx.fillText('Space or tap to run again', W / 2, H / 2 + 28);
+      }
+
+      S.raf = requestAnimationFrame(frame);
+    }
+    S.raf = requestAnimationFrame(frame);
+  }
+
+  function runInputJump() {
+    var S = runState;
+    if (!S) return;
+    if (S.over) { startAgoraRun(); return; }
+    if (!S.started) { S.started = true; return; }
+    if (S.y === 0) S.vy = -10.5;
+  }
+
+  function openAgoraRun() {
+    document.getElementById('runOverlay').classList.add('active');
+    startAgoraRun();
+  }
+
+  function closeAgoraRun() {
+    document.getElementById('runOverlay').classList.remove('active');
+    if (runState) {
+      runState.alive = false;
+      cancelAnimationFrame(runState.raf);
+      runState = null;
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!runState) return;
+    if (e.key === 'Escape') { closeAgoraRun(); return; }
+    if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); runInputJump(); }
+    else if (e.code === 'ArrowDown') { e.preventDefault(); runState.duckHeld = true; }
+  });
+  document.addEventListener('keyup', function(e) {
+    if (runState && e.code === 'ArrowDown') runState.duckHeld = false;
+  });
+
   // ── DEBATE EASTER EGG ─────────────────────────────────────────────────────
 
   var DEBATE = [
@@ -2012,6 +2464,20 @@
       <div class="quote-text" id="quote-text"></div>
       <div class="quote-author" id="quote-author"></div>
       <button class="quote-shuffle" onclick="nextQuote()">Another →</button>
+    </div>
+  </div>
+
+  <!-- AGORA RUN EASTER EGG -->
+  <div class="run-overlay" id="runOverlay">
+    <div class="run-modal">
+      <div class="greek-band"></div>
+      <button class="run-close" onclick="closeAgoraRun()">✕</button>
+      <div class="run-head">
+        <span class="run-title">The Agora Run</span>
+        <span class="run-eyebrow">ὁ δρόμος τοῦ Ἀριστοτέλους</span>
+      </div>
+      <canvas id="runCanvas" width="680" height="260"></canvas>
+      <div class="run-hint">Space or tap to jump · hold Down (or the lower half of the screen) to duck · Esc to close.<br>Leap the amphorae and fallen columns. Duck the bolts of Zeus.</div>
     </div>
   </div>
 

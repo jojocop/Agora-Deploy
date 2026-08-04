@@ -249,37 +249,55 @@
     .topic-pill:hover { border-color: var(--gold); color: var(--text); }
     .topic-pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-    /* ── FEATURED ── */
-    .featured-section { padding: 0; border-bottom: .5px solid var(--border); }
-    .featured-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; align-items: stretch; }
-    .feat-text { padding: 36px 40px 36px 28px; display: flex; flex-direction: column; justify-content: center; }
-    .feat-img-wrap { position: relative; overflow: hidden; border-left: .5px solid var(--border); }
-    .feat-img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; object-position: center 18%; display: block; transition: transform .4s ease; }
+    /* ── TOP PACKAGE ── */
+    .top-package { border-bottom: .5px solid var(--border); }
+    .tp-inner { max-width: 1080px; margin: 0 auto; padding: 26px 28px 30px; display: grid; grid-template-columns: 1fr 340px; gap: 0 34px; }
+    .tp-lead { display: grid; grid-template-columns: 1fr 300px; gap: 26px; padding-right: 34px; border-right: .5px solid var(--border); }
+    .feat-text { display: flex; flex-direction: column; justify-content: center; }
+    .feat-img-wrap { position: relative; overflow: hidden; border-radius: 2px; box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+    .feat-img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; object-position: center 18%; display: block; transition: transform .4s ease; }
     .feat-img-wrap:hover .feat-img { transform: scale(1.03); }
-    .feat-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-    .feat-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
-    .feat-title { font-family: var(--serif); font-size: 28px; font-weight: 500; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
-    .feat-deck { font-family: var(--bserif); font-size: 17px; color: var(--text2); line-height: 1.75; margin-bottom: 16px; }
+    .feat-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .feat-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+    .feat-title { font-family: var(--serif); font-size: 23px; font-weight: 600; line-height: 1.25; color: var(--text); margin-bottom: 10px; }
+    .feat-deck { font-family: var(--bserif); font-size: 14.5px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .feat-meta { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 8px; }
+    .tp-rail { display: flex; flex-direction: column; }
+    .tp-rail-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .tp-item { display: grid; grid-template-columns: 1fr 96px; gap: 14px; padding: 14px 0; border-bottom: .5px solid var(--border); }
+    .tp-item:last-child { border-bottom: none; padding-bottom: 0; }
     .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
     .read-link {
-      display: inline-block; margin-top: 14px; background: none;
-      border: none; border-bottom: .5px solid var(--gold); padding: 0 0 2px;
-      font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
+      display: inline-block; align-self: flex-start; margin-top: 14px;
+      background: var(--gold); border: none; border-radius: 2px; cursor: pointer;
+      padding: 12px 24px; font-family: var(--sans); font-size: 11.5px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--bg);
+      transition: transform .2s, box-shadow .2s;
     }
+    .read-link:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,.18); }
 
-    /* ── ARTICLE GRID ── */
-    .articles-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-    .article-card { padding: 26px 0; border-bottom: .5px solid var(--border); cursor: pointer; }
-    .card-img { width: 100%; height: 180px; object-fit: cover; object-position: center 20%; display: block; margin-bottom: 14px; border-radius: 2px; }
-    .article-card:nth-child(odd)  { padding-right: 36px; border-right: .5px solid var(--border); }
-    .article-card:nth-child(even) { padding-left: 36px; }
-    .article-card:hover .card-title { color: var(--gold); }
-    .card-topic { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text3); margin-bottom: 7px; }
-    .card-title { font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.3; color: var(--text); margin-bottom: 7px; transition: color .2s; }
-    .card-deck  { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 10px; }
-    .card-meta  { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
-    .card-read  { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 8px; }
+    /* ── TOPIC SECTIONS ── */
+    .articles-grid { padding-bottom: 32px; }
+    .topic-section { max-width: 1080px; margin: 0 auto; padding: 28px 28px 0; }
+    .ts-header { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 8px; }
+    .ts-title { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--text); }
+    .ts-count { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); }
+    .ts-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .grid-empty { text-align: center; padding: 56px 20px 64px; font-family: var(--bserif); font-size: 16px; color: var(--text2); line-height: 1.8; }
+    .grid-empty-btn { margin-top: 14px; background: none; border: 1px solid var(--gold); color: var(--gold); border-radius: 2px; padding: 9px 20px; font-family: var(--sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s; }
+    .grid-empty-btn:hover { background: var(--gold); color: var(--bg); }
+    .article-card { padding: 18px 18px 16px; border-bottom: .5px solid var(--border); border-right: .5px solid var(--border); cursor: pointer; display: flex; flex-direction: column; transition: background .25s; }
+    .article-card:nth-child(4n) { border-right: none; padding-right: 0; }
+    .article-card:nth-child(4n+1) { padding-left: 0; }
+    .article-card:hover { background: var(--bg2); }
+    .card-img-wrap { overflow: hidden; border-radius: 2px; margin-bottom: 12px; box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+    .card-img { width: 100%; height: 118px; object-fit: cover; object-position: center 20%; display: block; transition: transform .45s ease; }
+    .article-card:hover .card-img { transform: scale(1.04); }
+    .card-title { font-family: var(--serif); font-size: 15.5px; font-weight: 600; line-height: 1.32; color: var(--text); margin-bottom: 7px; }
+    .card-deck  { font-family: var(--bserif); font-size: 12.5px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+    .card-meta  { font-size: 10.5px; color: var(--text3); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .card-read  { display: inline-block; align-self: flex-start; margin-top: 12px; padding: 7px 14px; border: 1px solid var(--gold); border-radius: 2px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); transition: background .2s, color .2s; }
+    .article-card:hover .card-read { background: var(--gold); color: var(--bg); }
 
     /* ── PAGE HERO ── */
     .page-hero { padding: 40px 28px 30px; border-bottom: .5px solid var(--border); }
@@ -558,24 +576,15 @@
     @media (max-width: 640px) { .sub-bar-inner { padding: 12px 46px 12px 16px; } .sub-cta { padding: 28px 20px 24px; } }
 
     /* ── SECONDARY & TERTIARY FEATURED ── */
-    .feat2-section, .feat3-section { border-bottom: .5px solid var(--border); }
-    .feat2-section > div, .feat3-section > div { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; align-items: stretch; }
-    .feat2-img-wrap, .feat3-img-wrap { position: relative; overflow: hidden; border-right: .5px solid var(--border); cursor: pointer; }
-    .feat2-img, .feat3-img { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; transition: transform .4s ease; }
-    .feat2-img-wrap:hover .feat2-img, .feat3-img-wrap:hover .feat3-img { transform: scale(1.03); }
-    .feat2-text, .feat3-text { padding: 26px 36px; display: flex; flex-direction: column; justify-content: center; }
-    .feat2-label, .feat3-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .feat2-title, .feat3-title { background: none; border: none; font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); padding: 0; margin: 0 0 10px; cursor: pointer; text-align: left; }
+    /* ── TOP PACKAGE RAIL ITEMS ── */
+    .feat2-topic-lbl, .feat3-topic-lbl { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+    .feat2-title, .feat3-title { background: none; border: none; font-family: var(--serif); font-size: 15.5px; font-weight: 600; line-height: 1.32; color: var(--text); padding: 0; margin: 0 0 6px; cursor: pointer; text-align: left; transition: color .2s; }
     .feat2-title:hover, .feat3-title:hover { color: var(--gold); }
-    .feat2-deck, .feat3-deck { font-family: var(--bserif); font-size: 14px; color: var(--text2); line-height: 1.7; margin: 12px 0; }
-    .feat2-meta, .feat3-meta { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 6px; margin: 14px 0; }
-    .read-link { background: none; border: none; font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: var(--gold); cursor: pointer; text-transform: uppercase; margin-top: 16px; }
-    .read-link:hover { opacity: .75; }
-    .feat2-topic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
-    .feat2-title { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.25; color: var(--text); margin-bottom: 8px; cursor: pointer; transition: color .2s; background: none; border: none; text-align: left; padding: 0; width: 100%; }
-    .feat2-title:hover { color: var(--gold); }
-    .feat2-deck { font-family: var(--bserif); font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; }
-    .feat2-meta { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .feat2-deck, .feat3-deck { font-family: var(--bserif); font-size: 12.5px; color: var(--text2); line-height: 1.55; margin: 0 0 7px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .feat2-meta, .feat3-meta { font-size: 10.5px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .feat2-img-wrap, .feat3-img-wrap { overflow: hidden; border-radius: 2px; cursor: pointer; align-self: start; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+    .feat2-img, .feat3-img { width: 100%; height: 88px; object-fit: cover; display: block; transition: transform .45s ease; }
+    .feat2-img-wrap:hover .feat2-img, .feat3-img-wrap:hover .feat3-img { transform: scale(1.05); }
 
     /* ── STAT BLOCKS ── */
     .stat-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 36px 0; }
@@ -608,21 +617,37 @@
     .cannot-title { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
     .cannot-desc { font-family: var(--bserif); font-size: 14px; color: var(--text2); line-height: 1.6; }
 
+    /* ── ACCESSIBILITY ── */
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+
     /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      .tp-inner { grid-template-columns: 1fr 300px; gap: 0 26px; }
+      .tp-lead { grid-template-columns: 1fr 220px; gap: 20px; padding-right: 26px; }
+      .ts-grid { grid-template-columns: 1fr 1fr; }
+      .article-card, .article-card:nth-child(4n), .article-card:nth-child(4n+1) { border-right: none; padding-left: 0; padding-right: 0; }
+      .article-card:nth-child(odd)  { border-right: .5px solid var(--border); padding-right: 20px; }
+      .article-card:nth-child(even) { padding-left: 20px; }
+      .card-img { height: 150px; }
+    }
     @media (max-width: 768px) {
-      .masthead-inner, .articles-grid, .authors-grid, .about-layout, .article-layout { grid-template-columns: 1fr; }
-      .featured-section > div { grid-template-columns: 1fr; }
-      .feat-img-wrap { border-left: none; border-top: .5px solid var(--border); }
-      .feat-img { min-height: 220px; height: 220px; }
+      .masthead-inner, .authors-grid, .about-layout, .article-layout { grid-template-columns: 1fr; }
+      .tp-inner { grid-template-columns: 1fr; padding: 20px 28px 24px; }
+      .tp-lead { grid-template-columns: 1fr; padding-right: 0; border-right: none; }
+      .feat-img-wrap { order: -1; margin-bottom: 16px; }
+      .feat-img { min-height: 200px; height: 200px; }
+      .tp-rail { margin-top: 22px; border-top: .5px solid var(--border); padding-top: 16px; }
+      .ts-grid { grid-template-columns: 1fr; }
       .mast-headline { font-size: 36px; }
       .article-card:nth-child(odd)  { padding-right: 0; border-right: none; }
       .article-card:nth-child(even) { padding-left: 0; }
+      .card-img { height: 180px; }
       .author-card:nth-child(odd)   { padding-right: 0; border-right: none; }
       .author-card:nth-child(even)  { padding-left: 0; }
       .nav-motto, .mast-contrib { display: none; }
-      .feat2-section > div, .feat3-section > div { grid-template-columns: 1fr; }
-      .feat2-img-wrap, .feat3-img-wrap { border-right: none; border-bottom: .5px solid var(--border); }
-      .feat2-img, .feat3-img { min-height: 180px; height: 180px; }
       .stat-blocks, .platform-cards, .cannot-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -715,72 +740,67 @@
       <button class="topic-pill" data-topic="politics">Politics</button>
       <button class="topic-pill" data-topic="philosophy">Philosophy</button>
       <button class="topic-pill" data-topic="business">Business</button>
-      <button class="topic-pill" data-topic="analysis">Analysis</button>
     </div>
 
-    <!-- Featured -->
-    <section class="featured-section" id="featured-section">
-      <div>
-        <div class="feat-text">
-          <div class="feat-label">✦ Featured essay</div>
-          <div class="feat-topic-lbl" id="feat-topic-lbl"></div>
-          <h2 class="feat-title"><a id="feat-title" href="/"></a></h2>
-          <p class="feat-deck" id="feat-deck"></p>
-          <div class="feat-meta">
-            <span id="feat-author"></span>
-            <span class="meta-dot"></span>
-            <span id="feat-date"></span>
+    <!-- Top package: lead essay + rail -->
+    <section class="top-package">
+      <div class="tp-inner">
+        <div class="tp-lead" id="featured-section">
+          <div class="feat-text">
+            <div class="feat-label">✦ Featured essay</div>
+            <div class="feat-topic-lbl" id="feat-topic-lbl"></div>
+            <h2 class="feat-title"><a id="feat-title" href="/"></a></h2>
+            <p class="feat-deck" id="feat-deck"></p>
+            <div class="feat-meta">
+              <span id="feat-author"></span>
+              <span class="meta-dot"></span>
+              <span id="feat-date"></span>
+            </div>
+            <button class="read-link" id="feat-read-btn">Read essay →</button>
           </div>
-          <button class="read-link" id="feat-read-btn">Read essay →</button>
+          <div class="feat-img-wrap" id="feat-img-wrap" style="display:none;">
+            <img id="feat-img" class="feat-img" src="" alt="">
+          </div>
         </div>
-        <div class="feat-img-wrap" id="feat-img-wrap" style="display:none;">
-          <img id="feat-img" class="feat-img" src="" alt="">
-        </div>
+        <aside class="tp-rail">
+          <div class="tp-rail-label">✦ Also featured</div>
+          <div class="tp-item" id="feat2-section" style="display:none;">
+            <div class="tp-item-text">
+              <div class="feat2-topic-lbl" id="feat2-topic-lbl"></div>
+              <a class="feat2-title" id="feat2-title" href="/"></a>
+              <p class="feat2-deck" id="feat2-deck"></p>
+              <div class="feat2-meta">
+                <span id="feat2-author"></span>
+                <span class="meta-dot"></span>
+                <span id="feat2-date"></span>
+              </div>
+              <button class="read-link" id="feat2-read-btn" hidden>Read essay →</button>
+            </div>
+            <div class="feat2-img-wrap" id="feat2-img-wrap">
+              <img id="feat2-img" class="feat2-img" src="" alt="">
+            </div>
+          </div>
+          <div class="tp-item" id="feat3-section" style="display:none;">
+            <div class="tp-item-text">
+              <div class="feat3-topic-lbl" id="feat3-topic-lbl"></div>
+              <a class="feat3-title" id="feat3-title" href="/"></a>
+              <p class="feat3-deck" id="feat3-deck"></p>
+              <div class="feat2-meta">
+                <span id="feat3-author"></span>
+                <span class="meta-dot"></span>
+                <span id="feat3-date"></span>
+              </div>
+              <button class="read-link" id="feat3-read-btn" hidden>Read essay →</button>
+            </div>
+            <div class="feat3-img-wrap" id="feat3-img-wrap">
+              <img id="feat3-img" class="feat3-img" src="" alt="">
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <!-- Secondary Featured -->
-    <section class="feat2-section" id="feat2-section" style="display:none;">
-      <div>
-        <div class="feat2-img-wrap" id="feat2-img-wrap">
-          <img id="feat2-img" class="feat2-img" src="" alt="">
-        </div>
-        <div class="feat2-text">
-          <div class="feat2-label">✦ Also featured</div>
-          <div class="feat2-topic-lbl" id="feat2-topic-lbl"></div>
-          <a class="feat2-title" id="feat2-title" href="/"></a>
-          <p class="feat2-deck" id="feat2-deck"></p>
-          <div class="feat2-meta">
-            <span id="feat2-author"></span>
-            <span class="meta-dot"></span>
-            <span id="feat2-date"></span>
-          </div>
-          <button class="read-link" id="feat2-read-btn">Read essay →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tertiary Featured -->
-    <section class="feat3-section" id="feat3-section" style="display:none;">
-      <div>
-        <div class="feat3-img-wrap" id="feat3-img-wrap">
-          <img id="feat3-img" class="feat3-img" src="" alt="">
-        </div>
-        <div class="feat3-text">
-          <div class="feat3-label">✦ Also featured</div>
-          <div class="feat3-topic-lbl" id="feat3-topic-lbl"></div>
-          <a class="feat3-title" id="feat3-title" href="/"></a>
-          <p class="feat3-deck" id="feat3-deck"></p>
-          <div class="feat2-meta">
-            <span id="feat3-author"></span>
-            <span id="feat3-date"></span>
-          </div>
-          <button class="read-link" id="feat3-read-btn">Read essay →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Articles grid -->
+    <!-- Topic sections -->
     <div class="articles-grid" id="articles-grid"></div>
 
   </div>
@@ -1546,6 +1566,12 @@
     });
   });
 
+  function resetTopic() {
+    activeTopic = 'all';
+    document.querySelectorAll('.topic-pill').forEach(function(p) { p.classList.toggle('active', p.dataset.topic === 'all'); });
+    renderGrid();
+  }
+
   // ── RENDER HOME ───────────────────────────────────────────────────────────
 
   function renderHome() {
@@ -1626,39 +1652,71 @@
     renderGrid();
   }
 
+  var TOPIC_ORDER = ['business', 'politics', 'finance', 'philosophy'];
+  var TOPIC_LABELS = { business: 'Business', politics: 'Politics', finance: 'Finance', philosophy: 'Philosophy' };
+
+  function cardHtml(a) {
+    var auth = AUTHORS[a.author];
+    return '<a class="article-card" data-topic="' + a.topic + '" href="' + artHref(a) + '" onclick="return goArticle(event,\'' + a.id + '\')">'+
+      (a.heroImg ? '<div class="card-img-wrap"><img class="card-img" src="' + a.heroImg + '" alt="' + a.title + '"' + (a.imgPos ? ' style="object-position:' + a.imgPos + '"' : '') + '></div>' : '')+
+      '<div class="card-title">' + a.title + '</div>'+
+      '<p class="card-deck">' + a.deck + '</p>'+
+      '<div class="card-meta"><button class="author-link" onclick="return goAuthor(event,\'' + a.author + '\')">' + (auth ? auth.name : '') + '</button>' +
+      (a.date ? '<span class="meta-dot"></span><span>' + a.date + '</span>' : '') +
+      (a.readTime ? '<span class="meta-dot"></span><span>' + a.readTime + ' read</span>' : '') +
+      '</div>'+
+      '<span class="card-read">Read essay →</span>'+
+      '</a>';
+  }
+
   function renderGrid() {
     var grid = document.getElementById('articles-grid');
     var featured = ARTICLES.find(function(a) { return a.featured; });
     var feat2 = ARTICLES.find(function(a) { return a.secondFeatured; });
     var feat3 = ARTICLES.find(function(a) { return a.tertiaryFeatured; });
-    var list = ARTICLES.filter(function(a) { return !a.featured && !a.secondFeatured && !a.tertiaryFeatured; });
-    if (activeTopic !== 'all') list = list.filter(function(a) { return a.topic === activeTopic; });
-    grid.innerHTML = list.map(function(a) {
-      var auth = AUTHORS[a.author];
-      return '<a class="article-card" data-topic="' + a.topic + '" href="' + artHref(a) + '" onclick="return goArticle(event,\'' + a.id + '\')">'+
-        (a.heroImg ? '<img class="card-img" src="' + a.heroImg + '" alt="' + a.title + '"' + (a.imgPos ? ' style="object-position:' + a.imgPos + '"' : '') + '>' : '')+
-        '<div class="card-topic">' + a.topicLabel + '</div>'+
-        '<div class="card-title">' + a.title + '</div>'+
-        '<p class="card-deck">' + a.deck + '</p>'+
-        '<div class="card-meta"><button class="author-link" onclick="return goAuthor(event,\'' + a.author + '\')">' + (auth ? auth.name : '') + '</button>' +
-        (a.date ? '<span class="meta-dot"></span><span>' + a.date + '</span>' : '') +
-        (a.readTime ? '<span class="meta-dot"></span><span>' + a.readTime + ' read</span>' : '') +
-        '</div>'+
-        '<span class="card-read">Read →</span>'+
-        '</a>';
+    var pool = ARTICLES.filter(function(a) { return !a.featured && !a.secondFeatured && !a.tertiaryFeatured; });
+    var topics = TOPIC_ORDER.filter(function(t) { return activeTopic === 'all' || activeTopic === t; });
+    var html = topics.map(function(t) {
+      var items = pool.filter(function(a) { return a.topic === t; });
+      if (!items.length) return '';
+      return '<section class="topic-section">' +
+        '<div class="ts-header"><span class="ts-title">' + TOPIC_LABELS[t] + '</span><span class="ts-count">' + items.length + (items.length === 1 ? ' essay' : ' essays') + '</span></div>' +
+        '<div class="greek-band"></div>' +
+        '<div class="ts-grid">' + items.map(cardHtml).join('') + '</div>' +
+        '</section>';
     }).join('');
+    if (!html) {
+      var topicName = TOPIC_LABELS[activeTopic] || 'this topic';
+      var featMatch = [featured, feat2, feat3].some(function(f) { return f && (activeTopic === 'all' || f.topic === activeTopic); });
+      html = featMatch
+        ? '<div class="grid-empty">Every ' + topicName + ' essay is currently featured above.</div>'
+        : '<div class="grid-empty">Nothing filed under ' + topicName + ' yet. New essays land here first.<br>' +
+          '<button class="grid-empty-btn" onclick="resetTopic()">View all essays</button></div>';
+    }
+    grid.innerHTML = html;
 
     // Show/hide featured sections based on topic filter
     var fs = document.getElementById('featured-section');
-    var featVisible = featured && (activeTopic === 'all' || activeTopic === featured.topic);
+    var featVisible = !!(featured && (activeTopic === 'all' || activeTopic === featured.topic));
     fs.style.display = featVisible ? '' : 'none';
     var f2s = document.getElementById('feat2-section');
-    if (f2s && feat2) {
-      f2s.style.display = (feat2.heroImg && (activeTopic === 'all' || activeTopic === feat2.topic)) ? '' : 'none';
-    }
+    var f2Visible = !!(feat2 && feat2.heroImg && (activeTopic === 'all' || activeTopic === feat2.topic));
+    if (f2s) f2s.style.display = f2Visible ? '' : 'none';
     var f3s = document.getElementById('feat3-section');
-    if (f3s && feat3) {
-      f3s.style.display = (feat3.heroImg && (activeTopic === 'all' || activeTopic === feat3.topic)) ? '' : 'none';
+    var f3Visible = !!(feat3 && feat3.heroImg && (activeTopic === 'all' || activeTopic === feat3.topic));
+    if (f3s) f3s.style.display = f3Visible ? '' : 'none';
+    var railLabel = document.querySelector('.tp-rail-label');
+    if (railLabel) railLabel.style.display = (f2Visible || f3Visible) ? '' : 'none';
+    var rail = document.querySelector('.tp-rail');
+    if (rail) rail.style.display = (f2Visible || f3Visible) ? '' : 'none';
+    var pkg = document.querySelector('.top-package');
+    if (pkg) pkg.style.display = (featVisible || f2Visible || f3Visible) ? '' : 'none';
+    var tpInner = document.querySelector('.tp-inner');
+    if (tpInner) tpInner.style.gridTemplateColumns = (f2Visible || f3Visible) ? '' : '1fr';
+    var tpLead = document.querySelector('.tp-lead');
+    if (tpLead) {
+      tpLead.style.borderRight = (f2Visible || f3Visible) ? '' : 'none';
+      tpLead.style.paddingRight = (f2Visible || f3Visible) ? '' : '0';
     }
   }
 
